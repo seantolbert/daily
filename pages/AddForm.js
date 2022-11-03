@@ -19,13 +19,19 @@ const AddForm = ({ setShow, show }) => {
   const [inputHeight, setInputHeight] = useState(0);
 
   const focusRef = useRef(new Animated.Value(0)).current;
+  const greyRef = useRef(new Animated.Value(0)).current;
 
   const handleFocus = () => {
     Animated.timing(focusRef, {
       toValue: 5,
       useNativeDriver: true,
       duration: 1000,
-    }).start();
+    }).start(),
+      Animated.timing(greyRef, {
+        toValue: -5,
+        useNativeDriver: true,
+        duration: 1000,
+      }).start();
   };
 
   const { input } = styles;
@@ -41,6 +47,26 @@ const AddForm = ({ setShow, show }) => {
         </Pressable>
         <Text>Write your thoughts</Text>
         <View style={{ marginTop: 50 }}>
+          <Animated.View
+            ref={focusRef}
+            style={{
+              width: inputWidth,
+              height: inputHeight,
+              backgroundColor: "#000",
+              position: "absolute",
+              transform: [{ translateX: focusRef }, { translateY: focusRef }],
+            }}
+          ></Animated.View>
+          <Animated.View
+            ref={focusRef}
+            style={{
+              width: inputWidth,
+              height: inputHeight,
+              backgroundColor: "#828282",
+              position: "absolute",
+              transform: [{ translateX: greyRef }, { translateY: greyRef }],
+            }}
+          ></Animated.View>
           <TextInput
             autoCapitalize="sentences"
             // autoFocus={true}
@@ -59,17 +85,6 @@ const AddForm = ({ setShow, show }) => {
             textAlign="left"
             style={input}
           />
-          <Animated.View
-            ref={focusRef}
-            style={{
-              width: inputWidth,
-              height: inputHeight,
-              backgroundColor: "#000",
-              position: "absolute",
-              zIndex: -1,
-              transform: [{ translateX: focusRef }, { translateY: focusRef }],
-            }}
-          ></Animated.View>
         </View>
       </SafeAreaView>
     </Modal>
