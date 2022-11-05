@@ -3,7 +3,9 @@ import { useState } from "react";
 import { BackButton, HomeButton, Day } from "../components";
 
 const MonthView = ({ navigation }) => {
-  const [selected, setSelected] = useState(null);
+  const today = new Date().getDay() - 1;
+
+  const [selected, setSelected] = useState(today);
   const [acts, setActs] = useState(false);
 
 

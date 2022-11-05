@@ -1,12 +1,20 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, Animated } from "react-native";
 
 import { useState, useEffect, useRef } from "react";
 
-const Day = ({ day, selected, acts }) => {
+const Day = ({ day, selected, setSelected, acts }) => {
   const [shadowHeight, setShadowHeight] = useState(0);
   const [shadowWidth, setShadowWidth] = useState(0);
 
-  const today = new Date().getDay() - 1;
+  const shadowSlide = useRef(new Animated.Value(2)).current;
+
+  const handleShadow = () => {
+    Animated.timing(shadowSlide, {
+      useNativeDriver: true,
+      duration: 600,
+      toValue: 5,
+    }).start();
+  };
 
   const { dateBox, dateBoxText, shadow, container } = styles;
 
@@ -17,16 +25,28 @@ const Day = ({ day, selected, acts }) => {
         let { width, height } = e.nativeEvent.layout;
         setShadowHeight(height);
         setShadowWidth(width);
+        // handleShadow();
       }}
     >
-      <View
-        style={[shadow, { width: shadowWidth, height: shadowHeight }]}
-      ></View>
-      <Pressable
+      <Animated.View
         style={[
-          dateBox,
-          //  day === today && { backgroundColor: "#828282" }
+          shadow,
+          { width: shadowWidth, height: shadowHeight },
+          day === selected && {
+            transform: [
+              { translateX: shadowSlide },
+              { translateY: shadowSlide },
+            ],
+            backgroundColor: "#000",
+          },
         ]}
+      ></Animated.View>
+      <Pressable
+        style={dateBox}
+        onPress={() => {
+          setSelected(day);
+          handleShadow();
+        }}
       >
         <Text style={dateBoxText}>{day}</Text>
       </Pressable>
@@ -48,7 +68,7 @@ const styles = StyleSheet.create({
   },
   shadow: {
     position: "absolute",
-    transform: [{ translateX: 5 }, {translateY: 5}],
-    backgroundColor: "#828282",
+    transform: [{ translateX: 2 }, { translateY: 2 }],
+    backgroundColor: "#e3e3e3",
   },
 });
