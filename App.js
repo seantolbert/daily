@@ -15,7 +15,7 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="main" component={Main} />
           <Stack.Screen name="monthView" component={MonthView} />
-          <Stack.Screen name="allActivity" component={AllActivity} />
+          <Stack.Screen name="AllActivity" component={AllActivity} />
         </Stack.Navigator>
       </NavigationContainer>
       {/* <Menu isOpen={isOpen} setIsOpen={setIsOpen} /> */}

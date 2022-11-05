@@ -17,7 +17,11 @@ const Main = ({ navigation }) => {
         <AddForm show={show} setShow={setShow} />
         <Button
           title="All activity"
-          onPress={() => navigation.navigate("allActivity")}
+          onPress={() => navigation.navigate("AllActivity")}
+        />
+        <Button
+          title="monthView"
+          onPress={() => navigation.navigate("monthView")}
         />
       </SafeAreaView>
     </>
