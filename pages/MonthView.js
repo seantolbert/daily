@@ -1,13 +1,11 @@
 import { StyleSheet, Text, View, Pressable, SafeAreaView } from "react-native";
 import { useState } from "react";
-import { FontAwesome } from "@expo/vector-icons";
-import { BackButton, HomeButton } from "../components";
+import { BackButton, HomeButton, Day } from "../components";
 
 const MonthView = ({ navigation }) => {
-  const [date, setDate] = useState(null);
-  const [activity, setActivity] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [acts, setActs] = useState(false);
 
-  const today = new Date().getDay() - 1;
 
   const nov = [
     "",
@@ -47,20 +45,14 @@ const MonthView = ({ navigation }) => {
     "",
   ];
 
-  const { container, dateBox, dateBoxText, calendarContainer } = styles;
+  const { container, calendarContainer } = styles;
 
   return (
     <SafeAreaView style={container}>
       <BackButton nav={navigation} />
       <View style={calendarContainer}>
         {nov.map((day, idx) => (
-          <Pressable
-            key={idx}
-            style={[dateBox, day === today && { backgroundColor: "gold" }]}
-          >
-            <Text style={dateBoxText}>{day}</Text>
-            {activity && <FontAwesome name="square" size={24} color="black" />}
-          </Pressable>
+          <Day key={idx} day={day} selected={selected} setSelected={setSelected}/>
         ))}
       </View>
       <HomeButton nav={navigation} />
@@ -72,7 +64,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   calendarContainer: {
@@ -80,14 +72,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
-  dateBox: {
-    padding: 15,
-    width: "13%",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: 80,
-    margin: 2,
-    backgroundColor: "lightblue",
-    borderRadius: "5px",
-  },
+ 
 });
