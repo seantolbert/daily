@@ -23,8 +23,9 @@ const AddForm = ({ setShow, show }) => {
   const [inputHeight, setInputHeight] = useState(0);
 
   const date = new Date().toDateString();
+  const time = new Date().toTimeString();
 
-  console.log(date)
+  console.log(date);
 
   const focusRef = useRef(new Animated.Value(0)).current;
 
@@ -41,6 +42,7 @@ const AddForm = ({ setShow, show }) => {
     await addDoc(ref, {
       text,
       date,
+      time,
     });
     setText("");
     setShow(false);

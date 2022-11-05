@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   container: {
     width: "11%",
     margin: 5,
-    height: 80,
+    height: 60,
   },
   dateBox: {
     backgroundColor: "#fff",

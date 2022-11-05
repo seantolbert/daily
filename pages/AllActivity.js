@@ -1,6 +1,5 @@
-import { StyleSheet, Text, SafeAreaView, Pressable, View } from "react-native";
-import { HomeButton, BackButton } from "../components";
-import { Feather } from "@expo/vector-icons";
+import { StyleSheet, Text, SafeAreaView, Pressable, View, ScrollView } from "react-native";
+import { HomeButton, BackButton, Act } from "../components";
 
 import { deleteDoc, doc } from "firebase/firestore";
 
@@ -20,20 +19,16 @@ const AllActivity = ({ navigation }) => {
   return (
     <SafeAreaView style={container}>
       <BackButton nav={navigation} />
-      <Text>AllActivity</Text>
-      {acts &&
-        acts.map((act) => (
-          <View
-            key={act.id}
-            style={{ flexDirection: "row", alignItems: "center" }}
-          >
-            <Text style={{ paddingRight: 10 }}>{act.text}</Text>
-            <Text style={{ paddingRight: 10 }}>{act.date}</Text>
-            <Pressable onPress={() => handleDelete(act.id)}>
-              <Feather name="delete" size={24} color="black" />
-            </Pressable>
-          </View>
-        ))}
+      <ScrollView
+        style={{
+          flex: 1,
+          width: "100%",
+        }}
+      >
+        <Text>AllActivity</Text>
+        {acts &&
+          acts.map((act, idx) => <Act key={idx} act={act} handleDelete={handleDelete} />)}
+      </ScrollView>
       <HomeButton nav={navigation} />
     </SafeAreaView>
   );
@@ -44,5 +39,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
+    marginHorizontal: 15
   },
 });

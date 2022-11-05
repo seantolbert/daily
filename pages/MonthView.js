@@ -8,7 +8,6 @@ const MonthView = ({ navigation }) => {
   const [selected, setSelected] = useState(today);
   const [acts, setActs] = useState(false);
 
-
   const nov = [
     "",
     "",
@@ -47,15 +46,23 @@ const MonthView = ({ navigation }) => {
     "",
   ];
 
-  const { container, calendarContainer } = styles;
+  const { container, calendarContainer, monthText } = styles;
 
   return (
     <SafeAreaView style={container}>
       <BackButton nav={navigation} />
-      <View style={calendarContainer}>
-        {nov.map((day, idx) => (
-          <Day key={idx} day={day} selected={selected} setSelected={setSelected}/>
-        ))}
+      <View>
+        <Text style={monthText}>NOV</Text>
+        <View style={calendarContainer}>
+          {nov.map((day, idx) => (
+            <Day
+              key={idx}
+              day={day}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          ))}
+        </View>
       </View>
       <HomeButton nav={navigation} />
     </SafeAreaView>
@@ -74,5 +81,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
- 
+  monthText: {
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 30
+  },
 });
