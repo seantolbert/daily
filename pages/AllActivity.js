@@ -23,8 +23,8 @@ const AllActivity = ({ navigation }) => {
       <Text>AllActivity</Text>
       {acts &&
         acts.map((act) => (
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text key={act.id} style={{ paddingRight: 10 }}>
+          <View key={act.id} style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text  style={{ paddingRight: 10 }}>
               {act.text}
             </Text>
             <Pressable onPress={() => handleDelete(act.id)}>

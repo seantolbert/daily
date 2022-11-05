@@ -18,7 +18,7 @@ import { AntDesign } from "@expo/vector-icons";
 import Menu from "../components/Menu";
 
 const AddForm = ({ setShow, show }) => {
-  const [text, setActivityText] = useState("");
+  const [text, setText] = useState("");
   const [inputWidth, setInputWidth] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
 
@@ -37,6 +37,8 @@ const AddForm = ({ setShow, show }) => {
     await addDoc(ref, {
       text,
     });
+    setText("");
+    setShow(false);
   };
 
   const { input } = styles;
@@ -72,7 +74,7 @@ const AddForm = ({ setShow, show }) => {
             placeholder="thoughts?"
             value={text}
             numberOfLines={10}
-            onChangeText={setActivityText}
+            onChangeText={setText}
             onLayout={(e) => {
               let { width, height } = e.nativeEvent.layout;
               setInputWidth(width);
