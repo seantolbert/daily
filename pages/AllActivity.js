@@ -23,10 +23,12 @@ const AllActivity = ({ navigation }) => {
       <Text>AllActivity</Text>
       {acts &&
         acts.map((act) => (
-          <View key={act.id} style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text  style={{ paddingRight: 10 }}>
-              {act.text}
-            </Text>
+          <View
+            key={act.id}
+            style={{ flexDirection: "row", alignItems: "center" }}
+          >
+            <Text style={{ paddingRight: 10 }}>{act.text}</Text>
+            <Text style={{ paddingRight: 10 }}>{act.date}</Text>
             <Pressable onPress={() => handleDelete(act.id)}>
               <Feather name="delete" size={24} color="black" />
             </Pressable>

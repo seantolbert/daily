@@ -22,6 +22,10 @@ const AddForm = ({ setShow, show }) => {
   const [inputWidth, setInputWidth] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
 
+  const date = new Date().toDateString();
+
+  console.log(date)
+
   const focusRef = useRef(new Animated.Value(0)).current;
 
   const handleFocus = () => {
@@ -36,6 +40,7 @@ const AddForm = ({ setShow, show }) => {
     const ref = collection(db, "activities");
     await addDoc(ref, {
       text,
+      date,
     });
     setText("");
     setShow(false);
