@@ -1,4 +1,5 @@
-import AddForm from "./AddForm";
 import Main from "./Main";
+import MonthView from "./MonthView";
+import AllActivity from "./AllActivity";
 
-export { Main, AddForm };
+export { Main, MonthView, AllActivity };

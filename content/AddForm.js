@@ -9,29 +9,34 @@ import {
   Animated,
   TextInput,
 } from "react-native";
-// import { globalStyles } from "../styles/global.js";
+
+import { db } from "../firebase/config";
+import { addDoc, collection } from "firebase/firestore";
+
 import { useState, useRef } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import Menu from "../components/Menu";
 
 const AddForm = ({ setShow, show }) => {
-  const [activityText, setActivityText] = useState("");
+  const [text, setActivityText] = useState("");
   const [inputWidth, setInputWidth] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
 
   const focusRef = useRef(new Animated.Value(0)).current;
-  const greyRef = useRef(new Animated.Value(0)).current;
 
   const handleFocus = () => {
     Animated.timing(focusRef, {
-      toValue: 5,
       useNativeDriver: true,
-      duration: 1000,
-    }).start(),
-      Animated.timing(greyRef, {
-        toValue: -5,
-        useNativeDriver: true,
-        duration: 1000,
-      }).start();
+      toValue: 5,
+      duration: 500,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const ref = collection(db, "activities");
+    await addDoc(ref, {
+      text,
+    });
   };
 
   const { input } = styles;
@@ -57,36 +62,33 @@ const AddForm = ({ setShow, show }) => {
               transform: [{ translateX: focusRef }, { translateY: focusRef }],
             }}
           ></Animated.View>
-          <Animated.View
-            ref={focusRef}
-            style={{
-              width: inputWidth,
-              height: inputHeight,
-              backgroundColor: "#828282",
-              position: "absolute",
-              transform: [{ translateX: greyRef }, { translateY: greyRef }],
-            }}
-          ></Animated.View>
+
           <TextInput
             autoCapitalize="sentences"
             // autoFocus={true}
             onFocus={handleFocus}
             multiline={true}
             keyboardAppearance="light"
-            placeholder="gimme some thoughts brotherman"
-            value={activityText}
+            placeholder="thoughts?"
+            value={text}
             numberOfLines={10}
-            onChangeText={(e) => setActivityText(e)}
+            onChangeText={setActivityText}
             onLayout={(e) => {
               let { width, height } = e.nativeEvent.layout;
               setInputWidth(width);
               setInputHeight(height);
             }}
-            textAlign="left"
+            textAlignVertical="top"
             style={input}
           />
         </View>
+        <View>
+          <Pressable onPress={handleSubmit}>
+            <Text>Submit</Text>
+          </Pressable>
+        </View>
       </SafeAreaView>
+      {/* <Menu /> */}
     </Modal>
   );
 };
@@ -95,12 +97,9 @@ export default AddForm;
 const styles = StyleSheet.create({
   input: {
     paddingVertical: 20,
-    // justifyContent: 'center',
     paddingHorizontal: 5,
-    borderTopWidth: 1,
-    borderLeftWidth: 1,
-    borderBottomWidth: 1,
-    borderRightWidth: 1,
+    textAlignVertical: "top",
+    minWidth: "90%",
     fontSize: 20,
     backgroundColor: "#fff",
   },

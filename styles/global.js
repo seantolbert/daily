@@ -5,5 +5,6 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
+    backgroundColor: '#fff'
   },
 });
