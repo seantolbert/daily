@@ -48,7 +48,7 @@ const AddForm = ({ setShow, show }) => {
     setShow(false);
   };
 
-  const { input } = styles;
+  const { input, colorDot, colorPicker } = styles;
 
   return (
     <Modal animationType="slide" visible={show}>
@@ -91,6 +91,19 @@ const AddForm = ({ setShow, show }) => {
             style={input}
           />
         </View>
+        <View style={colorPicker}>
+          <Pressable style={[colorDot, { backgroundColor: "red" }]}></Pressable>
+          <Pressable
+            style={[colorDot, { backgroundColor: "blue" }]}
+          ></Pressable>
+          <Pressable
+            style={[colorDot, { backgroundColor: "yellow" }]}
+          ></Pressable>
+          <Pressable
+            style={[colorDot, { backgroundColor: "green" }]}
+          ></Pressable>
+        </View>
+
         <View>
           <Pressable onPress={handleSubmit}>
             <Text>Submit</Text>
@@ -111,5 +124,16 @@ const styles = StyleSheet.create({
     minWidth: "90%",
     fontSize: 20,
     backgroundColor: "#fff",
+  },
+  colorPicker: {
+    width: "100%",
+    paddingVertical: 20,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+  colorDot: {
+    width: 15,
+    height: 15,
+    borderRadius: "50%",
   },
 });

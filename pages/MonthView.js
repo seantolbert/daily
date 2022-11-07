@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, Pressable, SafeAreaView } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BackButton, HomeButton, Day } from "../components";
 
 const MonthView = ({ navigation }) => {
-  const today = new Date().getDay() - 1;
+
+  const today = new Date().getDate()
+
+  console.log(today);
 
   const [selected, setSelected] = useState(today);
   const [acts, setActs] = useState(false);
@@ -84,6 +87,6 @@ const styles = StyleSheet.create({
   monthText: {
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 30
+    marginBottom: 30,
   },
 });

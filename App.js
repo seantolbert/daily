@@ -6,8 +6,10 @@ import { useState } from "react";
 
 const Stack = createNativeStackNavigator();
 
+
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
+  
 
   return (
     <>
@@ -18,7 +20,6 @@ export default function App() {
           <Stack.Screen name="AllActivity" component={AllActivity} />
         </Stack.Navigator>
       </NavigationContainer>
-      {/* <Menu isOpen={isOpen} setIsOpen={setIsOpen} /> */}
     </>
   );
 }
