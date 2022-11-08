@@ -16,16 +16,26 @@ import { addDoc, collection } from "firebase/firestore";
 import { useState, useRef } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Menu from "../components/Menu";
+import { useAuthContext } from "../hooks/useAuthContext";
+
+const palette = [
+  "FCEF04",
+  "F7D21D",
+  "F1B536",
+  "EC9850",
+  "E77B69",
+  "E15E82",
+  "DC419B",
+];
 
 const AddForm = ({ setShow, show }) => {
   const [text, setText] = useState("");
   const [inputWidth, setInputWidth] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
+  const { user } = useAuthContext();
 
   const date = new Date().toDateString();
   const time = new Date().toTimeString();
-
-  console.log(date);
 
   const focusRef = useRef(new Animated.Value(0)).current;
 
@@ -34,7 +44,7 @@ const AddForm = ({ setShow, show }) => {
       useNativeDriver: true,
       toValue: 5,
       duration: 500,
-    });
+    }).start();
   };
 
   const handleSubmit = async () => {
@@ -43,6 +53,8 @@ const AddForm = ({ setShow, show }) => {
       text,
       date,
       time,
+      uid: user.uid,
+      owner: user.email
     });
     setText("");
     setShow(false);
@@ -59,14 +71,13 @@ const AddForm = ({ setShow, show }) => {
         >
           <AntDesign name="closecircleo" size={40} color="black" />
         </Pressable>
-        <Text>Write your thoughts</Text>
+        <Text>Whadidja doo</Text>
         <View style={{ marginTop: 50 }}>
           <Animated.View
-            ref={focusRef}
             style={{
               width: inputWidth,
               height: inputHeight,
-              backgroundColor: "#000",
+              backgroundColor: "#d2d2d2",
               position: "absolute",
               transform: [{ translateX: focusRef }, { translateY: focusRef }],
             }}
@@ -74,7 +85,7 @@ const AddForm = ({ setShow, show }) => {
 
           <TextInput
             autoCapitalize="sentences"
-            // autoFocus={true}
+            autoFocus={true}
             onFocus={handleFocus}
             multiline={true}
             keyboardAppearance="light"
@@ -92,25 +103,19 @@ const AddForm = ({ setShow, show }) => {
           />
         </View>
         <View style={colorPicker}>
-          <Pressable style={[colorDot, { backgroundColor: "red" }]}></Pressable>
-          <Pressable
-            style={[colorDot, { backgroundColor: "blue" }]}
-          ></Pressable>
-          <Pressable
-            style={[colorDot, { backgroundColor: "yellow" }]}
-          ></Pressable>
-          <Pressable
-            style={[colorDot, { backgroundColor: "green" }]}
-          ></Pressable>
+          {palette.map((c, idx) => (
+            <Pressable
+              key={idx}
+              style={[colorDot, { backgroundColor: `#${c}` }]}
+            ></Pressable>
+          ))}
         </View>
-
         <View>
           <Pressable onPress={handleSubmit}>
             <Text>Submit</Text>
           </Pressable>
         </View>
       </SafeAreaView>
-      {/* <Menu /> */}
     </Modal>
   );
 };
@@ -119,21 +124,25 @@ export default AddForm;
 const styles = StyleSheet.create({
   input: {
     paddingVertical: 20,
-    paddingHorizontal: 5,
+    // paddingHorizontal: 5,
     textAlignVertical: "top",
     minWidth: "90%",
     fontSize: 20,
     backgroundColor: "#fff",
+    borderColor: "#828282",
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
   },
   colorPicker: {
     width: "100%",
-    paddingVertical: 20,
+    paddingVertical: 50,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
   },
   colorDot: {
-    width: 15,
-    height: 15,
+    width: 30,
+    height: 30,
+    marginHorizontal: 10,
     borderRadius: "50%",
   },
 });

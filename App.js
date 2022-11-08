@@ -1,24 +1,23 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Menu from "./components/Menu";
-import { Main, MonthView, AllActivity } from "./pages";
+import { Main, MonthView, AllActivity, Register } from "./pages";
 import { useState } from "react";
+import { AuthContextProvider as Provider } from "./context/AuthContext";
 
 const Stack = createNativeStackNavigator();
 
-
 export default function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  
-
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="main" component={Main} />
-          <Stack.Screen name="monthView" component={MonthView} />
-          <Stack.Screen name="AllActivity" component={AllActivity} />
-        </Stack.Navigator>
+        <Provider>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="main" component={Main} />
+            <Stack.Screen name="register" component={Register} />
+            <Stack.Screen name="monthView" component={MonthView} />
+            <Stack.Screen name="AllActivity" component={AllActivity} />
+          </Stack.Navigator>
+        </Provider>
       </NavigationContainer>
     </>
   );

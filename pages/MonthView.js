@@ -1,12 +1,9 @@
 import { StyleSheet, Text, View, Pressable, SafeAreaView } from "react-native";
 import { useEffect, useState } from "react";
-import { BackButton, HomeButton, Day } from "../components";
+import { BackButton, HomeButton, Day, LatestPosts } from "../components";
 
 const MonthView = ({ navigation }) => {
-
-  const today = new Date().getDate()
-
-  console.log(today);
+  const today = new Date().getDate();
 
   const [selected, setSelected] = useState(today);
   const [acts, setActs] = useState(false);
@@ -54,6 +51,9 @@ const MonthView = ({ navigation }) => {
   return (
     <SafeAreaView style={container}>
       <BackButton nav={navigation} />
+
+      <LatestPosts actCount={2} selected={selected} />
+
       <View>
         <Text style={monthText}>NOV</Text>
         <View style={calendarContainer}>

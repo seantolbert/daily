@@ -19,7 +19,7 @@ const Menu = ({ isOpen, setIsOpen }) => {
   //       toValue: 50,
   //     }).start();
   //   };
-  console.log(isOpen);
+  // console.log(isOpen);
 
   const { container, menuContainer, menuButton, menuOptions, inner } = styles;
   return (

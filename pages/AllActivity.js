@@ -1,10 +1,17 @@
-import { StyleSheet, Text, SafeAreaView, Pressable, View, ScrollView } from "react-native";
-import { HomeButton, BackButton, Act } from "../components";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  Pressable,
+  View,
+  ScrollView,
+} from "react-native";
+import { HomeButton, BackButton, Act, LatestPosts } from "../components";
 
 import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 import { useCollection } from "../hooks/useCollection";
-import { db } from "../firebase/config";
 
 const AllActivity = ({ navigation }) => {
   const { documents: acts } = useCollection("activities");
@@ -26,8 +33,7 @@ const AllActivity = ({ navigation }) => {
         }}
       >
         <Text>AllActivity</Text>
-        {acts &&
-          acts.map((act, idx) => <Act key={idx} act={act} handleDelete={handleDelete} />)}
+        <LatestPosts />
       </ScrollView>
       <HomeButton nav={navigation} />
     </SafeAreaView>
@@ -39,6 +45,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
-    marginHorizontal: 15
+    marginHorizontal: 15,
   },
 });
