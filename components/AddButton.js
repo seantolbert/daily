@@ -2,7 +2,7 @@ import { StyleSheet, Animated, View, Pressable } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useState, useRef, useEffect } from "react";
 
-const AddButton = ({ show, setShow }) => {
+const AddButton = ({ show, setShow, nav }) => {
   const [shadowHeight, setShadowHeight] = useState(0);
   const [shadowWidth, setShadowWidth] = useState(0);
 
@@ -34,7 +34,7 @@ const AddButton = ({ show, setShow }) => {
       ></Animated.View>
       <Pressable
         style={plusButton}
-        onLongPress={() => setShow(!show)}
+        onLongPress={() => nav.navigate('AddForm')}
         onLayout={(e) => {
           let { width, height } = e.nativeEvent.layout;
           setShadowHeight(height);

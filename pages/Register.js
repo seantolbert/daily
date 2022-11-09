@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { HomeButton } from "../components";
-import { useLogin } from "../hooks/useLogin";
-import { useSignup } from "../hooks/useSignup";
+// import { useLogin } from "../hooks/useLogin";
+// import { useSignup } from "../hooks/useSignup";
 
 const Register = ({ navigation }) => {
   const [isMember, setIsMember] = useState(true);
@@ -19,17 +19,17 @@ const Register = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
 
-  const { signup } = useSignup();
+  // const { signup } = useSignup();
 
-  const { login } = useLogin();
+  // const { login } = useLogin();
 
   const handleSubmit = () => {
-    if (isMember) {
-      login(email, password);
-    }
-    if (!isMember) {
-      signup(email, password);
-    }
+    // if (isMember) {
+    //   login(email, password);
+    // }
+    // if (!isMember) {
+    //   signup(email, password);
+    // }
     // isMember ? login(email, password) : signup(email, password);
 
     navigation.navigate("main");

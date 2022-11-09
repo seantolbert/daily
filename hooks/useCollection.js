@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { db } from "../firebase/config";
 
 // firebase imports
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 export const useCollection = (c, _q) => {
   const [documents, setDocuments] = useState(null);
@@ -14,7 +14,7 @@ export const useCollection = (c, _q) => {
     let ref = collection(db, c);
 
     if (q) {
-      ref = query(ref, where(...q));
+      ref = query(ref, orderBy("-date"));
     }
 
     const unsub = onSnapshot(ref, (snapshot) => {

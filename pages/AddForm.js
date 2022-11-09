@@ -5,44 +5,42 @@ import {
   View,
   Modal,
   SafeAreaView,
-  Keyboard,
   Animated,
   TextInput,
 } from "react-native";
 
-import { db } from "../firebase/config";
+import { Auth, db } from "../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 
 import { useState, useRef } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import Menu from "../components/Menu";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 const palette = [
-  "FCEF04",
-  "F7D21D",
-  "F1B536",
-  "EC9850",
-  "E77B69",
-  "E15E82",
-  "DC419B",
+  "01BEFE",
+  "FFDD00",
+  "FF7D00",
+  "FF006D",
+  "ADFF02",
+  "8F00FF",
+  "828282",
 ];
 
-const AddForm = ({ setShow, show }) => {
+const AddForm = ({ setShow, show, navigation }) => {
   const [text, setText] = useState("");
   const [inputWidth, setInputWidth] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
-  const { user } = useAuthContext();
+  const [color, setColor] = useState("828282");
+  const user = Auth.currentUser;
 
-  const date = new Date().toDateString();
-  const time = new Date().toTimeString();
+  const date = new Date().getDate();
+  const time = new Date().getTime();
 
   const focusRef = useRef(new Animated.Value(0)).current;
 
   const handleFocus = () => {
     Animated.timing(focusRef, {
       useNativeDriver: true,
-      toValue: 5,
+      toValue: 7,
       duration: 500,
     }).start();
   };
@@ -53,20 +51,27 @@ const AddForm = ({ setShow, show }) => {
       text,
       date,
       time,
+      color,
       uid: user.uid,
-      owner: user.email
     });
     setText("");
-    setShow(false);
+    navigation.navigate("main");
   };
 
   const { input, colorDot, colorPicker } = styles;
 
   return (
-    <Modal animationType="slide" visible={show}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "flex-start",
+        backgroundColor: "#fff",
+      }}
+    >
       <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
         <Pressable
-          onPress={() => setShow(!show)}
+          onPress={() => navigation.navigate("main")}
           style={{ width: "100%", alignItems: "flex-end", padding: 10 }}
         >
           <AntDesign name="closecircleo" size={40} color="black" />
@@ -77,7 +82,7 @@ const AddForm = ({ setShow, show }) => {
             style={{
               width: inputWidth,
               height: inputHeight,
-              backgroundColor: "#d2d2d2",
+              backgroundColor: `#${color}`,
               position: "absolute",
               transform: [{ translateX: focusRef }, { translateY: focusRef }],
             }}
@@ -99,13 +104,14 @@ const AddForm = ({ setShow, show }) => {
               setInputHeight(height);
             }}
             textAlignVertical="top"
-            style={input}
+            style={[input, { borderColor: `#${color}` }]}
           />
         </View>
         <View style={colorPicker}>
           {palette.map((c, idx) => (
             <Pressable
               key={idx}
+              onPress={() => setColor(c)}
               style={[colorDot, { backgroundColor: `#${c}` }]}
             ></Pressable>
           ))}
@@ -116,7 +122,7 @@ const AddForm = ({ setShow, show }) => {
           </Pressable>
         </View>
       </SafeAreaView>
-    </Modal>
+    </View>
   );
 };
 export default AddForm;
@@ -124,25 +130,25 @@ export default AddForm;
 const styles = StyleSheet.create({
   input: {
     paddingVertical: 20,
-    // paddingHorizontal: 5,
+    paddingHorizontal: 5,
     textAlignVertical: "top",
     minWidth: "90%",
+    maxWidth: "90%",
     fontSize: 20,
     backgroundColor: "#fff",
-    borderColor: "#828282",
-    borderBottomWidth: 1,
-    borderRightWidth: 1,
+    borderBottomWidth: 2,
+    borderRightWidth: 2,
   },
   colorPicker: {
     width: "100%",
     paddingVertical: 50,
+    justifyContent: "space-evenly",
     flexDirection: "row",
-    justifyContent: "center",
   },
   colorDot: {
     width: 30,
     height: 30,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     borderRadius: "50%",
   },
 });
