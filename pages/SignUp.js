@@ -1,24 +1,27 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { Auth } from "../firebase/config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [displayName, setDisplayName] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("email: ", email);
     console.log("password: ", password);
 
-    createUserWithEmailAndPassword(Auth, email, password)
+    await createUserWithEmailAndPassword(Auth, email, password)
       .then((res) => {
         const user = res.user;
         console.log(`${user.email} signed up and logged in`);
       })
       .catch((err) => console.log(err.message));
-    // navigation.navigate("main");
+    await updateProfile(Auth.currentUser, { displayName })
+      .then(() => console.log("username: ", Auth.currentUser.displayName))
+      .catch((err) => console.log(err.message));
   };
 
   return (
@@ -35,6 +38,12 @@ const SignUp = ({ navigation }) => {
         onChangeText={setConfirm}
         placeholder="confirm"
         value={confirm}
+        secureTextEntry
+      />
+      <TextInput
+        onChangeText={setDisplayName}
+        placeholder="username"
+        value={displayName}
         secureTextEntry
       />
 

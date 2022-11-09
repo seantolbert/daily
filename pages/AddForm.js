@@ -11,7 +11,6 @@ import {
 
 import { Auth, db } from "../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
-
 import { useState, useRef } from "react";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
@@ -25,7 +24,7 @@ const palette = [
   "828282",
 ];
 
-const AddForm = ({ setShow, show, navigation }) => {
+const AddForm = ({ navigation }) => {
   const [text, setText] = useState("");
   const [inputWidth, setInputWidth] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
@@ -34,6 +33,8 @@ const AddForm = ({ setShow, show, navigation }) => {
 
   const date = new Date().getDate();
   const time = new Date().getTime();
+
+  // const date = `${day} ${month} ${year}`
 
   const focusRef = useRef(new Animated.Value(0)).current;
 

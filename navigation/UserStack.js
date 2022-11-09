@@ -18,17 +18,12 @@ export default function UserStack() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="main" component={Main} />
-        {/* <Stack.Screen name="signUp" component={SignUp} /> */}
-        <Stack.Screen name="AllActivity" component={AllActivity} />
         <Stack.Screen
           name="AddForm"
           component={AddForm}
           options={{ presentation: "Modal" }}
         />
-
-        {/* <Stack.Screen name="signIn" component={SignIn} /> */}
-        {/* <Stack.Screen name="landing" component={Landing} /> */}
-        {/* <Stack.Screen name="register" component={Register} /> */}
+        <Stack.Screen name="AllActivity" component={AllActivity} />
         <Stack.Screen name="monthView" component={MonthView} />
       </Stack.Navigator>
     </NavigationContainer>

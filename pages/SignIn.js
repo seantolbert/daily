@@ -7,16 +7,6 @@ const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    const unsub = Auth.onAuthStateChanged((user) => {
-      // if (user) {
-      //   navigation.navigate("main");
-      // }
-    });
-
-    return unsub;
-  }, []);
-
   const handleSubmit = () => {
     console.log("email: ", email);
     console.log("password: ", password);
@@ -39,10 +29,8 @@ const SignIn = ({ navigation }) => {
         secureTextEntry
       />
 
-      <Button onPress={() => navigation.navigate('signUp')} title="sign up"/>
+      <Button onPress={() => navigation.navigate("signUp")} title="sign up" />
       <Button onPress={handleSubmit} title="signIn" />
-      
-
     </View>
   );
 };

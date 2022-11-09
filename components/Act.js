@@ -30,6 +30,7 @@ const Act = ({ act, handleDelete }) => {
           borderBottomWidth: 2,
           borderRightWidth: 2,
           borderColor: `#${act.color}`,
+          // borderRadius: "10px",
         }}
         onLayout={(e) => {
           const { width, height } = e.nativeEvent.layout;

@@ -15,8 +15,8 @@ const LatestPosts = ({ actCount, limited }) => {
     await deleteDoc(docRef);
   };
 
-
   const { container } = styles;
+
   return (
     <View style={container}>
       <Text>Latest</Text>
