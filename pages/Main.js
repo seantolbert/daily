@@ -11,17 +11,6 @@ import { doc, getDoc } from "firebase/firestore";
 
 const Main = ({ navigation }) => {
   const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const themecolor = async () => {
-      const docRef = doc(db, 'users', 'wSRaX8R8fMVxnQsfUcCgTtSZVAH3')
-      const res = await getDoc(docRef);
-      console.log(Auth.currentUser.uid)
-      console.log(res.data().themeColor)
-    };
-    themecolor()
-  }, []);
-
   return (
     <>
       <SafeAreaView style={globalStyles.pageContainer}>
@@ -31,15 +20,20 @@ const Main = ({ navigation }) => {
 
         <Button
           title="All activity"
-          onPress={() => navigation.navigate("AllActivity")}
+          onPress={() => navigation.navigate("allActivity")}
         />
         <Button
           title="monthView"
           onPress={() => navigation.navigate("monthView")}
         />
-        <Button title="logout" onPress={() => signOut(Auth)} />
+        <Button
+          title="allgoals"
+          onPress={() => navigation.navigate("allGoals")}
+        />
 
-        <Text>{Auth.currentUser.displayName}</Text>
+        <Text style={{ color: "#fff" }}>{Auth.currentUser.displayName}</Text>
+
+        <Button title="logout" onPress={() => signOut(Auth)} />
 
         <AddButton2 nav={navigation} show={show} setShow={setShow} />
       </SafeAreaView>

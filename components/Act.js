@@ -40,10 +40,10 @@ const Act = ({ act, handleDelete }) => {
       >
         <View style={{ justifyContent: "center" }}>
           <Text style={{ paddingRight: 10 }}>{act.text}</Text>
-          {/* {act.date && (
+          {act.date && (
             <Text style={{ paddingRight: 10 }}>{Date(act.date)}</Text>
           )}
-          {act.time && (
+          {/* {act.time && (
             <Text style={{ paddingRight: 10 }}>{Date(act.time)}</Text>
           )} */}
           {/* {act.owner && <Text style={{ paddingRight: 10 }}>{act.owner}</Text>} */}
