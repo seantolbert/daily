@@ -31,6 +31,8 @@ const Main = ({ navigation }) => {
         />
         <Button title="logout" onPress={() => signOut(Auth)} />
 
+        <Text>{Auth.currentUser.displayName}</Text>
+
         <AddButton2 nav={navigation} show={show} setShow={setShow} />
       </SafeAreaView>
     </>
