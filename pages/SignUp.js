@@ -1,16 +1,12 @@
 import {
   StyleSheet,
   Text,
-  View,
   SafeAreaView,
-  Pressable,
-  Button,
   KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
 import { AuthButtons, BackButton, ColorPicker, InputRow } from "../components";
 import { useRegister } from "../hooks/useRegister";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -63,24 +59,13 @@ const SignUp = ({ navigation }) => {
         <ColorPicker setThemeColor={setThemeColor} />
       </KeyboardAvoidingView>
       <AuthButtons
+        color={themeColor}
         nav={navigation}
         disable={disable}
         handleSubmit={handleSubmit}
+        confirm={confirm}
+        password={password}
       />
-      {/* <View style={styles.buttons}>
-        <Button
-          title="LOG IN"
-          style={styles.login}
-          color="#fff"
-          onPress={() => navigation.navigate("signIn")}
-        />
-        <Text style={styles.or}>OR</Text>
-        <Pressable style={styles.create} disabled={disable}>
-          <Text style={styles.createText} onPress={handleSubmit}>
-            CREATE
-          </Text>
-        </Pressable>
-      </View> */}
     </SafeAreaView>
   );
 };
@@ -105,28 +90,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "75%",
   },
-  // buttons: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "space-between",
-  //   width: "75%",
-  // },
-  // create: {
-  //   backgroundColor: "#fff",
-  // },
-  // createText: {
-  //   fontWeight: "bold",
-  //   padding: 10,
-  //   letterSpacing: 2,
-  //   fontSize: 15,
-  // },
-  // or: {
-  //   color: "#fff",
-  //   fontWeight: "bold",
-  // },
-  // login: {
-  //   color: "#fff",
-  //   fontSize: 15,
-  //   fontWeight: "bold",
-  // },
 });

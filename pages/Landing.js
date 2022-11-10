@@ -48,11 +48,11 @@ const Landing = ({ navigation }) => {
         }),
       ]),
       Animated.parallel([
-        Animated.timing(confetti, {
-          useNativeDriver: true,
-          toValue: 1,
-          duration: 500,
-        }),
+        // Animated.timing(confetti, {
+        //   useNativeDriver: true,
+        //   toValue: 1,
+        //   duration: 500,
+        // }),
         Animated.timing(buttonsAnim, {
           useNativeDriver: true,
           toValue: 0,

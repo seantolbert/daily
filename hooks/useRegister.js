@@ -1,10 +1,15 @@
 import { Auth, db } from "../firebase/config";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 
 export const useRegister = () => {
-  const [error, setError] = useState(null);
+  const [signUpError, setSignUpError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
 
   const signup = async (email, password, displayName, themeColor) => {
     try {
@@ -13,13 +18,22 @@ export const useRegister = () => {
         console.log(err.message)
       );
       const ref = doc(db, "users", res.user.uid);
-      await setDoc(ref, {themeColor})
+      await setDoc(ref, { themeColor });
       console.log("username: ", res.user.displayName);
     } catch (err) {
-      setError(err.message);
+      setSignUpError(err.message);
       console.log(err.message);
     }
   };
 
-  return { signup, error };
+  const login = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(Auth, email, password);
+    } catch (err) {
+      setLoginError(err.message);
+      console.log(err.message);
+    }
+  };
+
+  return { signup, signUpError, login, loginError };
 };

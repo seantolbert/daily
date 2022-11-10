@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     borderColor: "#fff",
-    borderBottomWidth: 2,
+    // borderBottomWidth: 2,
     height: 50,
   },
   label: {
@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   colorDot: {
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
     borderRadius: "50%",
   },
 });

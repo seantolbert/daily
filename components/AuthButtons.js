@@ -1,18 +1,47 @@
-import { StyleSheet, Text, View, Button, Pressable } from "react-native";
-const AuthButtons = ({ nav, disable, handleSubmit }) => {
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Pressable,
+  Animated,
+} from "react-native";
+import { useState, useRef, useEffect } from "react";
+
+const AuthButtons = ({ nav, handleSubmit, color, disable }) => {
+  const shadow = useRef(new Animated.Value(1)).current;
+
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
   return (
     <View style={styles.buttons}>
-      <Button
-        title="LOG IN"
-        style={styles.login}
-        color="#fff"
-        onPress={() => nav.navigate("signIn")}
-      />
-      <Text style={styles.or}>OR</Text>
-      <Pressable style={styles.create} disabled={disable}>
-        <Text style={styles.createText} onPress={handleSubmit}>
-          CREATE
-        </Text>
+      <View style={{ marginBottom: 20 }}>
+        <Animated.View
+          style={{
+            position: "absolute",
+            width,
+            height,
+            backgroundColor: `#${color}`,
+            transition: [{ translateX: shadow }, { translateY: shadow }],
+          }}
+        ></Animated.View>
+        <Pressable
+          style={styles.create}
+          disabled={disable}
+          onPress={handleSubmit}
+          onLayout={(e) => {
+            const { width, height } = e.nativeEvent.layout;
+            setWidth(width);
+            setHeight(height);
+          }}
+        >
+          <Text style={styles.createText}>CREATE ACCOUNT</Text>
+        </Pressable>
+      </View>
+      <Text style={styles.or}>Already have an account?</Text>
+      <Pressable onPress={() => nav.navigate("signIn")}>
+        <Text style={styles.createText}>LOG IN</Text>
       </Pressable>
     </View>
   );
@@ -20,19 +49,21 @@ const AuthButtons = ({ nav, disable, handleSubmit }) => {
 export default AuthButtons;
 const styles = StyleSheet.create({
   buttons: {
-    flexDirection: "row",
+    // flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     width: "75%",
   },
   create: {
-    backgroundColor: "#fff",
+    backgroundColor: "#000",
+    paddingVertical: 15,
   },
   createText: {
     fontWeight: "bold",
     padding: 10,
     letterSpacing: 2,
     fontSize: 15,
+    color: "#fff",
   },
   or: {
     color: "#fff",

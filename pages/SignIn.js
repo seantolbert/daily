@@ -1,27 +1,30 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { Auth } from "../firebase/config";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useEffect, useState } from "react";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  SafeAreaView,
+} from "react-native";
+import { useState } from "react";
+import { useRegister } from "../hooks/useRegister";
+import { InputRow } from "../components";
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login } = useRegister();
+
   const handleSubmit = () => {
-    console.log("email: ", email);
-    console.log("password: ", password);
-    signInWithEmailAndPassword(Auth, email, password)
-      .then((res) => {
-        const user = res.user;
-        console.log(`${user.email} successfully logged in`);
-      })
-      .catch((err) => console.log(err.message));
+    login(email, password);
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text>SignIn</Text>
       <TextInput onChangeText={setEmail} placeholder="email" value={email} />
+      <InputRow value={email} label="email" change={setEmail} color="fff" />
       <TextInput
         onChangeText={setPassword}
         placeholder="password"
@@ -31,7 +34,7 @@ const SignIn = ({ navigation }) => {
 
       <Button onPress={() => navigation.navigate("signUp")} title="sign up" />
       <Button onPress={handleSubmit} title="signIn" />
-    </View>
+    </SafeAreaView>
   );
 };
 export default SignIn;
@@ -40,5 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-evenly",
+    backgroundColor: "#000",
   },
 });
