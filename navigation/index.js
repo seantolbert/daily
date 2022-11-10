@@ -1,4 +1,3 @@
-// import { useAuthentication } from "../hooks/useAuthentication";
 import AuthStack from "./AuthStack";
 import UserStack from "./UserStack";
 import { useAuthentication } from "../hooks/useAuthentication";

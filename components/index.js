@@ -1,4 +1,4 @@
-import AddButton from "./AddButton";
+import MenuButton from "./AddButton";
 import Title from "./Title";
 import HomeButton from "./HomeButton";
 import BackButton from "./BackButton";
@@ -12,7 +12,7 @@ import AuthButtons from "./AuthButtons";
 export {
   ColorPicker,
   InputRow,
-  AddButton,
+  MenuButton,
   Title,
   HomeButton,
   BackButton,

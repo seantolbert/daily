@@ -13,8 +13,10 @@ const styles = StyleSheet.create({
   container: { alignItems: "center", width: "100%" },
   heading: {
     fontSize: 30,
+    color: "#fff",
   },
   subheading: {
     fontWeight: "bold",
+    color: "#fff",
   },
 });

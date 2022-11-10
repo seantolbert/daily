@@ -12,14 +12,14 @@ const InputRow = ({ value, color, change, label, secret }) => {
     Animated.timing(shadow, {
       useNativeDriver: true,
       toValue: 10,
-      duration: 500,
+      duration: 300,
     }).start();
   };
   const handleBlur = () => {
     Animated.timing(shadow, {
       useNativeDriver: true,
       toValue: 1,
-      duration: 500,
+      duration: 300,
     }).start();
   };
 

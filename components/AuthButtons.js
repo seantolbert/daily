@@ -14,6 +14,14 @@ const AuthButtons = ({ nav, handleSubmit, color, disable }) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
+  const buttonShadow = () => {
+    Animated.timing(shadow, {
+      toValue: 10,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <View style={styles.buttons}>
       <View style={{ marginBottom: 20 }}>
@@ -49,7 +57,6 @@ const AuthButtons = ({ nav, handleSubmit, color, disable }) => {
 export default AuthButtons;
 const styles = StyleSheet.create({
   buttons: {
-    // flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     width: "75%",
