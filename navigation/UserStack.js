@@ -11,6 +11,7 @@ import {
   AddAct,
   AddGoal,
   Profile,
+  Settings,
 } from "../pages";
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +31,7 @@ export default function UserStack() {
           component={DayView}
           initialParams={{ day: new Date().getDate() }}
         />
+        <Stack.Screen name="settings" component={Settings} />
         <Stack.Screen name="monthView" component={MonthView} />
         <Stack.Screen name="allGoals" component={AllGoals} />
         <Stack.Screen name="profile" component={Profile} />

@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { BackButton, HomeButton, MonthlyActList } from "../components";
+import { BackButton, HomeButton, Menu, MonthlyActList } from "../components";
 import { gStyles } from "../styles/global";
 import { useState } from "react";
 
@@ -7,20 +7,12 @@ const DayView = ({ navigation, route }) => {
   const { day } = route.params;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} />
-      <Text style={gStyles.subtitle}>Day View</Text>
-      <MonthlyActList selected={day} nav={navigation}/>
-      <HomeButton nav={navigation} />
+      <MonthlyActList selected={day} nav={navigation} />
+      <Menu nav={navigation} />
     </SafeAreaView>
   );
 };
 export default DayView;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#000",
-  },
-});
+const styles = StyleSheet.create({});

@@ -6,7 +6,9 @@ import {
   Day,
   LatestPosts,
   MonthlyActList,
+  Menu,
 } from "../components";
+import { gStyles } from "../styles/global";
 
 const MonthView = ({ navigation }) => {
   const today = new Date().getDate();
@@ -14,7 +16,7 @@ const MonthView = ({ navigation }) => {
   const [selected, setSelected] = useState(today);
   const [acts, setActs] = useState(false);
 
-  console.log(selected)
+  console.log(selected);
 
   const nov = [
     "",
@@ -57,10 +59,10 @@ const MonthView = ({ navigation }) => {
   const { container, calendarContainer, monthText } = styles;
 
   return (
-    <SafeAreaView style={container}>
+    <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} />
 
-      <MonthlyActList selected={selected} nav={navigation}/>
+      <MonthlyActList selected={selected} nav={navigation} />
 
       <View>
         <Text style={monthText}>NOV</Text>
@@ -75,18 +77,12 @@ const MonthView = ({ navigation }) => {
           ))}
         </View>
       </View>
-      <HomeButton nav={navigation} />
+      <Menu nav={navigation} />
     </SafeAreaView>
   );
 };
 export default MonthView;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
   calendarContainer: {
     flexWrap: "wrap",
     flexDirection: "row",

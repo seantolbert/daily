@@ -1,14 +1,14 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { BackButton, HomeButton, Menu } from "../components";
+import { BackButton, Menu } from "../components";
 import { gStyles } from "../styles/global";
-const Profile = ({ navigation }) => {
+const Settings = ({ navigation }) => {
   return (
     <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} />
-      <Text style={gStyles.subtitle}>Profile</Text>
+      <Text style={gStyles.subtitle}>Settings</Text>
       <Menu nav={navigation} />
     </SafeAreaView>
   );
 };
-export default Profile;
+export default Settings;
 const styles = StyleSheet.create({});

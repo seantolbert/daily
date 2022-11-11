@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Animated, Pressable } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
 
-const Menu = () => {
+const Menu = ({ nav }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -15,7 +15,8 @@ const Menu = () => {
   const settings = useRef(new Animated.Value(0)).current;
 
   // helper function for measuring distance of menuitem from menu corner
-  const openState = (order) => -(order * height) - order * 10;
+  //   the last number is the distance between each menu item
+  const openState = (order) => -(order * height) - order * 15;
 
   const handleOpen = () => {
     isOpen
@@ -83,8 +84,11 @@ const Menu = () => {
           { transform: [{ translateX: monthView }] },
         ]}
       >
-        <Pressable style={styles.button}>
-          <EvilIcons name="calendar" size={30} color="black" />
+        <Pressable
+          style={styles.button}
+          onPress={() => nav.navigate("monthView")}
+        >
+          <EvilIcons name="calendar" size={55} color="white" />
         </Pressable>
       </Animated.View>
       <Animated.View
@@ -93,8 +97,8 @@ const Menu = () => {
           { transform: [{ translateX: addAct }] },
         ]}
       >
-        <Pressable style={styles.button}>
-          <EvilIcons name="pencil" size={30} color="black" />
+        <Pressable style={styles.button} onPress={() => nav.navigate("addAct")}>
+          <EvilIcons name="pencil" size={55} color="white" />
         </Pressable>
       </Animated.View>
       <Animated.View
@@ -103,8 +107,11 @@ const Menu = () => {
           { transform: [{ translateX: allGoals }] },
         ]}
       >
-        <Pressable style={styles.button}>
-          <EvilIcons name="trophy" size={30} color="black" />
+        <Pressable
+          style={styles.button}
+          onPress={() => nav.navigate("allGoals")}
+        >
+          <EvilIcons name="trophy" size={55} color="white" />
         </Pressable>
       </Animated.View>
       <Animated.View
@@ -113,8 +120,11 @@ const Menu = () => {
           { transform: [{ translateY: profile }] },
         ]}
       >
-        <Pressable style={styles.button}>
-          <EvilIcons name="user" size={30} color="black" />
+        <Pressable
+          style={styles.button}
+          onPress={() => nav.navigate("profile")}
+        >
+          <EvilIcons name="user" size={55} color="white" />
         </Pressable>
       </Animated.View>
       <Animated.View
@@ -123,8 +133,11 @@ const Menu = () => {
           { transform: [{ translateY: settings }] },
         ]}
       >
-        <Pressable style={styles.button}>
-          <EvilIcons name="gear" size={30} color="black" />
+        <Pressable
+          style={styles.button}
+          onPress={() => nav.navigate("settings")}
+        >
+          <EvilIcons name="gear" size={55} color="white" />
         </Pressable>
       </Animated.View>
       <Animated.View style={styles.buttonContainer}>
@@ -140,10 +153,9 @@ const Menu = () => {
             setHeight(height);
           }}
         >
-          <EvilIcons name="navicon" size={30} color="black" />
+          <EvilIcons name="navicon" size={55} color="white" />
         </Pressable>
       </Animated.View>
-      {/* </View> */}
     </View>
   );
 };
@@ -151,7 +163,6 @@ export default Menu;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    alignItems: "flex-end",
     padding: 15,
   },
   buttonContainer: {
@@ -159,11 +170,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
   },
   button: {
-    backgroundColor: "#fff",
+    backgroundColor: "#000",
     borderRadius: "50%",
     alignItems: "center",
     justifyContent: "center",

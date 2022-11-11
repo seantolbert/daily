@@ -25,7 +25,6 @@ const Day = ({ day, selected, setSelected, acts }) => {
         let { width, height } = e.nativeEvent.layout;
         setShadowHeight(height);
         setShadowWidth(width);
-        // handleShadow();
       }}
     >
       <Animated.View
@@ -37,7 +36,7 @@ const Day = ({ day, selected, setSelected, acts }) => {
               { translateX: shadowSlide },
               { translateY: shadowSlide },
             ],
-            backgroundColor: "#828282",
+            backgroundColor: "#b76e79",
           },
         ]}
       ></Animated.View>
@@ -61,14 +60,19 @@ const styles = StyleSheet.create({
     height: 60,
   },
   dateBox: {
-    backgroundColor: "#fff",
+    backgroundColor: "#000",
     height: "100%",
     padding: 5,
-    alignItems: "center",
+    alignItems: "flex-start",
+  },
+  dateBoxText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 12,
   },
   shadow: {
     position: "absolute",
     transform: [{ translateX: 2 }, { translateY: 2 }],
-    backgroundColor: "#e3e3e3",
+    backgroundColor: "#fff",
   },
 });

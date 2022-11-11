@@ -10,6 +10,7 @@ import DayView from "./DayView";
 import AddAct from "./AddAct";
 import AddGoal from "./AddGoal";
 import Profile from "./Profile";
+import Settings from "./Settings";
 
 export {
   Main,
@@ -24,4 +25,5 @@ export {
   AddAct,
   AddGoal,
   Profile,
+  Settings,
 };

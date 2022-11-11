@@ -13,7 +13,7 @@ const Act = ({ act, handleDelete, nav }) => {
       <View
         style={{
           position: "absolute",
-          backgroundColor: `#${act.color}`,
+          backgroundColor: "#fff",
           width: shadowWidth,
           height: shadowHeight,
           transform: [{ translateX: 6 }, { translateY: 6 }],
@@ -24,13 +24,13 @@ const Act = ({ act, handleDelete, nav }) => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          backgroundColor: "#fff",
-          paddingHorizontal: 4,
+          backgroundColor: "#000",
+          paddingHorizontal: 5,
           paddingVertical: 10,
           width: "100%",
           borderBottomWidth: 2,
           borderRightWidth: 2,
-          borderColor: `#${act.color}`,
+          borderColor: "#fff",
         }}
         onLayout={(e) => {
           const { width, height } = e.nativeEvent.layout;
@@ -39,16 +39,20 @@ const Act = ({ act, handleDelete, nav }) => {
         }}
       >
         <View style={{ justifyContent: "center" }}>
-          <Text style={{ paddingRight: 10 }}>{act.text}</Text>
+          <Text style={{ paddingRight: 10, color: "#fff" }}>{act.text}</Text>
           {act.date && (
-            <Text style={{ paddingRight: 10 }}>{act.date.valueOf()}</Text>
+            <Text style={{ paddingRight: 10, color: "#fff" }}>
+              {act.date.valueOf()}
+            </Text>
           )}
         </View>
-        <Pressable onPress={() => nav.navigate("dayView", {day: act.date.valueOf()})}>
+        <Pressable
+          onPress={() => nav.navigate("dayView", { day: act.date.valueOf() })}
+        >
           <Text>Day</Text>
         </Pressable>
         <Pressable onLongPress={() => handleDelete(act.id)}>
-          <Feather name="delete" size={30} color="black" />
+          <Feather name="delete" size={30} color="#fff" />
         </Pressable>
       </View>
     </View>

@@ -7,7 +7,6 @@ export const gStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#000",
   },
-
   subtitle: {
     textTransform: "uppercase",
     letterSpacing: 2,

@@ -1,24 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
-import { BackButton, GoalList, HomeButton } from "../components";
+import { StyleSheet, Text, SafeAreaView } from "react-native";
+import { BackButton, GoalList, Menu } from "../components";
 import { gStyles } from "../styles/global";
-
 
 const AllGoals = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} />
       <Text style={gStyles.subtitle}>All Goals</Text>
       <GoalList />
-      <HomeButton nav={navigation} />
-    </View>
+      <Menu nav={navigation} />
+    </SafeAreaView>
   );
 };
 export default AllGoals;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#000",
-  },
-});
+const styles = StyleSheet.create({});
