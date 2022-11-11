@@ -7,7 +7,7 @@ const MenuButton = ({ show, setShow, nav }) => {
 
   return (
     <View style={container}>
-      <Pressable style={plusButton} onLongPress={() => nav.navigate("addForm")}>
+      <Pressable style={plusButton} onLongPress={() => nav.navigate("addAct")}>
         <Entypo name="plus" size={24} color="black" style={{ padding: 10 }} />
       </Pressable>
     </View>

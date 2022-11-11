@@ -5,7 +5,7 @@ const HomeButton = ({ nav }) => {
   return (
     <View style={container}>
       <Pressable style={button} onPress={() => nav.navigate("main")}>
-        <MaterialIcons name="home" size={40} color="black" />
+        <MaterialIcons name="home" size={40} color="#fff" />
       </Pressable>
     </View>
   );

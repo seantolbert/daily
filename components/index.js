@@ -8,6 +8,8 @@ import LatestPosts from "./LatestPosts";
 import InputRow from "./InputRow";
 import ColorPicker from "./ColorPicker";
 import AuthButtons from "./AuthButtons";
+import GoalList from "./GoalList";
+import MonthlyActList from "./MonthlyActList";
 
 export {
   ColorPicker,
@@ -20,4 +22,6 @@ export {
   Act,
   LatestPosts,
   AuthButtons,
+  MonthlyActList,
+  GoalList,
 };

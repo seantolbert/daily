@@ -6,6 +6,9 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Loading from "./Loading";
 import AllGoals from "./AllGoals";
+import DayView from "./DayView";
+import AddAct from "./AddAct";
+import AddGoal from "./AddGoal";
 
 export {
   Main,
@@ -16,4 +19,7 @@ export {
   SignIn,
   Loading,
   AllGoals,
+  DayView,
+  AddAct,
+  AddGoal,
 };

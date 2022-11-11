@@ -1,21 +1,24 @@
 import { useState, useEffect, useRef } from "react";
-import { db } from "../firebase/config";
+import { Auth, db } from "../firebase/config";
 
 // firebase imports
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 export const useCollection = (c, _q) => {
   const [documents, setDocuments] = useState(null);
 
   //   set up the query
-  const q = useRef(_q).current;
+  // const q = useRef(_q).current;
 
   useEffect(() => {
-    let ref = collection(db, c);
+    let ref = query(
+      collection(db, c),
+      where("uid", "==", Auth.currentUser.uid)
+    );
 
-    if (q) {
-      ref = query(ref, orderBy("-date"));
-    }
+    // if (q) {
+    //   ref = query(ref, orderBy("-date"));
+    // }
 
     const unsub = onSnapshot(ref, (snapshot) => {
       let results = [];
@@ -26,7 +29,7 @@ export const useCollection = (c, _q) => {
     });
 
     return () => unsub();
-  }, [c, q]);
+  }, [c]);
 
   return { documents };
 };

@@ -2,13 +2,14 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { gStyles } from "../styles/global";
 
-const Act = ({ act, handleDelete }) => {
+const Act = ({ act, handleDelete, nav }) => {
   const [shadowWidth, setShadowWidth] = useState(0);
   const [shadowHeight, setShadowHeight] = useState(0);
 
   return (
-    <View style={{ width: "100%", marginVertical: 10, alignItems: "center" }}>
+    <View style={{ width: "95%", marginVertical: 10, alignItems: "center" }}>
       <View
         style={{
           position: "absolute",
@@ -26,11 +27,10 @@ const Act = ({ act, handleDelete }) => {
           backgroundColor: "#fff",
           paddingHorizontal: 4,
           paddingVertical: 10,
-          width: "95%",
+          width: "100%",
           borderBottomWidth: 2,
           borderRightWidth: 2,
           borderColor: `#${act.color}`,
-          // borderRadius: "10px",
         }}
         onLayout={(e) => {
           const { width, height } = e.nativeEvent.layout;
@@ -41,14 +41,12 @@ const Act = ({ act, handleDelete }) => {
         <View style={{ justifyContent: "center" }}>
           <Text style={{ paddingRight: 10 }}>{act.text}</Text>
           {act.date && (
-            <Text style={{ paddingRight: 10 }}>{Date(act.date)}</Text>
+            <Text style={{ paddingRight: 10 }}>{act.date.valueOf()}</Text>
           )}
-          {/* {act.time && (
-            <Text style={{ paddingRight: 10 }}>{Date(act.time)}</Text>
-          )} */}
-          {/* {act.owner && <Text style={{ paddingRight: 10 }}>{act.owner}</Text>} */}
-          {/* <Text style={{ paddingRight: 10 }}>{act.uid}</Text> */}
         </View>
+        <Pressable onPress={() => nav.navigate("dayView", {day: act.date.valueOf()})}>
+          <Text>Day</Text>
+        </Pressable>
         <Pressable onLongPress={() => handleDelete(act.id)}>
           <Feather name="delete" size={30} color="black" />
         </Pressable>

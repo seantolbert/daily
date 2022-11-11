@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 import Title from "../components/Title";
-import { globalStyles } from "../styles/global";
+import { gStyles } from "../styles/global";
 import { useEffect, useState } from "react";
 import AddButton2 from "../components/AddButton";
 import { LatestPosts } from "../components";
@@ -13,10 +13,10 @@ const Main = ({ navigation }) => {
   const [show, setShow] = useState(false);
   return (
     <>
-      <SafeAreaView style={globalStyles.pageContainer}>
+      <SafeAreaView style={gStyles.pageContainer}>
         <Title />
 
-        <LatestPosts actCount={3} limit={true} />
+        <LatestPosts actCount={3} limit={true} nav={navigation} />
 
         <Button
           title="All activity"
@@ -30,8 +30,16 @@ const Main = ({ navigation }) => {
           title="allgoals"
           onPress={() => navigation.navigate("allGoals")}
         />
+        <Button
+          title="dayView"
+          onPress={() => navigation.navigate("dayView")}
+        />
+        <Button
+          title="addGoal"
+          onPress={() => navigation.navigate("addGoal")}
+        />
 
-        <Text style={{ color: "#fff" }}>{Auth.currentUser.displayName}</Text>
+        <Text style={gStyles.subtitle}>{Auth.currentUser.displayName}</Text>
 
         <Button title="logout" onPress={() => signOut(Auth)} />
 

@@ -1,12 +1,20 @@
 import { StyleSheet, Text, View, Pressable, SafeAreaView } from "react-native";
 import { useEffect, useState } from "react";
-import { BackButton, HomeButton, Day, LatestPosts } from "../components";
+import {
+  BackButton,
+  HomeButton,
+  Day,
+  LatestPosts,
+  MonthlyActList,
+} from "../components";
 
 const MonthView = ({ navigation }) => {
   const today = new Date().getDate();
 
   const [selected, setSelected] = useState(today);
   const [acts, setActs] = useState(false);
+
+  console.log(selected)
 
   const nov = [
     "",
@@ -52,7 +60,7 @@ const MonthView = ({ navigation }) => {
     <SafeAreaView style={container}>
       <BackButton nav={navigation} />
 
-      <LatestPosts actCount={2} selected={selected} />
+      <MonthlyActList selected={selected} nav={navigation}/>
 
       <View>
         <Text style={monthText}>NOV</Text>
@@ -75,7 +83,7 @@ export default MonthView;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
+    backgroundColor: "#000",
     justifyContent: "space-between",
     alignItems: "center",
   },

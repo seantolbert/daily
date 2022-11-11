@@ -24,7 +24,7 @@ const palette = [
   "828282",
 ];
 
-const AddForm = ({ navigation }) => {
+const AddAct = ({ navigation }) => {
   const [text, setText] = useState("");
   const [inputWidth, setInputWidth] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
@@ -175,7 +175,7 @@ const AddForm = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default AddForm;
+export default AddAct;
 
 const styles = StyleSheet.create({
   input: {

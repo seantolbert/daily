@@ -1,8 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
-const AllGoals = () => {
+import { BackButton, GoalList, HomeButton } from "../components";
+import { gStyles } from "../styles/global";
+
+
+const AllGoals = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={{ color: "#fff" }}>AllGoals</Text>
+      <BackButton nav={navigation} />
+      <Text style={gStyles.subtitle}>All Goals</Text>
+      <GoalList />
+      <HomeButton nav={navigation} />
     </View>
   );
 };
