@@ -11,7 +11,7 @@ export const gStyles = StyleSheet.create({
   subtitle: {
     textTransform: "uppercase",
     letterSpacing: 2,
-    fontSize: 20,
+    fontSize: 15,
     color: "#fff",
     fontWeight: "bold",
   },

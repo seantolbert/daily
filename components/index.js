@@ -10,9 +10,14 @@ import ColorPicker from "./ColorPicker";
 import AuthButtons from "./AuthButtons";
 import GoalList from "./GoalList";
 import MonthlyActList from "./MonthlyActList";
+import CloseModal from "./CloseModal";
+import IconSelector from "./IconSelector";
+import AddActColorPicker from "./AddActColorPicker";
+import Submit from "./Submit";
 
 export {
   ColorPicker,
+  AddActColorPicker,
   InputRow,
   MenuButton,
   Title,
@@ -24,4 +29,7 @@ export {
   AuthButtons,
   MonthlyActList,
   GoalList,
+  CloseModal,
+  IconSelector,
+  Submit,
 };

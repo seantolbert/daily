@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { StyleSheet, TextInput, View, Animated } from "react-native";
 
-const InputRow = ({ value, color, change, label, secret }) => {
+const InputRow = ({ value, color, change, label, secret, custWidth }) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
@@ -41,7 +41,10 @@ const InputRow = ({ value, color, change, label, secret }) => {
         value={value}
         placeholder={label}
         placeholderTextColor="#fff"
-        style={[styles.input, { borderColor: `#${color}` }]}
+        style={[
+          styles.input,
+          { borderColor: `#${color}`, width: custWidth ? `${custWidth}%` : "100%" },
+        ]}
         secureTextEntry={secret}
         onLayout={(e) => {
           const { width, height } = e.nativeEvent.layout;
