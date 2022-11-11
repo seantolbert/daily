@@ -1,23 +1,22 @@
-// import { doc, getDoc } from "firebase/firestore";
-// import { Auth, db } from "../firebase/config";
-// import { useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { Auth, db } from "../firebase/config";
+import { useState } from "react";
 
-// export const themeContext = async () => {
-//   const [themeError, setThemeError] = useState();
-//   try {
-//     const docRef = doc(db, "users", Auth.currentUser.uid);
-//     const themeColor = res.data().themeColor;
+export const themeContext = async () => {
+  const [themeError, setThemeError] = useState();
+  try {
+    const docRef = doc(db, "users", Auth.currentUser.uid);
+    const themeColor = res.data().themeColor;
 
-//     if (res.exists()) {
-//       return themeColor
-//     } else {
-//         console.log('nope')
-//     }
+    if (res.exists()) {
+      return themeColor
+    } else {
+        console.log('nope')
+    }
 
-//     console.log(themeColor);
-//   } catch (err) {
-//     console.log(err);
-//     setThemeError(err.message);
-//   }
-//   return;
-// };
+    console.log(themeColor);
+  } catch (err) {
+    console.log(err);
+    setThemeError(err.message);
+  }
+};

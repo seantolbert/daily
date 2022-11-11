@@ -14,9 +14,12 @@ import CloseModal from "./CloseModal";
 import IconSelector from "./IconSelector";
 import AddActColorPicker from "./AddActColorPicker";
 import Submit from "./Submit";
+import Menu from "./Menu";
+import AddButton from "./AddButton";
 
 export {
   ColorPicker,
+  AddButton,
   AddActColorPicker,
   InputRow,
   MenuButton,
@@ -32,4 +35,5 @@ export {
   CloseModal,
   IconSelector,
   Submit,
+  Menu,
 };

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const gStyles = StyleSheet.create({
   pageContainer: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     flex: 1,
     backgroundColor: "#000",
   },

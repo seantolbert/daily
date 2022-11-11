@@ -2,7 +2,7 @@ import { StyleSheet, Animated, View, Pressable } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useState, useRef, useEffect } from "react";
 
-const MenuButton = ({ show, setShow, nav }) => {
+const AddButton = ({ show, setShow, nav }) => {
   const { container, plusButton, shadow } = styles;
 
   return (
@@ -13,7 +13,7 @@ const MenuButton = ({ show, setShow, nav }) => {
     </View>
   );
 };
-export default MenuButton;
+export default AddButton;
 const styles = StyleSheet.create({
   container: {
     width: "100%",

@@ -10,6 +10,7 @@ import {
   DayView,
   AddAct,
   AddGoal,
+  Profile,
 } from "../pages";
 
 const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ export default function UserStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="main" component={Main} />
         <Stack.Screen
           name="addAct"
           component={AddAct}
@@ -30,12 +32,12 @@ export default function UserStack() {
         />
         <Stack.Screen name="monthView" component={MonthView} />
         <Stack.Screen name="allGoals" component={AllGoals} />
+        <Stack.Screen name="profile" component={Profile} />
         <Stack.Screen
           name="addGoal"
           component={AddGoal}
           options={{ presentation: "Modal" }}
         />
-        <Stack.Screen name="main" component={Main} />
         <Stack.Screen name="loading" component={Loading} />
         <Stack.Screen name="allActivity" component={AllActivity} />
       </Stack.Navigator>
