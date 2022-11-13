@@ -4,8 +4,7 @@ import { gStyles } from "../styles/global";
 const Profile = ({ navigation }) => {
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <BackButton nav={navigation} />
-      <Text style={gStyles.subtitle}>Profile</Text>
+      <BackButton nav={navigation} title="profile"/>
       <Menu nav={navigation} />
     </SafeAreaView>
   );

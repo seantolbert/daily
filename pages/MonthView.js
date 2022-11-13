@@ -60,12 +60,12 @@ const MonthView = ({ navigation }) => {
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <BackButton nav={navigation} />
+      <BackButton nav={navigation} title="month view" />
 
       <MonthlyActList selected={selected} nav={navigation} />
 
       <View>
-        <Text style={monthText}>NOV</Text>
+        {/* <Text style={monthText}>NOV</Text> */}
         <View style={calendarContainer}>
           {nov.map((day, idx) => (
             <Day

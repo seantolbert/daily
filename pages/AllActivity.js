@@ -5,7 +5,7 @@ import { gStyles } from "../styles/global";
 const AllActivity = ({ navigation }) => {
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <BackButton nav={navigation} />
+      <BackButton nav={navigation} title="All Activities"/>
       <ScrollView
         style={{
           flex: 1,

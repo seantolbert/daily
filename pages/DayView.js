@@ -8,7 +8,7 @@ const DayView = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <BackButton nav={navigation} />
+      <BackButton nav={navigation} title="day view"/>
       <MonthlyActList selected={day} nav={navigation} />
       <Menu nav={navigation} />
     </SafeAreaView>

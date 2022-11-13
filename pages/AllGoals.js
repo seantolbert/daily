@@ -5,8 +5,7 @@ import { gStyles } from "../styles/global";
 const AllGoals = ({ navigation }) => {
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <BackButton nav={navigation} />
-      <Text style={gStyles.subtitle}>All Goals</Text>
+      <BackButton nav={navigation} title="All goals"/>
       <GoalList />
       <Menu nav={navigation} />
     </SafeAreaView>
