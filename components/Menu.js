@@ -14,7 +14,7 @@ const Menu = ({ nav }) => {
   const profile = useRef(new Animated.Value(0)).current;
   const settings = useRef(new Animated.Value(0)).current;
   const main = useRef(new Animated.Value(0)).current;
-  const menuIcon = useRef(new Animated.Value(menuWidth / 4)).current;
+  const menuIcon = useRef(new Animated.Value(0)).current;
   // const closeIcon = useRef(new Animated.Value(-500)).current;
 
   // helper function for measuring distance of menuitem from menu corner
@@ -59,7 +59,7 @@ const Menu = ({ nav }) => {
 
           Animated.timing(menuIcon, {
             useNativeDriver: true,
-            toValue: -menuWidth / 4,
+            toValue: -menuWidth / 2,
             duration: 400,
           }),
         ]).start()
@@ -99,7 +99,7 @@ const Menu = ({ nav }) => {
 
           Animated.timing(menuIcon, {
             useNativeDriver: true,
-            toValue: menuWidth / 4,
+            toValue: 0,
             duration: 400,
           }),
         ]).start();
@@ -194,7 +194,7 @@ const Menu = ({ nav }) => {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "flex-start",
+              justifyContent: "space-between",
               transform: [{ translateX: menuIcon }],
             }}
             onLayout={(e) => {
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#000",
     borderRadius: "50%",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
     width: "100%",
     height: "100%",
