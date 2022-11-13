@@ -36,7 +36,7 @@ const Day = ({ day, selected, setSelected, acts }) => {
               { translateX: shadowSlide },
               { translateY: shadowSlide },
             ],
-            backgroundColor: "#b76e79",
+            backgroundColor: "#FFD700",
           },
         ]}
       ></Animated.View>

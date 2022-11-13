@@ -29,7 +29,7 @@ const AddAct = ({ navigation }) => {
       color,
       uid: user.uid,
     });
-    setText("");
+    setActText("");
     navigation.navigate("main");
   };
 

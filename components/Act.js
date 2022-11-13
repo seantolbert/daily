@@ -3,6 +3,7 @@ import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { gStyles } from "../styles/global";
+import { Ionicons } from "@expo/vector-icons";
 
 const Act = ({ act, handleDelete, nav }) => {
   const [shadowWidth, setShadowWidth] = useState(0);
@@ -16,7 +17,7 @@ const Act = ({ act, handleDelete, nav }) => {
           backgroundColor: "#fff",
           width: shadowWidth,
           height: shadowHeight,
-          transform: [{ translateX: 6 }, { translateY: 6 }],
+          transform: [{ translateX: 1 }, { translateY: 1 }],
         }}
       ></View>
       <View
@@ -25,11 +26,10 @@ const Act = ({ act, handleDelete, nav }) => {
           alignItems: "center",
           justifyContent: "space-between",
           backgroundColor: "#000",
-          paddingHorizontal: 5,
-          paddingVertical: 10,
+          padding: 10,
           width: "100%",
-          borderBottomWidth: 2,
-          borderRightWidth: 2,
+          // borderBottomWidth: 2,
+          // borderRightWidth: 2,
           borderColor: "#fff",
         }}
         onLayout={(e) => {
@@ -39,7 +39,7 @@ const Act = ({ act, handleDelete, nav }) => {
         }}
       >
         <View style={{ justifyContent: "center" }}>
-          <Text style={{ paddingRight: 10, color: "#fff" }}>{act.text}</Text>
+          <Text style={{ paddingRight: 10, color: "#fff" }}>{act.actText}</Text>
           {act.date && (
             <Text style={{ paddingRight: 10, color: "#fff" }}>
               {act.date.valueOf()}
@@ -49,7 +49,7 @@ const Act = ({ act, handleDelete, nav }) => {
         <Pressable
           onPress={() => nav.navigate("dayView", { day: act.date.valueOf() })}
         >
-          <Text>Day</Text>
+          <Ionicons name="navigate-circle-outline" size={30} color="white" />
         </Pressable>
         <Pressable onLongPress={() => handleDelete(act.id)}>
           <Feather name="delete" size={30} color="#fff" />

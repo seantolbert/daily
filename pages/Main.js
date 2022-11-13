@@ -6,20 +6,36 @@ import AddButton from "../components/AddButton";
 import { LatestPosts, Menu } from "../components";
 import { Auth } from "../firebase/config";
 import { signOut } from "firebase/auth";
+import GoalDash from "../components/GoalDash";
+import Timeline from "../components/Timeline";
+import MainLatestActs from "../components/MainLatestActs";
 
 const Main = ({ navigation }) => {
+  console.log(Auth.currentUser.uid);
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
       <Title />
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+        }}
+      >
+        <Text style={gStyles.subtitle}>
+          Welcome {Auth.currentUser.displayName}
+        </Text>
+        <Button title="logout" onPress={() => signOut(Auth)} />
+      </View>
 
-      <LatestPosts actCount={3} limit={true} nav={navigation} />
+      {/* <LatestPosts actCount={3} limit={true} nav={navigation} /> */}
+      <GoalDash />
 
-      
+      <Timeline />
 
-      <Text style={gStyles.subtitle}>{Auth.currentUser.displayName}</Text>
-
-      <Button title="logout" onPress={() => signOut(Auth)} />
+      <MainLatestActs />
 
       <Menu nav={navigation} />
     </SafeAreaView>
