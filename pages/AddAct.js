@@ -14,11 +14,12 @@ import {
 const AddAct = ({ navigation }) => {
   const [actText, setActText] = useState("");
   const [color, setColor] = useState("fff");
-  const [icon, setIcon] = useState("none");
+  const [category, setCategory] = useState("none");
   const user = Auth.currentUser;
 
   const date = new Date().getDate();
   const time = new Date().getTime();
+
 
   const handleSubmit = async () => {
     const ref = collection(db, "activities");
@@ -26,14 +27,13 @@ const AddAct = ({ navigation }) => {
       actText,
       date,
       time,
-      icon,
+      category,
       color,
       uid: user.uid,
     });
     setActText("");
     navigation.navigate("main");
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <CloseModal nav={navigation} />
@@ -47,7 +47,7 @@ const AddAct = ({ navigation }) => {
           />
           <View></View>
         </View>
-        <IconSelector selected={icon} setSelected={setIcon} />
+        <IconSelector category={category} setCategory={setCategory} />
         <AddActColorPicker setColor={setColor} />
         <Submit handleSubmit={handleSubmit} />
       </View>

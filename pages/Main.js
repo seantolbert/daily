@@ -30,7 +30,6 @@ const Main = ({ navigation }) => {
         <Button title="logout" onPress={() => signOut(Auth)} />
       </View>
 
-      {/* <LatestPosts actCount={3} limit={true} nav={navigation} /> */}
       <GoalDash />
 
       <Timeline nav={navigation}/>

@@ -56,7 +56,7 @@ const Act = ({ act, handleDelete, nav }) => {
           )}
         </View>
         <View>
-          {act.icon === "none" && (
+          {act.category === "none" && (
             <MaterialCommunityIcons
               name="checkbox-blank-circle-outline"
               size={24}
@@ -64,7 +64,7 @@ const Act = ({ act, handleDelete, nav }) => {
             />
           )}
 
-          {act.icon === "workout" && (
+          {act.category === "workout" && (
             <MaterialCommunityIcons
               name="weight-lifter"
               size={24}
@@ -72,11 +72,11 @@ const Act = ({ act, handleDelete, nav }) => {
             />
           )}
 
-          {act.icon === "music" && (
+          {act.category === "music" && (
             <MaterialCommunityIcons name="music" size={24} color="#fff" />
           )}
 
-          {act.icon === "social" && (
+          {act.category === "social" && (
             <MaterialCommunityIcons
               name="human-greeting-proximity"
               size={24}
@@ -84,10 +84,11 @@ const Act = ({ act, handleDelete, nav }) => {
             />
           )}
 
-          {act.icon === "apps" && (
+          {act.category === "apps" && (
             <MaterialCommunityIcons name="briefcase" size={24} color="#fff" />
           )}
         </View>
+        <Text style={{ color: "#fff" }}>{act.category}</Text>
         <View style={styles.buttons}>
           <Pressable
             onPress={() => nav.navigate("dayView", { day: act.date.valueOf() })}

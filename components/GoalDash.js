@@ -1,17 +1,44 @@
 import { StyleSheet, Text, View } from "react-native";
 import { gStyles } from "../styles/global";
 import { useCollection } from "../hooks/useCollection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const GoalDash = () => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const { documents: goals } = useCollection("goals");
+  const { documents: acts } = useCollection("activities");
+
+  const totalActCount = (category) => {
+    const filteredActs =
+      acts && acts.filter((act) => act.category === category);
+    return filteredActs.length;
+  };
+  const weeklyActCount = (category) => {
+    const filteredActs =
+    acts && acts.filter((act) => {
+        const day = act.date.getDay().valueOf()
+
+        act.category === category
+        // if day is greater than 0
+      })
+    return filteredActs.length;
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  if (loading) {
+    return <Text style={gStyles.subtitle}>Loading ... </Text>;
+  }
 
   return (
     <View style={styles.container}>
-      {/* <Text style={gStyles.subtitle}>Weekly Goals</Text> */}
       <View
         style={styles.dashContainer}
         onLayout={(e) => {
@@ -22,35 +49,14 @@ const GoalDash = () => {
       >
         {goals &&
           goals.map((goal, idx) => (
-            <View
-              key={idx}
-              style={[
-                styles.goalBox,
-                {
-                  width: width / 2,
-                  height: height / 2,
-                  padding: 5,
-                  borderWidth: 2,
-                  borderColor: "#fff",
-                },
-              ]}
-            >
-              <Text
-                style={[
-                  gStyles.subtitle,
-                  {
-                    // borderWidth: 2,
-                    borderColor: "#fff",
-                    height: "100%",
-                    width: "100%",
-                    borderRadius: "20%",
-                    alignItems: "center",
-                    justify: "center",
-                  },
-                ]}
-              >
-                {goal.title}
+            <View key={idx} style={styles.goalBox}>
+              <Text style={gStyles.subtitle}>{goal.title}</Text>
+              <Text style={gStyles.subtitle}>
+                total: {totalActCount(goal.title)}
               </Text>
+              {/* <Text style={gStyles.subtitle}>
+                total: {actCount(goal.title)}
+              </Text> */}
             </View>
           ))}
       </View>
@@ -61,27 +67,20 @@ export default GoalDash;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "30%",
+    height: "25%",
     alignItems: "center",
     justifyContent: "center",
-  },
-  dashContainer: {
-    // borderWidth: 2,
-    borderColor: "#fff",
-    height: "100%",
-    width: "90%",
-    justifyContent: "space-between",
-    alignItems: "",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignContent: "center",
-    gap: "10px",
-  },
-  goalBox: {
     // borderWidth: 1,
     // borderColor: "#fff",
-    borderRadius: "10px",
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  dashContainer: {
+    height: "100%",
+    width: "100%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  goalBox: {
+    width: "45%",
+    height: "45%",
   },
 });
