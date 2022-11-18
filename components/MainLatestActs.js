@@ -1,10 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
 import { gStyles } from "../styles/global";
-const MainLatestActs = () => {
+import { useCollection } from "../hooks/useCollection";
+
+import { Act } from "../components";
+
+const MainLatestActs = ({ nav }) => {
+  const { documents: acts } = useCollection("activities");
+
   return (
     <View style={styles.container}>
       <View style={styles.listContainer}>
-        <Text style={gStyles.subtitle}>today's latest (3)</Text>
+        {/* <Text style={gStyles.subtitle}>today's latest (3)</Text> */}
+
+        {acts &&
+          acts
+            .slice(0, 3)
+            .map((act, idx) => <Act nav={nav} act={act} key={idx} />)}
       </View>
     </View>
   );
@@ -20,8 +31,8 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: "10px",
     width: "90%",
-    borderColor: "#fff",
-    borderWidth: 2,
+    // borderColor: "#fff",
+    // borderWidth: 2,
     alignItems: "center",
     justifyContent: "center",
   },

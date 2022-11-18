@@ -65,7 +65,6 @@ const MonthView = ({ navigation }) => {
       <MonthlyActList selected={selected} nav={navigation} />
 
       <View>
-        {/* <Text style={monthText}>NOV</Text> */}
         <View style={calendarContainer}>
           {nov.map((day, idx) => (
             <Day

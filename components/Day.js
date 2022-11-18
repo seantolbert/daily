@@ -6,15 +6,25 @@ const Day = ({ day, selected, setSelected, acts }) => {
   const [shadowHeight, setShadowHeight] = useState(0);
   const [shadowWidth, setShadowWidth] = useState(0);
 
+  let initialState;
   const shadowSlide = useRef(new Animated.Value(2)).current;
 
-  const handleShadow = () => {
-    Animated.timing(shadowSlide, {
-      useNativeDriver: true,
-      duration: 600,
-      toValue: 5,
-    }).start();
-  };
+  useEffect(() => {
+    day === selected
+      ? Animated.timing(shadowSlide, {
+          useNativeDriver: true,
+          duration: 600,
+          toValue: 10,
+        }).start()
+      : Animated.timing(shadowSlide, {
+          useNativeDriver: true,
+          duration: 600,
+          toValue: 2,
+        }).start();
+  }, [selected]);
+
+  // const handleShadow = () => {
+  // };
 
   const { dateBox, dateBoxText, shadow, container } = styles;
 
@@ -31,12 +41,11 @@ const Day = ({ day, selected, setSelected, acts }) => {
         style={[
           shadow,
           { width: shadowWidth, height: shadowHeight },
-          day === selected && {
+          {
             transform: [
               { translateX: shadowSlide },
               { translateY: shadowSlide },
             ],
-            backgroundColor: "#FFD700",
           },
         ]}
       ></Animated.View>
@@ -44,7 +53,7 @@ const Day = ({ day, selected, setSelected, acts }) => {
         style={dateBox}
         onPress={() => {
           setSelected(day);
-          handleShadow();
+          // handleShadow();
         }}
       >
         <Text style={dateBoxText}>{day}</Text>
@@ -72,7 +81,7 @@ const styles = StyleSheet.create({
   },
   shadow: {
     position: "absolute",
-    transform: [{ translateX: 2 }, { translateY: 2 }],
+    // transform: [{ translateX: 2 }, { translateY: 2 }],
     backgroundColor: "#fff",
   },
 });

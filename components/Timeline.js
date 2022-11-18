@@ -1,11 +1,27 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { gStyles } from "../styles/global";
-const Timeline = () => {
+import TlDay from "./TlDay";
+
+const Timeline = ({ nav }) => {
+  const today = new Date().getDate().valueOf();
+
+  const days = [10, 11, 12, 13, 14, 15, 16, 17, 18];
+
+  // get month name
+  const dateStr = new Date().toDateString();
+  const dateStrArr = dateStr.split(" ");
+  const month = dateStrArr[1];
+
+  console.log(today);
+
   return (
     <View style={styles.container}>
-      <View style={styles.tlContainer}>
-        <Text style={gStyles.subtitle}>Weekly Timeline</Text>
-      </View>
+      <Text style={gStyles.subtitle}>{month}</Text>
+      <ScrollView horizontal contentContainerStyle={styles.tlContainer}>
+        {days.map((day, idx) => (
+          <TlDay key={idx} day={day} today={today} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -15,14 +31,13 @@ const styles = StyleSheet.create({
     height: "10%",
     width: "100%",
     alignItems: "center",
+    borderRadius: "10px",
   },
   tlContainer: {
-    width: "90%",
-    borderWidth: 2,
-    borderRadius: "10px",
-    borderColor: "#fff",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row-reverse",
+    paddingVertical: 2,
   },
 });

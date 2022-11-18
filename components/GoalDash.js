@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     alignContent: "center",
+    gap: "10px",
   },
   goalBox: {
     // borderWidth: 1,

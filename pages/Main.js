@@ -35,7 +35,7 @@ const Main = ({ navigation }) => {
 
       <Timeline />
 
-      <MainLatestActs />
+      <MainLatestActs nav={navigation} />
 
       <Menu nav={navigation} />
     </SafeAreaView>

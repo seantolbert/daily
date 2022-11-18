@@ -40,23 +40,32 @@ const Act = ({ act, handleDelete, nav }) => {
       >
         <View style={{ justifyContent: "center" }}>
           <Text style={{ paddingRight: 10, color: "#fff" }}>{act.actText}</Text>
-          {act.date && (
+          {/* {act.date && (
             <Text style={{ paddingRight: 10, color: "#fff" }}>
               {act.date.valueOf()}
             </Text>
-          )}
+          )} */}
         </View>
-        <Pressable
-          onPress={() => nav.navigate("dayView", { day: act.date.valueOf() })}
-        >
-          <Ionicons name="navigate-circle-outline" size={30} color="white" />
-        </Pressable>
-        <Pressable onLongPress={() => handleDelete(act.id)}>
-          <Feather name="delete" size={30} color="#fff" />
-        </Pressable>
+        <View style={styles.buttons}>
+          <Pressable
+            onPress={() => nav.navigate("dayView", { day: act.date.valueOf() })}
+          >
+            <Ionicons name="navigate-circle-outline" size={25} color="white" />
+          </Pressable>
+          <Pressable
+            onLongPress={() => handleDelete(act.id)}
+            style={{ marginLeft: 10 }}
+          >
+            <Feather name="delete" size={25} color="#fff" />
+          </Pressable>
+        </View>
       </View>
     </View>
   );
 };
 export default Act;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  buttons: {
+    flexDirection: "row",
+  },
+});
