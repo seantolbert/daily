@@ -19,7 +19,7 @@ const Timeline = ({ nav }) => {
       <Text style={gStyles.subtitle}>{month}</Text>
       <ScrollView horizontal contentContainerStyle={styles.tlContainer}>
         {days.map((day, idx) => (
-          <TlDay key={idx} day={day} today={today} />
+          <TlDay key={idx} day={day} today={today} nav={nav} />
         ))}
       </ScrollView>
     </View>

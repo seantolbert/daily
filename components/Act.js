@@ -10,14 +10,14 @@ const Act = ({ act, handleDelete, nav }) => {
   const [shadowHeight, setShadowHeight] = useState(0);
 
   return (
-    <View style={{ width: "95%", marginVertical: 10, alignItems: "center" }}>
+    <View style={{ width: "100%", marginVertical: 10, alignItems: "center" }}>
       <View
         style={{
           position: "absolute",
-          backgroundColor: "#fff",
+          backgroundColor: `#${act.color}`,
           width: shadowWidth,
           height: shadowHeight,
-          transform: [{ translateX: 1 }, { translateY: 1 }],
+          transform: [{ translateX: 3 }, { translateY: 3 }],
         }}
       ></View>
       <View
@@ -38,13 +38,21 @@ const Act = ({ act, handleDelete, nav }) => {
           setShadowWidth(width);
         }}
       >
-        <View style={{ justifyContent: "center" }}>
-          <Text style={{ paddingRight: 10, color: "#fff" }}>{act.actText}</Text>
-          {/* {act.date && (
+        <View
+          style={{
+            justifyContent: "center",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ paddingRight: 10, color: "#fff", fontSize: 20 }}>
+            {act.actText}
+          </Text>
+          {act.date && (
             <Text style={{ paddingRight: 10, color: "#fff" }}>
               {act.date.valueOf()}
             </Text>
-          )} */}
+          )}
         </View>
         <View style={styles.buttons}>
           <Pressable

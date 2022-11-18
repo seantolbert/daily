@@ -33,7 +33,7 @@ const Main = ({ navigation }) => {
       {/* <LatestPosts actCount={3} limit={true} nav={navigation} /> */}
       <GoalDash />
 
-      <Timeline />
+      <Timeline nav={navigation}/>
 
       <MainLatestActs nav={navigation} />
 

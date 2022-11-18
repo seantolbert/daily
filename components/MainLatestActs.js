@@ -10,10 +10,9 @@ const MainLatestActs = ({ nav }) => {
   return (
     <View style={styles.container}>
       <View style={styles.listContainer}>
-        {/* <Text style={gStyles.subtitle}>today's latest (3)</Text> */}
-
         {acts &&
           acts
+            .sort((a, b) => Number(b.time) - Number(a.time))
             .slice(0, 3)
             .map((act, idx) => <Act nav={nav} act={act} key={idx} />)}
       </View>
