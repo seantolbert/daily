@@ -1,19 +1,12 @@
-import { StyleSheet, Pressable } from "react-native";
-const IconButton = ({ children, setSelected, selected }) => {
+import { StyleSheet, View, Text, Pressable } from "react-native";
+import { gStyles } from "../styles/global";
+const IconButton = ({ selected, setSelected, title }) => {
   return (
-    <Pressable
-      onPress={() => setSelected(!selected)}
-      style={[styles.button, { borderWidth: selected ? 1 : 0 }]}
-    >
-      {children}
+    <Pressable style={styles.container} onPress={() => setSelected(title)}>
+      <Text style={{ color: selected ? "#fff" : "#828282" }}>{title}</Text>
     </Pressable>
   );
 };
 export default IconButton;
 const styles = StyleSheet.create({
-  button: {
-    borderColor: "#fff",
-    borderRadius: "50%",
-    padding: 5,
-  },
 });

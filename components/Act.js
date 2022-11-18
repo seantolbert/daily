@@ -4,6 +4,7 @@ import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { gStyles } from "../styles/global";
 import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Act = ({ act, handleDelete, nav }) => {
   const [shadowWidth, setShadowWidth] = useState(0);
@@ -52,6 +53,39 @@ const Act = ({ act, handleDelete, nav }) => {
             <Text style={{ paddingRight: 10, color: "#fff" }}>
               {act.date.valueOf()}
             </Text>
+          )}
+        </View>
+        <View>
+          {act.icon === "none" && (
+            <MaterialCommunityIcons
+              name="checkbox-blank-circle-outline"
+              size={24}
+              color="#fff"
+            />
+          )}
+
+          {act.icon === "workout" && (
+            <MaterialCommunityIcons
+              name="weight-lifter"
+              size={24}
+              color="#fff"
+            />
+          )}
+
+          {act.icon === "music" && (
+            <MaterialCommunityIcons name="music" size={24} color="#fff" />
+          )}
+
+          {act.icon === "social" && (
+            <MaterialCommunityIcons
+              name="human-greeting-proximity"
+              size={24}
+              color="#fff"
+            />
+          )}
+
+          {act.icon === "apps" && (
+            <MaterialCommunityIcons name="briefcase" size={24} color="#fff" />
           )}
         </View>
         <View style={styles.buttons}>

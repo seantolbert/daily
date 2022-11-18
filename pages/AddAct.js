@@ -14,7 +14,7 @@ import {
 const AddAct = ({ navigation }) => {
   const [actText, setActText] = useState("");
   const [color, setColor] = useState("fff");
-
+  const [icon, setIcon] = useState("none");
   const user = Auth.currentUser;
 
   const date = new Date().getDate();
@@ -26,6 +26,7 @@ const AddAct = ({ navigation }) => {
       actText,
       date,
       time,
+      icon,
       color,
       uid: user.uid,
     });
@@ -37,13 +38,16 @@ const AddAct = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <CloseModal nav={navigation} />
       <View style={styles.form}>
-        <InputRow
-          color={color}
-          label="what did you do?"
-          value={actText}
-          change={setActText}
-        />
-        {/* <IconSelector /> */}
+        <View>
+          <InputRow
+            color={color}
+            label="what did you do?"
+            value={actText}
+            change={setActText}
+          />
+          <View></View>
+        </View>
+        <IconSelector selected={icon} setSelected={setIcon} />
         <AddActColorPicker setColor={setColor} />
         <Submit handleSubmit={handleSubmit} />
       </View>

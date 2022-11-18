@@ -20,12 +20,12 @@ export default function UserStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="main" component={Main} />
         <Stack.Screen
           name="addAct"
           component={AddAct}
           options={{ presentation: "Modal" }}
         />
+        <Stack.Screen name="main" component={Main} />
         <Stack.Screen
           name="dayView"
           component={DayView}

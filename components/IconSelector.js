@@ -1,34 +1,54 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import IconButton from "./IconButton";
 import { useState } from "react";
 
 const IconSelector = () => {
+  const [selected, setSelected] = useState("none");
 
-    const [selected, setSelected] = useState(null)
+  console.log(selected);
 
-  const icons = [
-    <MaterialCommunityIcons name="weight-lifter" size={24} color="white" />,
-    <MaterialCommunityIcons name="water" size={24} color="white" />,
-    <MaterialCommunityIcons name="music" size={24} color="white" />,
-    <MaterialCommunityIcons name="briefcase" size={24} color="white" />,
-    <MaterialCommunityIcons name="account-plus" size={24} color="white" />,
-    <MaterialCommunityIcons
-      name="human-greeting-proximity"
-      size={24}
-      color="white"
-    />,
-    <MaterialCommunityIcons name="dog-side" size={24} color="white" />,
-    <MaterialCommunityIcons name="food-apple" size={24} color="white" />,
-  ];
-
+  const categories = ["workout", "music", "apps", "social", "none"];
+  const icons = [];
 
   return (
     <View style={styles.container}>
-      {icons.map((icon, idx) => (
-        <IconButton selected={selected} setSelected={setSelected} key={idx}>
-          {icon}
-        </IconButton>
+      <View>
+        {selected === "none" && (
+          <MaterialCommunityIcons
+            name="checkbox-blank-circle-outline"
+            size={24}
+            color="#fff"
+          />
+        )}
+
+        {selected === "workout" && (
+          <MaterialCommunityIcons name="weight-lifter" size={24} color="#fff" />
+        )}
+
+        {selected === "music" && (
+          <MaterialCommunityIcons name="music" size={24} color="#fff" />
+        )}
+
+        {selected === "social" && (
+          <MaterialCommunityIcons
+            name="human-greeting-proximity"
+            size={24}
+            color="#fff"
+          />
+        )}
+
+        {selected === "apps" && (
+          <MaterialCommunityIcons name="briefcase" size={24} color="#fff" />
+        )}
+      </View>
+      {categories.map((title, idx) => (
+        <IconButton
+          key={idx}
+          selected={selected}
+          setSelected={setSelected}
+          title={title}
+        />
       ))}
     </View>
   );
@@ -38,7 +58,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     alignItems: "center",
   },
 });
