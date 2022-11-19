@@ -17,15 +17,16 @@ const AddAct = ({ navigation }) => {
   const [category, setCategory] = useState("none");
   const user = Auth.currentUser;
 
-  const date = new Date().getDate();
+  const fullDate = new Date().toDateString();
+  const dateDay = new Date().getDate();
   const time = new Date().getTime();
-
 
   const handleSubmit = async () => {
     const ref = collection(db, "activities");
     await addDoc(ref, {
       actText,
-      date,
+      date: dateDay,
+      fullDate,
       time,
       category,
       color,

@@ -5,11 +5,21 @@ import { formatDistanceToNow } from "date-fns";
 import { gStyles } from "../styles/global";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { getWeek } from "date-fns";
 
 const Act = ({ act, handleDelete, nav }) => {
   const [shadowWidth, setShadowWidth] = useState(0);
   const [shadowHeight, setShadowHeight] = useState(0);
 
+  function getPreviousSunday(date = new Date()) {
+    const previousMonday = new Date();
+    previousMonday.setDate(date.getDate() - date.getDay());
+    return previousMonday.getDate();
+  }
+
+  console.log(getWeek(new Date(act.fullDate)));
+  console.log(getWeek(new Date()));
+  
   return (
     <View style={{ width: "100%", marginVertical: 10, alignItems: "center" }}>
       <View
