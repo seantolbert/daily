@@ -1,27 +1,20 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
-import { formatDistanceToNow } from "date-fns";
-import { gStyles } from "../styles/global";
-import { Ionicons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { getWeek } from "date-fns";
+import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/config";
 
-const Act = ({ act, handleDelete, nav }) => {
+const Act = ({ act, nav }) => {
   const [shadowWidth, setShadowWidth] = useState(0);
   const [shadowHeight, setShadowHeight] = useState(0);
 
-  function getPreviousSunday(date = new Date()) {
-    const previousMonday = new Date();
-    previousMonday.setDate(date.getDate() - date.getDay());
-    return previousMonday.getDate();
-  }
+  const handleDelete = async (id) => {
+    const docRef = doc(db, "activities", id);
+    await deleteDoc(docRef);
+  };
 
-  console.log(getWeek(new Date(act.fullDate)));
-  console.log(getWeek(new Date()));
-  
   return (
-    <View style={{ width: "100%", marginVertical: 10, alignItems: "center" }}>
+    <View style={{ width: "95%", marginVertical: 10, alignItems: "center" }}>
       <View
         style={{
           position: "absolute",
@@ -29,19 +22,21 @@ const Act = ({ act, handleDelete, nav }) => {
           width: shadowWidth,
           height: shadowHeight,
           transform: [{ translateX: 3 }, { translateY: 3 }],
+          borderRadius: "10px",
         }}
       ></View>
       <View
         style={{
+          borderRadius: "10px",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
           backgroundColor: "#000",
           padding: 10,
           width: "100%",
-          // borderBottomWidth: 2,
-          // borderRightWidth: 2,
-          borderColor: "#fff",
+          borderBottomWidth: 2,
+          borderRightWidth: 2,
+          borderColor: `#${act.color}`,
         }}
         onLayout={(e) => {
           const { width, height } = e.nativeEvent.layout;
@@ -65,42 +60,43 @@ const Act = ({ act, handleDelete, nav }) => {
             </Text>
           )}
         </View>
-        <View>
-          {act.category === "none" && (
-            <MaterialCommunityIcons
-              name="checkbox-blank-circle-outline"
-              size={24}
-              color="#fff"
-            />
-          )}
-
-          {act.category === "workout" && (
-            <MaterialCommunityIcons
-              name="weight-lifter"
-              size={24}
-              color="#fff"
-            />
-          )}
-
-          {act.category === "music" && (
-            <MaterialCommunityIcons name="music" size={24} color="#fff" />
-          )}
-
-          {act.category === "social" && (
-            <MaterialCommunityIcons
-              name="human-greeting-proximity"
-              size={24}
-              color="#fff"
-            />
-          )}
-
-          {act.category === "apps" && (
-            <MaterialCommunityIcons name="briefcase" size={24} color="#fff" />
-          )}
-        </View>
-        <Text style={{ color: "#fff" }}>{act.category}</Text>
         <View style={styles.buttons}>
+          <View>
+            {act.category === "none" && (
+              <MaterialCommunityIcons
+                name="checkbox-blank-circle-outline"
+                size={24}
+                color="#fff"
+              />
+            )}
+
+            {act.category === "workout" && (
+              <MaterialCommunityIcons
+                name="weight-lifter"
+                size={24}
+                color="#fff"
+              />
+            )}
+
+            {act.category === "music" && (
+              <MaterialCommunityIcons name="music" size={24} color="#fff" />
+            )}
+
+            {act.category === "social" && (
+              <MaterialCommunityIcons
+                name="human-greeting-proximity"
+                size={24}
+                color="#fff"
+              />
+            )}
+
+            {act.category === "apps" && (
+              <MaterialCommunityIcons name="briefcase" size={24} color="#fff" />
+            )}
+          </View>
+
           <Pressable
+            style={{ marginLeft: 20 }}
             onPress={() => nav.navigate("dayView", { day: act.date.valueOf() })}
           >
             <Ionicons name="navigate-circle-outline" size={25} color="white" />
@@ -120,5 +116,6 @@ export default Act;
 const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
+    alignItems: "center",
   },
 });

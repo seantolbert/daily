@@ -12,7 +12,6 @@ const Timeline = ({ nav }) => {
   const dateStrArr = dateStr.split(" ");
   const month = dateStrArr[1];
 
-  console.log(today);
 
   return (
     <View style={styles.container}>

@@ -2,11 +2,10 @@ import { StyleSheet, Text, View, Pressable, Animated } from "react-native";
 
 import { useState, useEffect, useRef } from "react";
 
-const Day = ({ day, selected, setSelected, acts }) => {
+const Day = ({ day, selected, setSelected }) => {
   const [shadowHeight, setShadowHeight] = useState(0);
   const [shadowWidth, setShadowWidth] = useState(0);
 
-  let initialState;
   const shadowSlide = useRef(new Animated.Value(2)).current;
 
   useEffect(() => {

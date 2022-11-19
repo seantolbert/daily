@@ -12,17 +12,12 @@ const GoalDash = () => {
   const { documents: goals } = useCollection("goals");
   const { documents: acts } = useCollection("activities");
 
-  function getPreviousSunday(date = new Date()) {
-    const previousMonday = new Date();
-    previousMonday.setDate(date.getDate() - date.getDay());
-    return previousMonday.getDate();
-  }
-
   const totalActCount = (category) => {
     const filteredActs =
       acts && acts.filter((act) => act.category === category);
     return filteredActs.length;
   };
+  
   const weeklyActCount = (category) => {
     const filteredActs =
       acts &&
@@ -34,8 +29,6 @@ const GoalDash = () => {
     return filteredActs.length;
   };
 
-  console.log();
-
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -45,7 +38,7 @@ const GoalDash = () => {
   return (
     <View style={styles.container}>
       {loading ? (
-        <Text>Loading ...</Text>
+        <Text style={gStyles.subtitle}>Loading ...</Text>
       ) : (
         <View
           style={styles.dashContainer}
@@ -60,10 +53,10 @@ const GoalDash = () => {
               <View key={idx} style={styles.goalBox}>
                 <Text style={gStyles.subtitle}>{goal.title}</Text>
                 <View>
-                  <Text style={gStyles.subtitle}>
+                  <Text style={{color: '#fff'}}>
                     total: {totalActCount(goal.title)}
                   </Text>
-                  <Text style={gStyles.subtitle}>
+                  <Text style={{color: '#fff'}}>
                     weekly: {weeklyActCount(goal.title)}
                   </Text>
                 </View>
@@ -81,10 +74,9 @@ const styles = StyleSheet.create({
     height: "25%",
     alignItems: "center",
     justifyContent: "center",
-    // borderWidth: 1,
-    // borderColor: "#fff",
   },
   dashContainer: {
+    justifyContent: "space-evenly",
     height: "100%",
     width: "90%",
     flexDirection: "row",
@@ -93,5 +85,11 @@ const styles = StyleSheet.create({
   goalBox: {
     width: "45%",
     height: "45%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: "#828282",
+    marginBottom: 10,
+    borderRadius: "10px",
   },
 });

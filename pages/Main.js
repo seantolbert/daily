@@ -1,9 +1,7 @@
 import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 import Title from "../components/Title";
 import { gStyles } from "../styles/global";
-import { useState } from "react";
-import AddButton from "../components/AddButton";
-import { LatestPosts, Menu } from "../components";
+import { Menu } from "../components";
 import { Auth } from "../firebase/config";
 import { signOut } from "firebase/auth";
 import GoalDash from "../components/GoalDash";
@@ -11,8 +9,6 @@ import Timeline from "../components/Timeline";
 import MainLatestActs from "../components/MainLatestActs";
 
 const Main = ({ navigation }) => {
-  console.log(Auth.currentUser.uid);
-
   return (
     <SafeAreaView style={gStyles.pageContainer}>
       <Title />
@@ -32,7 +28,7 @@ const Main = ({ navigation }) => {
 
       <GoalDash />
 
-      <Timeline nav={navigation}/>
+      <Timeline nav={navigation} />
 
       <MainLatestActs nav={navigation} />
 
