@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from "react-native";
-import { gStyles } from "../styles/global";
 import { useCollection } from "../hooks/useCollection";
 
 import { Act } from "../components";
@@ -29,9 +28,7 @@ const styles = StyleSheet.create({
   listContainer: {
     height: "100%",
     borderRadius: "10px",
-    width: "90%",
-    // borderColor: "#fff",
-    // borderWidth: 2,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
   },

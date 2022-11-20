@@ -16,6 +16,7 @@ import AddActColorPicker from "./AddActColorPicker";
 import Submit from "./Submit";
 import Menu from "./Menu";
 import AddButton from "./AddButton";
+import Calendar from "./Calendar";
 
 export {
   ColorPicker,
@@ -36,4 +37,5 @@ export {
   IconSelector,
   Submit,
   Menu,
+  Calendar,
 };
