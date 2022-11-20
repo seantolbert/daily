@@ -2,8 +2,6 @@ import MenuButton from "./AddButton";
 import Title from "./Title";
 import HomeButton from "./HomeButton";
 import BackButton from "./BackButton";
-import Day from "./Day";
-import Act from "./Act";
 import LatestPosts from "./LatestPosts";
 import InputRow from "./InputRow";
 import ColorPicker from "./ColorPicker";
@@ -17,6 +15,9 @@ import Submit from "./Submit";
 import Menu from "./Menu";
 import AddButton from "./AddButton";
 import Calendar from "./Calendar";
+import Timeline from "./Timeline";
+import GoalDash from "./GoalDash";
+import MainLatestActs from "./MainLatestActs";
 
 export {
   ColorPicker,
@@ -27,8 +28,6 @@ export {
   Title,
   HomeButton,
   BackButton,
-  Day,
-  Act,
   LatestPosts,
   AuthButtons,
   MonthlyActList,
@@ -38,4 +37,7 @@ export {
   Submit,
   Menu,
   Calendar,
+  Timeline,
+  GoalDash,
+  MainLatestActs,
 };

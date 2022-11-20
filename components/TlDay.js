@@ -1,16 +1,28 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
 
-const TlDay = ({ selected, setSelected, day, nav }) => {
+const TlDay = ({ selected, setSelected, day }) => {
   const date = new Date(day).getDate();
   const dow = new Date(day).toDateString().split(" ")[0];
 
-  // console.log(dow, date);
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.dow}>{dow}</Text>
-      <Text style={styles.date}>{date}</Text>
-    </View>
+    <Pressable
+      onPress={() => setSelected(date)}
+      style={[
+        styles.container,
+        { backgroundColor: selected === date ? "#fff" : "#000" },
+      ]}
+    >
+      <Text
+        style={[styles.dow, { color: selected === date ? "#000" : "#fff" }]}
+      >
+        {dow}
+      </Text>
+      <Text
+        style={[styles.date, { color: selected === date ? "#000" : "#fff" }]}
+      >
+        {date}
+      </Text>
+    </Pressable>
   );
 };
 export default TlDay;
@@ -19,6 +31,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     justifyContent: "center",
     alignItems: "center",
+    padding: 5,
+    borderRadius: "5px",
   },
   dow: {
     fontWeight: "bold",

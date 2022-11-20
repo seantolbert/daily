@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
-import Title from "../components/Title";
-import { gStyles } from "../styles/global";
-import { Menu } from "../components";
+
+import { Menu, GoalDash, Timeline, Title, MainLatestActs } from "../components";
+// firebase
 import { Auth } from "../firebase/config";
 import { signOut } from "firebase/auth";
-import GoalDash from "../components/GoalDash";
-import Timeline from "../components/Timeline";
-import MainLatestActs from "../components/MainLatestActs";
+
+import { gStyles } from "../styles/global";
 
 const Main = ({ navigation, route }) => {
-  
+  const today = new Date().getDate().valueOf();
+
+  const [selected, setSelected] = useState(today);
+
   const { date } = route.params;
 
   return (
@@ -31,9 +34,14 @@ const Main = ({ navigation, route }) => {
 
       <GoalDash />
 
-      <Timeline nav={navigation} date={date} />
+      <Timeline
+        nav={navigation}
+        date={date}
+        selected={selected}
+        setSelected={setSelected}
+      />
 
-      <MainLatestActs nav={navigation} />
+      <MainLatestActs nav={navigation} selected={selected} />
 
       <Menu nav={navigation} />
     </SafeAreaView>

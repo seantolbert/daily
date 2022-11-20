@@ -5,11 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { gStyles } from "../styles/global";
 import TlDay from "./TlDay";
 
-const Timeline = ({ nav, date }) => {
-  const today = new Date().getDate().valueOf();
-
-  const [selected, setSelected] = useState(today);
-
+const Timeline = ({ nav, date, selected, setSelected }) => {
   const scrollRef = useRef();
 
   const days = eachDayOfInterval({

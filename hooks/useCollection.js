@@ -13,7 +13,7 @@ export const useCollection = (c, _q) => {
   useEffect(() => {
     let ref = query(
       collection(db, c),
-      where("uid", "==", Auth.currentUser.uid)
+      where("uid", "==", Auth.currentUser.uid),
     );
 
     // if (q) {
