@@ -8,7 +8,10 @@ import GoalDash from "../components/GoalDash";
 import Timeline from "../components/Timeline";
 import MainLatestActs from "../components/MainLatestActs";
 
-const Main = ({ navigation }) => {
+const Main = ({ navigation, route }) => {
+  
+  const { date } = route.params;
+
   return (
     <SafeAreaView style={gStyles.pageContainer}>
       <Title />
@@ -28,7 +31,7 @@ const Main = ({ navigation }) => {
 
       <GoalDash />
 
-      <Timeline nav={navigation} />
+      <Timeline nav={navigation} date={date} />
 
       <MainLatestActs nav={navigation} />
 

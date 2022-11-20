@@ -1,24 +1,42 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { eachDayOfInterval, sub } from "date-fns";
+import { useEffect, useState, useRef } from "react";
+
 import { gStyles } from "../styles/global";
 import TlDay from "./TlDay";
 
-const Timeline = ({ nav }) => {
+const Timeline = ({ nav, date }) => {
   const today = new Date().getDate().valueOf();
 
-  const days = [10, 11, 12, 13, 14, 15, 16, 17, 18];
+  const [selected, setSelected] = useState(today);
 
-  // get month name
-  const dateStr = new Date().toDateString();
-  const dateStrArr = dateStr.split(" ");
-  const month = dateStrArr[1];
+  const scrollRef = useRef();
 
+  const days = eachDayOfInterval({
+    start: sub(new Date(date), { days: 20 }),
+    end: new Date(date),
+  }).map((day) => day.toDateString());
 
+  const month = new Date(date).toLocaleString("default", { month: "long" });
   return (
     <View style={styles.container}>
       <Text style={gStyles.subtitle}>{month}</Text>
-      <ScrollView horizontal contentContainerStyle={styles.tlContainer}>
+      <ScrollView
+        horizontal
+        contentContainerStyle={styles.tlContainer}
+        ref={scrollRef}
+        onContentSizeChange={() =>
+          scrollRef.current?.scrollToEnd({ animated: true })
+        }
+      >
         {days.map((day, idx) => (
-          <TlDay key={idx} day={day} today={today} nav={nav} />
+          <TlDay
+            key={idx}
+            day={day}
+            selected={selected}
+            setSelected={setSelected}
+            nav={nav}
+          />
         ))}
       </ScrollView>
     </View>
@@ -36,7 +54,7 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row-reverse",
+    flexDirection: "row",
     paddingVertical: 2,
   },
 });

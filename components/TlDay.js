@@ -1,21 +1,15 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import { gStyles } from "../styles/global";
 
-const TlDay = ({ today, day, nav }) => {
+const TlDay = ({ selected, setSelected, day, nav }) => {
+  const date = new Date(day).getDate();
+  const dow = new Date(day).toDateString().split(" ")[0];
+
+  // console.log(dow, date);
+
   return (
     <View style={styles.container}>
-      <View style={styles.line}></View>
-      <Text
-        style={[
-          styles.number,
-          {
-            color: day === today ? "#000" : "#fff",
-            backgroundColor: day === today ? "#fff" : "#000",
-          },
-        ]}
-      >
-        {day}
-      </Text>
+      <Text style={styles.dow}>{dow}</Text>
+      <Text style={styles.date}>{date}</Text>
     </View>
   );
 };
@@ -25,20 +19,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
   },
-  line: {
-    width: 2,
-    position: "absolute",
-    height: "100%",
-    backgroundColor: "white",
+  dow: {
+    fontWeight: "bold",
+    fontSize: 10,
+    letterSpacing: 1.5,
+    color: "#fff",
+    textTransform: "uppercase",
   },
-  number: {
-    fontSize: 30,
+  date: {
+    fontSize: 20,
     padding: 0,
     margin: 0,
     borderColor: "#fff",
     fontWeight: "bold",
     letterSpacing: 2,
+    color: "#fff",
   },
 });
