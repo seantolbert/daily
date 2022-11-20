@@ -9,77 +9,26 @@ import { gStyles } from "../styles/global";
 const MonthView = ({ navigation }) => {
   const today = new Date().getDate();
 
-  // console.log(lastDayOfMonth(new Date()).toDateString());
-  // console.log(startOfMonth(new Date()).toDateString());
-  const days = eachDayOfInterval({
-    start: startOfMonth(new Date()),
-    end: lastDayOfMonth(new Date()),
-  }).map((day) => day.getDate());
-  
-
-
-  console.log(startOfMonth(new Date()).getDay());
-
-  console.log(days);
-
   const [selected, setSelected] = useState(today);
 
   const weekDays = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 
-  const nov = [
-    "",
-    "",
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    "",
-    "",
-    "",
-  ];
+  const start = startOfMonth(new Date());
+  const end = lastDayOfMonth(new Date());
+  
+  let days = eachDayOfInterval({
+    start,
+    end,
+  }).map((day) => day.getDate());
 
-  const calendar = () => {
-    const start = startOfMonth(new Date());
-    const end = lastDayOfMonth(new Date());
-    // create an array of the entire month
-    let days = eachDayOfInterval({
-      start,
-      end,
-      // extract the date of each day of the month from each array item
-    }).map((day) => day.getDate());
+  start.getDay();
+  end.getDay();
 
-    start.getDay();
-    // determine what day of the week the month starts on
-    // push empty spaces into the array for the days of the previous month
-  };
+  const beforeArr = Array.from(new Array(start.getDay()), (s) => "");
+  const afterArr = Array.from(new Array(6 - end.getDay()), () => "");
 
-  const { calendarContainer } = styles;
+  let fullCal = [];
+  fullCal.push(...beforeArr, ...days, ...afterArr);
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
@@ -95,8 +44,8 @@ const MonthView = ({ navigation }) => {
             </View>
           ))}
         </View>
-        <View style={calendarContainer}>
-          {nov.map((day, idx) => (
+        <View style={styles.calendarContainer}>
+          {fullCal.map((day, idx) => (
             <Day
               key={idx}
               day={day}

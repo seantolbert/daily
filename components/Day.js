@@ -12,12 +12,12 @@ const Day = ({ day, selected, setSelected }) => {
     day === selected
       ? Animated.timing(shadowSlide, {
           useNativeDriver: true,
-          duration: 600,
+          duration: 300,
           toValue: 10,
         }).start()
       : Animated.timing(shadowSlide, {
           useNativeDriver: true,
-          duration: 600,
+          duration: 300,
           toValue: 2,
         }).start();
   }, [selected]);
@@ -51,8 +51,7 @@ const Day = ({ day, selected, setSelected }) => {
       <Pressable
         style={dateBox}
         onPress={() => {
-          setSelected(day);
-          // handleShadow();
+          if (typeof day === "number") setSelected(day);
         }}
       >
         <Text style={dateBoxText}>{day}</Text>
