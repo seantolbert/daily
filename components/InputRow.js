@@ -1,12 +1,20 @@
 import { useState, useRef } from "react";
 import { StyleSheet, TextInput, View, Animated } from "react-native";
 
-const InputRow = ({ value, color, change, label, secret, custWidth }) => {
+const InputRow = ({
+  value,
+  color,
+  change,
+  label,
+  secret,
+  custWidth,
+  multiline,
+}) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
   let initialState;
-  const shadow = useRef(new Animated.Value(!!initialState ? 10 : 1)).current;
+  const shadow = useRef(new Animated.Value(!!initialState ? 10 : 2)).current;
 
   const handleFocus = () => {
     Animated.timing(shadow, {
@@ -18,13 +26,15 @@ const InputRow = ({ value, color, change, label, secret, custWidth }) => {
   const handleBlur = () => {
     Animated.timing(shadow, {
       useNativeDriver: true,
-      toValue: 1,
+      toValue: 2,
       duration: 300,
     }).start();
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { width: custWidth ? `${custWidth}%` : "95%" }]}
+    >
       <Animated.View
         style={{
           backgroundColor: `#${color}`,
@@ -32,6 +42,7 @@ const InputRow = ({ value, color, change, label, secret, custWidth }) => {
           height,
           position: "absolute",
           transform: [{ translateX: shadow }, { translateY: shadow }],
+          borderRadius: "10px",
         }}
       ></Animated.View>
       <TextInput
@@ -43,7 +54,7 @@ const InputRow = ({ value, color, change, label, secret, custWidth }) => {
         placeholderTextColor="#fff"
         style={[
           styles.input,
-          { borderColor: `#${color}`, width: custWidth ? `${custWidth}%` : "100%" },
+          { borderColor: `#${color}`, height: multiline ? 'auto' : 50 },
         ]}
         secureTextEntry={secret}
         onLayout={(e) => {
@@ -51,6 +62,7 @@ const InputRow = ({ value, color, change, label, secret, custWidth }) => {
           setWidth(width);
           setHeight(height);
         }}
+        multiline={multiline ? true : false}
       />
     </View>
   );
@@ -58,17 +70,16 @@ const InputRow = ({ value, color, change, label, secret, custWidth }) => {
 export default InputRow;
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    // paddingVertical: 20,
     alignItems: "center",
   },
   input: {
-    height: 50,
+    minHeight: 50,
     width: "100%",
-    borderBottomWidth: 2,
-    borderRightWidth: 2,
     borderColor: "#fff",
     fontSize: 20,
     color: "#fff",
     backgroundColor: "#000",
+    borderRadius: "10px",
   },
 });

@@ -18,8 +18,12 @@ import Calendar from "./Calendar";
 import Timeline from "./Timeline";
 import GoalDash from "./GoalDash";
 import MainLatestActs from "./MainLatestActs";
+import NumInputRow from "./NumInputRow";
+import EmojiPicker from "./EmojiPicker";
+import Keyboard from "./Keyboard";
 
 export {
+  Keyboard,
   ColorPicker,
   AddButton,
   AddActColorPicker,
@@ -40,4 +44,6 @@ export {
   Timeline,
   GoalDash,
   MainLatestActs,
+  NumInputRow,
+  EmojiPicker,
 };

@@ -2,11 +2,14 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 
 import { gStyles } from "../styles/global";
 
-const Submit = ({ handleSubmit }) => {
+const Submit = ({ handler, color }) => {
   return (
     <View style={styles.container}>
-      <Pressable onPress={handleSubmit} style={styles.button}>
-        <Text style={[gStyles.subtitle, { padding: 10 }]}>Submit</Text>
+      <Pressable
+        onPress={handler}
+        style={[styles.button, { borderColor: `#${color}` }]}
+      >
+        <Text style={gStyles.subtitle}>Submit</Text>
       </Pressable>
     </View>
   );
@@ -14,14 +17,13 @@ const Submit = ({ handleSubmit }) => {
 export default Submit;
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "95%",
     alignItems: "flex-end",
-    justifyContent: "center",
+    // marginTop: 30,
   },
   button: {
-    borderWidth: 2,
-    borderColor: "white",
-    width: "30%",
-    alignItems: "center",
+    borderWidth: 5,
+    padding: 15,
+    borderRadius: "10px",
   },
 });
