@@ -4,9 +4,12 @@ const ColorPicker = ({ color, setShow, custWidth }) => {
   const colors = ["F47C7C", "F7F48B", "A1DE93", "70A1D7", "fff"];
 
   return (
-    <View style={[styles.container, {width: custWidth ? custWidth : '95%'}]}>
+    <View style={[styles.container, { width: custWidth ? custWidth : "95%" }]}>
       <Text style={[gStyles.subtitle, { fontSize: 15 }]}>color</Text>
-      <Pressable onPress={() => setShow(true)} style={[styles.colorDot, {backgroundColor: `#${color}`}]}></Pressable>
+      <Pressable
+        onPress={() => setShow(true)}
+        style={[styles.colorDot, { backgroundColor: `#${color}` }]}
+      ></Pressable>
     </View>
   );
 };
@@ -23,7 +26,7 @@ const styles = StyleSheet.create({
 
   colors: {
     flexDirection: "row",
-    width: '50%',
+    width: "50%",
     justifyContent: "space-evenly",
   },
   colorDot: {

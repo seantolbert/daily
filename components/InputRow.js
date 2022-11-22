@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { StyleSheet, TextInput, View, Animated } from "react-native";
+import { StyleSheet, TextInput, View, Animated, Keyboard } from "react-native";
 
 const InputRow = ({
   value,
@@ -24,11 +24,13 @@ const InputRow = ({
     }).start();
   };
   const handleBlur = () => {
+    Keyboard.dismiss()
     Animated.timing(shadow, {
       useNativeDriver: true,
       toValue: 2,
       duration: 300,
     }).start();
+    Keyboard.dismiss()
   };
 
   return (

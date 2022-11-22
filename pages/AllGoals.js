@@ -1,11 +1,12 @@
 import { StyleSheet, Text, SafeAreaView } from "react-native";
-import { BackButton, GoalList, Menu } from "../components";
+import { AddButton, BackButton, GoalList, Menu } from "../components";
 import { gStyles } from "../styles/global";
 
 const AllGoals = ({ navigation }) => {
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <BackButton nav={navigation} title="All goals"/>
+      <BackButton nav={navigation} title="goals" />
+      <AddButton nav={navigation} dest='allGoals'/>
       <GoalList />
       <Menu nav={navigation} />
     </SafeAreaView>

@@ -1,3 +1,4 @@
+import { addDoc, collection } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -16,13 +17,15 @@ import {
   NumInputRow,
   Submit,
 } from "../components";
+import { Auth, db } from "../firebase/config";
 import { gStyles } from "../styles/global";
 
 const AddGoal = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [count, setCount] = useState(3);
-  const [icon, setIcon] = useState("👺");
+  const [weekly, setWeekly] = useState(3);
+  const [monthly, setMonthly] = useState(3);
+  const [yearly, setYearly] = useState(3);
   const [color, setColor] = useState("32cfff");
 
   const keyboardAnimation = useRef(new Animated.Value(1000)).current;
@@ -35,7 +38,7 @@ const AddGoal = ({ navigation }) => {
       toValue: 0,
       duration: 400,
     }).start();
-    if (show) {
+    if (!show) {
       Animated.timing(keyboardAnimation, {
         useNativeDriver: true,
         toValue: 1000,
@@ -44,12 +47,19 @@ const AddGoal = ({ navigation }) => {
     }
   }, [show]);
 
-  console.log(color);
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const ref = collection(db, "goals");
+    await addDoc(ref, {
+      title,
+      description,
+      weekly,
+      color,
+      uid: Auth.currentUser.uid,
+    });
+    navigation.navigate("allGoals");
     console.log(title);
-    console.log(count);
-    console.log(icon);
+    console.log(description);
+    console.log(weekly);
     console.log(color);
   };
 
@@ -93,28 +103,30 @@ const AddGoal = ({ navigation }) => {
     <SafeAreaView
       style={[
         gStyles.pageContainer,
-        { justifyContent: "space-between", alignItems: "center" },
+        { justifyContent: "flex-start", alignItems: "center" },
       ]}
     >
       <CloseModal nav={navigation} dest="allGoals" title="create new goal" />
       <View
         style={{
           justifyContent: "space-between",
-          height: "50%",
+          height: "30%",
           width: "95%",
           alignItems: "center",
         }}
       >
         <InputRow value={title} change={setTitle} label="Title" color={color} />
-        <InputRow
+        {/* <InputRow
           value={description}
           change={setDescription}
           label="Description"
           color={color}
           multiline
-        />
-
-        <NumInputRow count={count} setCount={setCount} />
+        /> */}
+        {/* <View style={{width: '95%'}}>
+          <Text style={gStyles.subtitle}>Commits</Text>
+        </View> */}
+        <NumInputRow title="weekly commit" value={weekly} change={setWeekly} />
 
         <View style={styles.custInputContainer}>
           <ColorPicker
@@ -123,10 +135,8 @@ const AddGoal = ({ navigation }) => {
             setShow={setShow}
             custWidth="45%"
           />
-          <EmojiPicker icon={icon} setIcon={setIcon} />
+          <Submit handler={handleSubmit} color={color} />
         </View>
-
-        <Submit handler={handleSubmit} color={color} />
       </View>
 
       {/* <Keyboard /> */}
@@ -151,7 +161,7 @@ const AddGoal = ({ navigation }) => {
               style={{
                 width: 30,
                 height: 30,
-                backgroundColor: c,
+                backgroundColor: `#${c}`,
                 margin: 10,
               }}
             ></Pressable>
@@ -170,9 +180,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   custInputContainer: {
-    width: "95%",
     flexDirection: "row",
+    width: "95%",
     justifyContent: "space-between",
-    alignItems: "center",
   },
 });

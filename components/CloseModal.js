@@ -1,25 +1,24 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { gStyles } from "../styles/global";
 
-const CloseModal = ({ nav }) => {
+const CloseModal = ({ nav, title, dest }) => {
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => nav.navigate("main")}>
-        <AntDesign
-          name="closecircleo"
-          size={40}
-          color="#fff"
-          style={{ padding: 10 }}
-        />
+      <Text style={gStyles.subtitle}>{title}</Text>
+      <Pressable onPress={() => nav.navigate(dest)}>
+        <AntDesign name="close" size={40} color="#fff" />
       </Pressable>
-      <Text>CloseModal</Text>
     </View>
   );
 };
 export default CloseModal;
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    alignItems: "flex-end",
+    width: "95%",
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
   },
 });

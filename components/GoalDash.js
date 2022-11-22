@@ -50,7 +50,7 @@ const GoalDash = () => {
         >
           {goals &&
             goals.map((goal, idx) => (
-              <View key={idx} style={styles.goalBox}>
+              <View key={idx} style={[styles.goalBox, {borderColor: `#${goal.color}`}]}>
                 <Text style={gStyles.subtitle}>{goal.title}</Text>
                 <View>
                   <Text style={{color: '#fff'}}>
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
     height: "45%",
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderColor: "#828282",
+    borderWidth: 8,
+    // borderColor: "#828282",
     marginBottom: 10,
     borderRadius: "10px",
   },
