@@ -33,11 +33,11 @@ const AddAct = ({ navigation }) => {
       uid: user.uid,
     });
     setActText("");
-    navigation.navigate("main");
+    navigation.navigate("dayView");
   };
   return (
     <SafeAreaView style={styles.container}>
-      <CloseModal nav={navigation} />
+      <CloseModal nav={navigation} dest='dayView'/>
       <View style={styles.form}>
         <View>
           <InputRow
@@ -50,7 +50,7 @@ const AddAct = ({ navigation }) => {
         </View>
         <IconSelector category={category} setCategory={setCategory} />
         <AddActColorPicker setColor={setColor} />
-        <Submit handleSubmit={handleSubmit} />
+        <Submit handler={handleSubmit} />
       </View>
     </SafeAreaView>
   );

@@ -4,7 +4,7 @@ import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/config";
 
-const Act = ({ act, nav }) => {
+const Act = ({ act, nav, custWidth }) => {
   const [shadowWidth, setShadowWidth] = useState(0);
   const [shadowHeight, setShadowHeight] = useState(0);
 
