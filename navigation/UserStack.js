@@ -20,6 +20,7 @@ export default function UserStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="profile" component={Profile} />
         <Stack.Screen
           name="main"
           component={Main}
@@ -48,7 +49,6 @@ export default function UserStack() {
         />
         <Stack.Screen name="settings" component={Settings} />
 
-        <Stack.Screen name="profile" component={Profile} />
         <Stack.Screen
           name="addGoal"
           component={AddGoal}

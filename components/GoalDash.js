@@ -1,13 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Animated, StyleSheet, Text, View } from "react-native";
 import { gStyles } from "../styles/global";
 import { useCollection } from "../hooks/useCollection";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getWeek } from "date-fns";
 
 const GoalDash = () => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const spinAnimation = useRef(new Animated.Value(0)).current;
+  const scaleAnimation = useRef(new Animated.Value(0)).current;
+
+  const [rotation, setRotation] = useState(0);
 
   const { documents: goals } = useCollection("goals");
   const { documents: acts } = useCollection("activities");
@@ -17,7 +22,7 @@ const GoalDash = () => {
       acts && acts.filter((act) => act.category === category);
     return filteredActs.length;
   };
-  
+
   const weeklyActCount = (category) => {
     const filteredActs =
       acts &&
@@ -35,13 +40,25 @@ const GoalDash = () => {
     }, 2000);
   }, []);
 
+  useEffect(() => {
+    // acts.length > 4 ? setRotation()
+  }, []);
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        // { transform: [{ rotate: `${spinAnimation}deg` }] },
+      ]}
+    >
       {loading ? (
         <Text style={gStyles.subtitle}>Loading ...</Text>
       ) : (
         <View
-          style={styles.dashContainer}
+          style={[
+            styles.dashContainer,
+            { transform: [{ rotate: "10deg" }], borderRadius: "50%" },
+          ]}
           onLayout={(e) => {
             const { width, height } = e.nativeEvent.layout;
             setWidth(width);
@@ -50,13 +67,16 @@ const GoalDash = () => {
         >
           {goals &&
             goals.map((goal, idx) => (
-              <View key={idx} style={[styles.goalBox, {borderColor: `#${goal.color}`}]}>
+              <View
+                key={idx}
+                style={[styles.goalBox, { borderColor: `#${goal.color}` }]}
+              >
                 <Text style={gStyles.subtitle}>{goal.title}</Text>
                 <View>
-                  <Text style={{color: '#fff'}}>
+                  <Text style={{ color: "#fff" }}>
                     total: {totalActCount(goal.title)}
                   </Text>
-                  <Text style={{color: '#fff'}}>
+                  <Text style={{ color: "#fff" }}>
                     weekly: {weeklyActCount(goal.title)}
                   </Text>
                 </View>

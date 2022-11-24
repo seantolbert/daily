@@ -21,7 +21,7 @@ import MainLatestActs from "./MainLatestActs";
 import NumInputRow from "./NumInputRow";
 import EmojiPicker from "./EmojiPicker";
 import Keyboard from "./Keyboard";
-import Menu2 from "./Menu";
+
 
 export {
   Keyboard,
