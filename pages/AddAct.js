@@ -1,5 +1,5 @@
 import { StyleSheet, View, SafeAreaView, Text, Pressable } from "react-native";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Auth, db } from "../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import { useState, useEffect } from "react";
@@ -17,7 +17,7 @@ const AddAct = ({ navigation }) => {
   const [actText, setActText] = useState("");
   const [color, setColor] = useState("fff");
   const [category, setCategory] = useState("none");
-  const [placeholder, setPlaceholder] = useState('what did you do?')
+  const [placeholder, setPlaceholder] = useState("what did you do?");
   const [goalColors, setGoalColors] = useState([]);
   const [goalCategories, setGoalCategories] = useState([]);
 
@@ -59,7 +59,7 @@ const AddAct = ({ navigation }) => {
       <View style={styles.form}>
         <InputRow
           color={color}
-          label="what did you do?"
+          label={placeholder}
           value={actText}
           change={setActText}
         />
@@ -74,23 +74,33 @@ const AddAct = ({ navigation }) => {
           {goals &&
             goals.map((goal, idx) => (
               <Pressable
-              key={idx}
+                key={idx}
                 onPress={() => {
                   setCategory(goal.id);
                   console.log(goal.id);
-                  setColor(goal.color)
+                  setColor(goal.color);
+                  setPlaceholder(goal.placeholder);
                 }}
                 style={{
                   backgroundColor: `#${goal.color}`,
                   padding: 10,
                   borderRadius: "10px",
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
               >
-                <Text style={{ fontWeight: "bold" }}>{goal.title}</Text>
+                <Text style={{ fontWeight: "bold", marginRight: 10 }}>
+                  {goal.title}
+                </Text>
+                <MaterialCommunityIcons
+                  name={goal.title.toLowerCase()}
+                  size={24}
+                  color="black"
+                />
               </Pressable>
             ))}
         </View>
-        <Submit handler={handleSubmit} />
+        <Submit handler={handleSubmit} color={color} />
       </View>
     </SafeAreaView>
   );

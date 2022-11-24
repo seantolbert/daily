@@ -4,10 +4,10 @@ import { gStyles } from "../styles/global";
 
 const AllGoals = ({ navigation }) => {
   return (
-    <SafeAreaView style={gStyles.pageContainer}>
+    <SafeAreaView style={[gStyles.pageContainer, { justifyContent: "space-between" }]}>
       <BackButton nav={navigation} title="goals" />
-      <AddButton nav={navigation} dest='allGoals'/>
-      <GoalList />
+      <AddButton nav={navigation} dest="allGoals" />
+      <GoalList nav={navigation}/>
       <Menu nav={navigation} />
     </SafeAreaView>
   );

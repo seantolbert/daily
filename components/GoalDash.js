@@ -2,35 +2,37 @@ import { Animated, StyleSheet, Text, View } from "react-native";
 import { gStyles } from "../styles/global";
 import { useCollection } from "../hooks/useCollection";
 import { useEffect, useState, useRef } from "react";
-import { getWeek } from "date-fns";
+import LottieView from "lottie-react-native";
+import { getWeek, isToday } from "date-fns";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const GoalDash = () => {
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const spinAnimation = useRef(new Animated.Value(0)).current;
-  const scaleAnimation = useRef(new Animated.Value(0)).current;
-
-  const [rotation, setRotation] = useState(0);
 
   const { documents: goals } = useCollection("goals");
   const { documents: acts } = useCollection("activities");
 
-  const totalActCount = (category) => {
+  const dailyCountTotal = () => {
     const filteredActs =
-      acts && acts.filter((act) => act.category === category);
+      acts && acts.filter((act) => isToday(new Date(act.fullDate)));
+    return filteredActs;
+  };
+
+  // console.log(dailyCountTotal().length)
+
+  const totalActCount = (id) => {
+    const filteredActs = acts && acts.filter((act) => act.category === id);
     return filteredActs.length;
   };
 
-  const weeklyActCount = (category) => {
+  const weeklyActCount = (id) => {
     const filteredActs =
       acts &&
       acts
         .filter(
           (act) => getWeek(new Date(act.fullDate)) === getWeek(new Date())
         )
-        .filter((act) => act.category === category);
+        .filter((act) => act.category === id);
     return filteredActs.length;
   };
 
@@ -40,9 +42,7 @@ const GoalDash = () => {
     }, 2000);
   }, []);
 
-  useEffect(() => {
-    // acts.length > 4 ? setRotation()
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={[styles.container]}>
@@ -52,40 +52,60 @@ const GoalDash = () => {
         <View
           style={{
             width: "100%",
-            height: '100%',
+            height: "100%",
             flexDirection: "row",
             borderWidth: 1,
             borderColor: "#fff",
           }}
         >
           <View style={{ width: "25%", height: "100%" }}>
-
-          </View>
-          <View
-            style={styles.weeklyContainer}
-            onLayout={(e) => {
-              const { width, height } = e.nativeEvent.layout;
-              setWidth(width);
-              setHeight(height);
-            }}
-          >
+            <Text style={gStyles.subtitle}>Daily</Text>
             {goals &&
-              goals.map((goal, idx) => (
-                <View
-                  key={idx}
-                  style={[styles.goalBox, { borderColor: `#${goal.color}` }]}
-                >
-                  <Text style={gStyles.subtitle}>{goal.title}</Text>
-                  <View>
-                    <Text style={{ color: "#fff" }}>
-                      total: {totalActCount(goal.title)}
-                    </Text>
-                    <Text style={{ color: "#fff" }}>
-                      weekly: {weeklyActCount(goal.title)}
-                    </Text>
+              goals
+                .filter((goal) => goal.daily)
+                .map((goal, idx) => (
+                  <View key={idx} style={{ backgroundColor: `#${goal.color}` }}>
+                    <Text style={{ color: "#fff" }}>{goal.title}</Text>
                   </View>
-                </View>
-              ))}
+                ))}
+          </View>
+          <View style={styles.weeklyContainer}>
+            <Text style={[gStyles.subtitle, { width: "100%" }]}>weekly</Text>
+            {goals &&
+              goals
+                // .filter((act) => !act.daily)
+                .map((goal, idx) => (
+                  <View
+                    key={idx}
+                    style={[styles.goalBox, { borderColor: `#${goal.color}` }]}
+                  >
+                    {/* <Text style={gStyles.subtitle}>{goal.title}</Text> */}
+                    <MaterialCommunityIcons
+                      name={goal.title.toLowerCase()}
+                      size={24}
+                      color="#fff"
+                    />
+                    <View>
+                      <View style={{ alignItems: "center" }}>
+                        <Text
+                          style={{
+                            color: "#fff",
+                            fontSize: 30,
+                            fontWeight: "bold",
+                            color: `#${goal.color}`,
+                          }}
+                        >
+                          {Math.round(
+                            (weeklyActCount(goal.id) / goal.weekly) * 100
+                          ) + "%"}
+                        </Text>
+                        <Text style={{ color: "#fff" }}>
+                          {weeklyActCount(goal.id)} / {goal.weekly}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                ))}
           </View>
         </View>
       )}
@@ -101,20 +121,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   weeklyContainer: {
-    // justifyContent: "",
     height: "100%",
     width: "80%",
     flexDirection: "row",
     flexWrap: "wrap",
   },
   goalBox: {
-    // width: 120,
-    // height: "45%",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
     borderWidth: 8,
-    // borderColor: "#828282",
-    // marginBottom: 10,
+    padding: 10,
     borderRadius: "10px",
   },
 });

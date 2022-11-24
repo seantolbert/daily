@@ -12,6 +12,7 @@ const Loading = ({ navigation }) => {
     }).start(() => navigation.navigate("main"));
   }, []);
 
+
   return (
     <View style={styles.container}>
       <LottieView

@@ -11,6 +11,7 @@ import AddAct from "./AddAct";
 import AddGoal from "./AddGoal";
 import Profile from "./Profile";
 import Settings from "./Settings";
+import GoalView from "./GoalView";
 
 export {
   Main,
@@ -25,5 +26,6 @@ export {
   AddAct,
   AddGoal,
   Profile,
+  GoalView,
   Settings,
 };

@@ -21,14 +21,21 @@ import Checkbox from "../components/Checkbox";
 import { Auth, db } from "../firebase/config";
 import { gStyles } from "../styles/global";
 
-const AddGoal = ({ navigation }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [weekly, setWeekly] = useState(3);
-  const [placeholder, setPlaceholder] = useState("");
-  const [daily, setDaily] = useState(true);
-  // const [yearly, setYearly] = useState(3);
-  const [color, setColor] = useState("32cfff");
+const AddGoal = ({ navigation, route }) => {
+
+
+  const { goal, isUpdate } = route.params;
+
+  const [title, setTitle] = useState(isUpdate ? goal.title : "");
+  const [description, setDescription] = useState(
+    isUpdate ? goal.description : ""
+  );
+  const [weekly, setWeekly] = useState(isUpdate ? goal.weekly : 3);
+  const [placeholder, setPlaceholder] = useState(
+    isUpdate ? goal.placholder : ""
+  );
+  const [daily, setDaily] = useState(isUpdate ? goal.daily : "");
+  const [color, setColor] = useState(isUpdate ? goal.color : "");
 
   const keyboardAnimation = useRef(new Animated.Value(1000)).current;
 
@@ -65,6 +72,7 @@ const AddGoal = ({ navigation }) => {
     console.log(description);
     console.log(weekly);
     console.log(color);
+    console.log(daily);
   };
 
   const themeColors = [
@@ -103,7 +111,11 @@ const AddGoal = ({ navigation }) => {
     "4c1084",
   ];
 
-  console.log(daily);
+  // console.log(daily);
+
+  
+
+  console.log(isUpdate);
 
   return (
     <SafeAreaView
@@ -142,9 +154,9 @@ const AddGoal = ({ navigation }) => {
             setShow={setShow}
             custWidth="45%"
           />
-        <Checkbox daily={daily} setDaily={setDaily} />
+          <Checkbox daily={daily} setDaily={setDaily} />
         </View>
-          <Submit handler={handleSubmit} color={color} />
+        <Submit handler={handleSubmit} color={color} />
       </View>
 
       {/* <Keyboard /> */}

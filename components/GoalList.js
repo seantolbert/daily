@@ -1,20 +1,34 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useCollection } from "../hooks/useCollection";
 import { gStyles } from "../styles/global";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Goal from "./Goal";
 
-const GoalList = () => {
+const GoalList = ({ nav }) => {
   const { documents: goals } = useCollection("goals");
   return (
-    <View style={styles.Container}>
+    <View style={styles.container}>
       <View
         style={{
-        //   height: "50%",
           justifyContent: "space-evenly",
-          alignItems: 'flex-start'
+          alignItems: "flex-start",
         }}
       >
-        {goals && goals.map((goal, idx) => <Goal key={idx} goal={goal} />)}
+        {goals &&
+          goals.map((goal, idx) => (
+            <Pressable
+              onPress={() => nav.navigate("goalView", { goal })}
+              key={idx}
+              style={[styles.box, { backgroundColor: `#${goal.color}` }]}
+            >
+              <MaterialCommunityIcons
+                name={goal.title.toLowerCase()}
+                size={30}
+                color="#fff"
+              />
+              <Text style={{ color: "#fff" }}>{goal.title}</Text>
+            </Pressable>
+          ))}
       </View>
     </View>
   );
@@ -22,6 +36,9 @@ const GoalList = () => {
 export default GoalList;
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "95%",
+  },
+  box: {
+    padding: 20,
   },
 });

@@ -16,8 +16,8 @@ const AddButton = ({ show, setShow, nav }) => {
 export default AddButton;
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    alignItems: "center",
+    width: "95%",
+    alignItems: "flex-end",
     marginVertical: 30,
   },
 

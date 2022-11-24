@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 
-import {
-  Menu,
-  GoalDash,
-  Timeline,
-  Title,
-  MainLatestActs,
-} from "../components";
+import { Menu, GoalDash, Timeline, Title, MainLatestActs } from "../components";
 // firebase
 import { Auth } from "../firebase/config";
 import { signOut } from "firebase/auth";
@@ -15,15 +9,13 @@ import { signOut } from "firebase/auth";
 import { gStyles } from "../styles/global";
 
 const Main = ({ navigation, route }) => {
-  const today = new Date().getDate().valueOf();
+  const today = new Date().toDateString()
 
   const [selected, setSelected] = useState(today);
 
   const { date } = route.params;
 
   return (
-
-    
     <SafeAreaView style={gStyles.pageContainer}>
       <Title />
       <View
@@ -45,7 +37,7 @@ const Main = ({ navigation, route }) => {
       <Timeline
         nav={navigation}
         date={date}
-        selected={selected}
+        selected={new Date(selected).getDate()}
         setSelected={setSelected}
       />
 
