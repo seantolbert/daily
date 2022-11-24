@@ -17,6 +17,7 @@ import {
   NumInputRow,
   Submit,
 } from "../components";
+import Checkbox from "../components/Checkbox";
 import { Auth, db } from "../firebase/config";
 import { gStyles } from "../styles/global";
 
@@ -25,8 +26,8 @@ const AddGoal = ({ navigation }) => {
   const [description, setDescription] = useState("");
   const [weekly, setWeekly] = useState(3);
   const [placeholder, setPlaceholder] = useState("");
-  const [monthly, setMonthly] = useState(3);
-  const [yearly, setYearly] = useState(3);
+  const [daily, setDaily] = useState(true);
+  // const [yearly, setYearly] = useState(3);
   const [color, setColor] = useState("32cfff");
 
   const keyboardAnimation = useRef(new Animated.Value(1000)).current;
@@ -55,6 +56,7 @@ const AddGoal = ({ navigation }) => {
       description,
       weekly,
       placeholder,
+      daily,
       color,
       uid: Auth.currentUser.uid,
     });
@@ -101,6 +103,8 @@ const AddGoal = ({ navigation }) => {
     "4c1084",
   ];
 
+  console.log(daily);
+
   return (
     <SafeAreaView
       style={[
@@ -112,7 +116,7 @@ const AddGoal = ({ navigation }) => {
       <View
         style={{
           justifyContent: "space-between",
-          height: "30%",
+          height: "50%",
           width: "95%",
           alignItems: "center",
         }}
@@ -124,7 +128,12 @@ const AddGoal = ({ navigation }) => {
           label="What are you asking for?"
           color={color}
         />
-        <NumInputRow title="weekly commit" value={weekly} change={setWeekly} />
+        <NumInputRow
+          title="weekly commit"
+          daily={daily}
+          value={weekly}
+          change={setWeekly}
+        />
 
         <View style={styles.custInputContainer}>
           <ColorPicker
@@ -133,8 +142,9 @@ const AddGoal = ({ navigation }) => {
             setShow={setShow}
             custWidth="45%"
           />
-          <Submit handler={handleSubmit} color={color} />
+        <Checkbox daily={daily} setDaily={setDaily} />
         </View>
+          <Submit handler={handleSubmit} color={color} />
       </View>
 
       {/* <Keyboard /> */}

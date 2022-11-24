@@ -45,43 +45,48 @@ const GoalDash = () => {
   }, []);
 
   return (
-    <View
-      style={[
-        styles.container,
-        // { transform: [{ rotate: `${spinAnimation}deg` }] },
-      ]}
-    >
+    <View style={[styles.container]}>
       {loading ? (
         <Text style={gStyles.subtitle}>Loading ...</Text>
       ) : (
         <View
-          style={[
-            styles.dashContainer,
-            { transform: [{ rotate: "10deg" }], borderRadius: "50%" },
-          ]}
-          onLayout={(e) => {
-            const { width, height } = e.nativeEvent.layout;
-            setWidth(width);
-            setHeight(height);
+          style={{
+            width: "100%",
+            height: '100%',
+            flexDirection: "row",
+            borderWidth: 1,
+            borderColor: "#fff",
           }}
         >
-          {goals &&
-            goals.map((goal, idx) => (
-              <View
-                key={idx}
-                style={[styles.goalBox, { borderColor: `#${goal.color}` }]}
-              >
-                <Text style={gStyles.subtitle}>{goal.title}</Text>
-                <View>
-                  <Text style={{ color: "#fff" }}>
-                    total: {totalActCount(goal.title)}
-                  </Text>
-                  <Text style={{ color: "#fff" }}>
-                    weekly: {weeklyActCount(goal.title)}
-                  </Text>
+          <View style={{ width: "25%", height: "100%" }}>
+
+          </View>
+          <View
+            style={styles.weeklyContainer}
+            onLayout={(e) => {
+              const { width, height } = e.nativeEvent.layout;
+              setWidth(width);
+              setHeight(height);
+            }}
+          >
+            {goals &&
+              goals.map((goal, idx) => (
+                <View
+                  key={idx}
+                  style={[styles.goalBox, { borderColor: `#${goal.color}` }]}
+                >
+                  <Text style={gStyles.subtitle}>{goal.title}</Text>
+                  <View>
+                    <Text style={{ color: "#fff" }}>
+                      total: {totalActCount(goal.title)}
+                    </Text>
+                    <Text style={{ color: "#fff" }}>
+                      weekly: {weeklyActCount(goal.title)}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-            ))}
+              ))}
+          </View>
         </View>
       )}
     </View>
@@ -91,25 +96,25 @@ export default GoalDash;
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "25%",
+    height: "45%",
     alignItems: "center",
     justifyContent: "center",
   },
-  dashContainer: {
-    justifyContent: "space-evenly",
+  weeklyContainer: {
+    // justifyContent: "",
     height: "100%",
-    width: "90%",
+    width: "80%",
     flexDirection: "row",
     flexWrap: "wrap",
   },
   goalBox: {
-    width: "45%",
-    height: "45%",
+    // width: 120,
+    // height: "45%",
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 8,
     // borderColor: "#828282",
-    marginBottom: 10,
+    // marginBottom: 10,
     borderRadius: "10px",
   },
 });

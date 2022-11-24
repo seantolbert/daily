@@ -2,11 +2,7 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { gStyles } from "../styles/global";
 
-const NumInputRow = ({ title, value, change }) => {
-
-
-
-
+const NumInputRow = ({ daily, title, value, change }) => {
   return (
     <View
       style={{
@@ -21,7 +17,7 @@ const NumInputRow = ({ title, value, change }) => {
         <Text style={gStyles.subtitle}>{title}</Text>
       </View>
       <View>
-        <Text style={{ fontWeight: "bold", fontSize: "30", color: "#fff" }}>
+        <Text style={{ fontWeight: "bold", fontSize: "30", color: daily ? "#828282" : "#fff" }}>
           {value}
         </Text>
       </View>
@@ -31,13 +27,13 @@ const NumInputRow = ({ title, value, change }) => {
         }}
       >
         <Pressable onPress={() => change((count) => count - 1)}>
-          <AntDesign name="leftsquareo" size={40} color="#fff" />
+          <AntDesign name="leftsquareo" size={40} color={daily ? "#828282" : "#fff"} />
         </Pressable>
         <Pressable
           onPress={() => change((count) => count + 1)}
           style={{ marginLeft: 15 }}
         >
-          <AntDesign name="rightsquareo" size={40} color="#fff" />
+          <AntDesign name="rightsquareo" size={40} color={daily ? "#828282" : "#fff"}/>
         </Pressable>
       </View>
     </View>

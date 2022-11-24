@@ -21,13 +21,13 @@ export default function UserStack() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="addAct"
-          component={AddAct}
+          name="addGoals"
+          component={AddGoal}
           options={{ presentation: "modal" }}
         />
         <Stack.Screen
-          name="addGoals"
-          component={AddGoal}
+          name="addAct"
+          component={AddAct}
           options={{ presentation: "modal" }}
         />
         <Stack.Screen name="profile" component={Profile} />

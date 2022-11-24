@@ -17,7 +17,7 @@ const Submit = ({ handler, color }) => {
 export default Submit;
 const styles = StyleSheet.create({
   container: {
-    width: "45%",
+    width: "95%",
     alignItems: "flex-end",
     // marginTop: 30,
   },
