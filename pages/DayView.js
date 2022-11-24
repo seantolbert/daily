@@ -20,13 +20,12 @@ const DayView = ({ navigation, route }) => {
     <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} title={date} />
       <ScrollView>
-        <View>
+        <View style={styles.container}>
           <View
             style={{
               height: "100%",
               width: "100%",
               borderColor: "#fff",
-              // borderWidth: 0.2,
               position: "absolute",
               justifyContent: "center",
             }}
@@ -75,4 +74,8 @@ const DayView = ({ navigation, route }) => {
   );
 };
 export default DayView;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+  },
+});

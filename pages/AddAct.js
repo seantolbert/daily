@@ -2,7 +2,7 @@ import { StyleSheet, View, SafeAreaView } from "react-native";
 
 import { Auth, db } from "../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AddActColorPicker,
   CloseModal,
@@ -10,11 +10,27 @@ import {
   InputRow,
   Submit,
 } from "../components";
+import { useCollection } from "../hooks/useCollection";
 
 const AddAct = ({ navigation }) => {
   const [actText, setActText] = useState("");
   const [color, setColor] = useState("fff");
   const [category, setCategory] = useState("none");
+  const [goalColors, setGoalColors] = useState([]);
+  const [goalCategories, setGoalCategories] = useState([]);
+
+  const { documents: goals } = useCollection("goals");
+
+  useEffect(() => {
+    const colors = goals && goals.map((goal) => goal.color);
+    const categories = goals && goals.map((goal) => goal.title);
+    setGoalColors(colors);
+    setGoalCategories(categories);
+  }, [goals]);
+
+  console.log(goalColors);
+  console.log(goalCategories);
+
   const user = Auth.currentUser;
 
   const fullDate = new Date().toDateString();
@@ -33,23 +49,20 @@ const AddAct = ({ navigation }) => {
       uid: user.uid,
     });
     setActText("");
-    navigation.navigate("dayView");
+    navigation.navigate("main");
   };
   return (
     <SafeAreaView style={styles.container}>
-      <CloseModal nav={navigation} dest='dayView'/>
+      <CloseModal nav={navigation} dest="main" />
       <View style={styles.form}>
-        <View>
-          <InputRow
-            color={color}
-            label="what did you do?"
-            value={actText}
-            change={setActText}
-          />
-          <View></View>
-        </View>
-        <IconSelector category={category} setCategory={setCategory} />
-        <AddActColorPicker setColor={setColor} />
+        <InputRow
+          color={color}
+          label="what did you do?"
+          value={actText}
+          change={setActText}
+        />
+        <IconSelector categories={goalCategories} setCategory={setCategory} />
+        <AddActColorPicker colors={goalColors} setColor={setColor} />
         <Submit handler={handleSubmit} />
       </View>
     </SafeAreaView>
@@ -68,5 +81,6 @@ const styles = StyleSheet.create({
     width: "95%",
     height: "40%",
     justifyContent: "space-evenly",
+    alignItems: "center",
   },
 });

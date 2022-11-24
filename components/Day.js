@@ -22,9 +22,6 @@ const Day = ({ day, selected, setSelected }) => {
         }).start();
   }, [selected]);
 
-  // const handleShadow = () => {
-  // };
-
   const { dateBox, dateBoxText, shadow, container } = styles;
 
   return (
@@ -71,6 +68,7 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 5,
     alignItems: "flex-start",
+    borderRadius: "10px",
   },
   dateBoxText: {
     color: "#fff",
@@ -79,7 +77,7 @@ const styles = StyleSheet.create({
   },
   shadow: {
     position: "absolute",
-    // transform: [{ translateX: 2 }, { translateY: 2 }],
     backgroundColor: "#fff",
+    borderRadius: "10px",
   },
 });

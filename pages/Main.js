@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 
-import { Menu, GoalDash, Timeline, Title, MainLatestActs } from "../components";
+import {
+  Menu,
+  GoalDash,
+  Timeline,
+  Title,
+  MainLatestActs,
+} from "../components";
 // firebase
 import { Auth } from "../firebase/config";
 import { signOut } from "firebase/auth";
@@ -16,6 +22,8 @@ const Main = ({ navigation, route }) => {
   const { date } = route.params;
 
   return (
+
+    
     <SafeAreaView style={gStyles.pageContainer}>
       <Title />
       <View
