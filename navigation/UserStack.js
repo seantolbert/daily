@@ -20,6 +20,16 @@ export default function UserStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="addAct"
+          component={AddAct}
+          options={{ presentation: "modal" }}
+        />
+        <Stack.Screen
+          name="addGoals"
+          component={AddGoal}
+          options={{ presentation: "modal" }}
+        />
         <Stack.Screen name="profile" component={Profile} />
         <Stack.Screen
           name="main"
@@ -31,21 +41,11 @@ export default function UserStack() {
           component={DayView}
           initialParams={{ date: new Date().toDateString() }}
         />
-        <Stack.Screen
-          name="addGoals"
-          component={AddGoal}
-          options={{ presentation: "modal" }}
-        />
         <Stack.Screen name="allGoals" component={AllGoals} />
         <Stack.Screen
           name="monthView"
           component={MonthView}
           initialParams={{ date: new Date().toDateString() }}
-        />
-        <Stack.Screen
-          name="addAct"
-          component={AddAct}
-          options={{ presentation: "modal" }}
         />
         <Stack.Screen name="settings" component={Settings} />
 

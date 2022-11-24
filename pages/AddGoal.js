@@ -24,6 +24,7 @@ const AddGoal = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [weekly, setWeekly] = useState(3);
+  const [placeholder, setPlaceholder] = useState("");
   const [monthly, setMonthly] = useState(3);
   const [yearly, setYearly] = useState(3);
   const [color, setColor] = useState("32cfff");
@@ -53,6 +54,7 @@ const AddGoal = ({ navigation }) => {
       title,
       description,
       weekly,
+      placeholder,
       color,
       uid: Auth.currentUser.uid,
     });
@@ -116,16 +118,12 @@ const AddGoal = ({ navigation }) => {
         }}
       >
         <InputRow value={title} change={setTitle} label="Title" color={color} />
-        {/* <InputRow
-          value={description}
-          change={setDescription}
-          label="Description"
+        <InputRow
+          value={placeholder}
+          change={setPlaceholder}
+          label="What are you asking for?"
           color={color}
-          multiline
-        /> */}
-        {/* <View style={{width: '95%'}}>
-          <Text style={gStyles.subtitle}>Commits</Text>
-        </View> */}
+        />
         <NumInputRow title="weekly commit" value={weekly} change={setWeekly} />
 
         <View style={styles.custInputContainer}>
