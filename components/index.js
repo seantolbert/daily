@@ -1,11 +1,8 @@
 import MenuButton from "./ActionButton";
 import Title from "./Title";
-import HomeButton from "./HomeButton";
 import BackButton from "./BackButton";
 import LatestPosts from "./LatestPosts";
 import InputRow from "./InputRow";
-import ColorPicker from "./ColorPicker";
-import AuthButtons from "./AuthButtons";
 import GoalList from "./GoalList";
 import MonthlyActList from "./MonthlyActList";
 import CloseModal from "./CloseModal";
@@ -20,15 +17,14 @@ import MainLatestActs from "./MainLatestActs";
 import NumInputRow from "./NumInputRow";
 import EmojiPicker from "./EmojiPicker";
 import Keyboard from "./Keyboard";
+import AuthButtons from "./AuthButtons";
 
 export {
   Keyboard,
-  ColorPicker,
   ActionButton,
   InputRow,
   MenuButton,
   Title,
-  HomeButton,
   BackButton,
   LatestPosts,
   AuthButtons,
@@ -44,5 +40,4 @@ export {
   MainLatestActs,
   NumInputRow,
   EmojiPicker,
-  // Menu2,
 };

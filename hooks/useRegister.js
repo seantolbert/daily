@@ -10,9 +10,11 @@ import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 
 export const useRegister = () => {
-  const [signUpError, setSignUpError] = useState(null);
-  const [loginError, setLoginError] = useState(null);
-  const [resetPassError, setResetPassError] = useState(null);
+  const [signUpError, setSignUpError] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [resetPassError, setResetPassError] = useState("");
+
+  
 
   const signup = async (email, password, displayName, themeColor) => {
     try {
@@ -25,18 +27,21 @@ export const useRegister = () => {
       await setDoc(ref, { themeColor, uid: res.user.uid });
       console.log("username: ", res.user.displayName);
     } catch (err) {
-      setSignUpError(err.message);
+      setSignUpError(err);
       console.log(err.message);
     }
   };
 
   const login = async (email, password) => {
-    try {
-      await signInWithEmailAndPassword(Auth, email, password);
-    } catch (err) {
+    // try {
+    await signInWithEmailAndPassword(Auth, email, password).catch((err) => {
       setLoginError(err.message);
       console.log(err.message);
-    }
+    });
+    // } catch (err) {
+    // setLoginError(err.message);
+    // console.log(err.message);
+    // }
   };
 
   const resetPassword = async (email) => {

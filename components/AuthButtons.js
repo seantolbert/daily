@@ -1,84 +1,107 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Pressable,
-  Animated,
-} from "react-native";
-import { useState, useRef, useEffect } from "react";
+import { StyleSheet, Text, View, Animated, Pressable } from "react-native";
+import { useState, useEffect, useRef } from "react";
+import { gStyles } from "../styles/global";
 
-const AuthButtons = ({ nav, handleSubmit, color, disable }) => {
-  const shadow = useRef(new Animated.Value(1)).current;
-
+const AuthButtons = ({
+  handler,
+  email,
+  password,
+  displayName,
+  confirm,
+  navLabel,
+  dest,
+  nav,
+  label,
+  isMember,
+}) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
-  const buttonShadow = () => {
-    Animated.timing(shadow, {
-      toValue: 10,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
+  const shadowAnim = useRef(new Animated.Value(2)).current;
+
+  useEffect(() => {
+    isMember
+      ? // sign in error handling
+        email.split("").includes("@") && password.length > 4
+        ? Animated.timing(shadowAnim, {
+            useNativeDriver: true,
+            toValue: 10,
+            duration: 400,
+          }).start()
+        : Animated.timing(shadowAnim, {
+            useNativeDriver: true,
+            toValue: 2,
+            duration: 400,
+          }).start()
+      : // sign up error handling
+      displayName.length > 4 &&
+        email.split("").includes("@") &&
+        password.length > 4 &&
+        password === confirm
+      ? Animated.timing(shadowAnim, {
+          useNativeDriver: true,
+          toValue: 10,
+          duration: 400,
+        }).start()
+      : Animated.timing(shadowAnim, {
+          useNativeDriver: true,
+          toValue: 2,
+          duration: 400,
+        }).start();
+  }, [email, password, confirm, displayName]);
 
   return (
-    <View style={styles.buttons}>
-      <View style={{ marginBottom: 20 }}>
+    <View style={styles.container}>
+      <View>
+        <Pressable onPress={() => nav.navigate(dest)}>
+          <Text style={gStyles.subtitle}>{navLabel}</Text>
+        </Pressable>
+      </View>
+      <View>
         <Animated.View
-          style={{
-            position: "absolute",
-            width,
-            height,
-            backgroundColor: `#${color}`,
-            transition: [{ translateX: shadow }, { translateY: shadow }],
-          }}
+          style={[
+            styles.shadow,
+            {
+              width,
+              height,
+              transform: [
+                { translateX: shadowAnim },
+                { translateY: shadowAnim },
+              ],
+            },
+          ]}
         ></Animated.View>
         <Pressable
-          style={styles.create}
-          disabled={disable}
-          onPress={handleSubmit}
+          style={styles.login}
+          onPress={handler}
           onLayout={(e) => {
             const { width, height } = e.nativeEvent.layout;
             setWidth(width);
             setHeight(height);
           }}
         >
-          <Text style={styles.createText}>CREATE ACCOUNT</Text>
+          <Text style={gStyles.subtitle}>{label}</Text>
         </Pressable>
       </View>
-      <Text style={styles.or}>Already have an account?</Text>
-      <Pressable onPress={() => nav.navigate("signIn")}>
-        <Text style={styles.createText}>LOG IN</Text>
-      </Pressable>
     </View>
   );
 };
 export default AuthButtons;
 const styles = StyleSheet.create({
-  buttons: {
+  container: {
+    width: "100%",
     alignItems: "center",
+    flexDirection: "row",
     justifyContent: "space-between",
-    width: "75%",
-  },
-  create: {
-    backgroundColor: "#000",
-    paddingVertical: 15,
-  },
-  createText: {
-    fontWeight: "bold",
-    padding: 10,
-    letterSpacing: 2,
-    fontSize: 15,
-    color: "#fff",
-  },
-  or: {
-    color: "#fff",
-    fontWeight: "bold",
   },
   login: {
-    color: "#fff",
-    fontSize: 15,
-    fontWeight: "bold",
+    padding: 15,
+    borderRadius: "10px",
+    backgroundColor: "#000",
+  },
+  shadow: {
+    backgroundColor: "#fff",
+    position: "absolute",
+    borderRadius: "10px",
   },
 });

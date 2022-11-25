@@ -3,9 +3,10 @@ import {
   Text,
   SafeAreaView,
   KeyboardAvoidingView,
+  View,
 } from "react-native";
 import { useState } from "react";
-import { AuthButtons, BackButton, ColorPicker, InputRow } from "../components";
+import { AuthButtons, BackButton, InputRow } from "../components";
 import { useRegister } from "../hooks/useRegister";
 
 const SignUp = ({ navigation }) => {
@@ -13,59 +14,58 @@ const SignUp = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const [themeColor, setThemeColor] = useState("fff");
 
   const { signup } = useRegister();
 
   const handleSubmit = () => {
-    signup(email, password, displayName, themeColor);
+    signup(email, password, displayName);
   };
-
-  const disable = password !== confirm;
-
+  
   return (
     <SafeAreaView style={styles.container}>
-      <BackButton nav={navigation} dest="landing" />
-      <Text style={[styles.title, { color: `#${themeColor}` }]}>
-        CREATE AN ACCOUNT
-      </Text>
+      <BackButton nav={navigation} dest="landing" title="create an account" />
       <KeyboardAvoidingView style={styles.form}>
         <InputRow
           value={displayName}
-          color={themeColor}
+          color='fff'
           change={setDisplayName}
           label="username"
         />
         <InputRow
           value={email}
-          color={themeColor}
+          color='fff'
           change={setEmail}
           label="email"
         />
         <InputRow
           value={password}
-          color={themeColor}
+          color='fff'
           change={setPassword}
           label="password"
           secret
         />
         <InputRow
           value={confirm}
-          color={themeColor}
+          color='fff'
           change={setConfirm}
           label="confirm"
           secret
         />
-        <ColorPicker setThemeColor={setThemeColor} />
+          <View style={{ width: "75%", alignItems: "flex-start" }}>
+            <Text style={{ color: "#fff" }}>Already have an account?</Text>
+          </View>
+          <AuthButtons
+            nav={navigation}
+            isMember={false}
+            dest="signIn"
+            label="sign up"
+            email={email}
+            password={password}
+            confirm={confirm}
+            displayName={displayName}
+            navLabel="log in"
+          />
       </KeyboardAvoidingView>
-      <AuthButtons
-        color={themeColor}
-        nav={navigation}
-        disable={disable}
-        handleSubmit={handleSubmit}
-        confirm={confirm}
-        password={password}
-      />
     </SafeAreaView>
   );
 };
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   form: {
-    height: "50%",
+    height: "60%",
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "75%",

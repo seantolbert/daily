@@ -1,8 +1,6 @@
 import {
-  Button,
   StyleSheet,
   Text,
-  TextInput,
   View,
   SafeAreaView,
   Pressable,
@@ -10,22 +8,26 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useRegister } from "../hooks/useRegister";
-import { BackButton, InputRow } from "../components";
+import { BackButton, InputRow, AuthButtons } from "../components";
+import { gStyles } from "../styles/global";
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login } = useRegister();
+  const { login, logInError } = useRegister();
 
   const handleSubmit = () => {
     login(email, password);
   };
 
+  console.log("login error: " + logInError);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <BackButton nav={navigation} dest="landing" />
-      <Text style={styles.title}>LOG IN</Text>
+    <SafeAreaView
+      style={[gStyles.pageContainer, { justifyContent: "flex-start" }]}
+    >
+      <BackButton nav={navigation} title="log in" dest="landing" />
       <KeyboardAvoidingView style={styles.form}>
         <InputRow value={email} label="email" change={setEmail} color="fff" />
         <InputRow
@@ -35,30 +37,32 @@ const SignIn = ({ navigation }) => {
           color="fff"
           secret
         />
-        <Pressable onPress={() => console.log("forgot password")}>
-          <Text style={{ color: "#fff" }}>forgot your password?</Text>
-        </Pressable>
+        <View style={{ width: "100%", alignItems: "flex-end" }}>
+          <Pressable onPress={() => console.log("forgot password")}>
+            <Text style={{ color: "#fff" }}>Forgot your password?</Text>
+          </Pressable>
+        </View>
+        <View style={{ width: "100%" }}>
+          <View style={{ width: "75%", alignItems: "flex-start" }}>
+            <Text style={{ color: "#fff" }}>Don't have an account?</Text>
+          </View>
+          <AuthButtons
+            handler={handleSubmit}
+            email={email}
+            password={password}
+            label="log in"
+            nav={navigation}
+            dest="signUp"
+            navLabel="sign up"
+            isMember={true}
+          />
+        </View>
       </KeyboardAvoidingView>
-      <View style={styles.buttons}>
-        <Pressable style={styles.login} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>LOG IN</Text>
-        </Pressable>
-        <Text style={{ color: "#fff" }}>Don't have an account?</Text>
-        <Pressable onPress={() => navigation.navigate("signUp")}>
-          <Text style={styles.buttonText}>SIGN UP</Text>
-        </Pressable>
-      </View>
     </SafeAreaView>
   );
 };
 export default SignIn;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    backgroundColor: "#000",
-  },
   title: {
     fontSize: 16,
     letterSpacing: 2,
@@ -68,19 +72,13 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   form: {
-    height: "30%",
+    height: "50%",
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "75%",
+    marginTop: 30,
   },
-  buttons: {
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "75%",
-  },
-  login: {
-    paddingVertical: 15,
-  },
+
   buttonText: {
     color: "#fff",
     letterSpacing: 2,

@@ -45,16 +45,8 @@ const AddAct = ({ navigation }) => {
     setActText("");
     navigation.navigate("main");
   };
-  
 
 
-
-  console.log(icon);
-
-
-
-
-  
   return (
     <SafeAreaView style={styles.container}>
       <CloseModal nav={navigation} dest="main" />

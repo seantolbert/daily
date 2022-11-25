@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { StyleSheet, View, Animated, Text, Pressable } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import LottieView from "lottie-react-native";
+import {
+  StyleSheet,
+  View,
+  Animated,
+  Text,
+  Pressable,
+  Easing,
+  SafeAreaView,
+} from "react-native";
 
 const Landing = ({ navigation }) => {
   const [shadowWidth, setShadowWidth] = useState(0);
@@ -24,7 +30,6 @@ const Landing = ({ navigation }) => {
   const seizeAnim = useRef(new Animated.Value(-100)).current;
   const theAnim = useRef(new Animated.Value(-100)).current;
   const dailyAnim = useRef(new Animated.Value(100)).current;
-  const confetti = useRef(new Animated.Value(0)).current;
   const buttonsAnim = useRef(new Animated.Value(500)).current;
   const shadowAnim = useRef(new Animated.Value(0)).current;
 
@@ -48,21 +53,17 @@ const Landing = ({ navigation }) => {
         }),
       ]),
       Animated.parallel([
-        // Animated.timing(confetti, {
-        //   useNativeDriver: true,
-        //   toValue: 1,
-        //   duration: 500,
-        // }),
         Animated.timing(buttonsAnim, {
           useNativeDriver: true,
           toValue: 0,
-          duration: 300,
+          duration: 400,
         }),
       ]),
       Animated.timing(shadowAnim, {
         useNativeDriver: true,
         toValue: 15,
-        duration: 400,
+        duration: 700,
+        easing: Easing.bounce,
       }),
     ]).start();
   }, []);
@@ -71,13 +72,17 @@ const Landing = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View>
         <Animated.View
-          style={{
-            width: shadowWidth,
-            height: shadowHeight,
-            position: "absolute",
-            backgroundColor: "#fff",
-            transform: [{ translateY: shadowAnim }, { translateX: shadowAnim }],
-          }}
+          style={[
+            styles.shadow,
+            {
+              width: shadowWidth,
+              height: shadowHeight,
+              transform: [
+                { translateY: shadowAnim },
+                { translateX: shadowAnim },
+              ],
+            },
+          ]}
         ></Animated.View>
         <Animated.View
           onLayout={(e) => handleTitleShadow(e)}
@@ -105,16 +110,17 @@ const Landing = ({ navigation }) => {
       >
         <View>
           <Animated.View
-            style={{
-              position: "absolute",
-              height: buttonHeight,
-              width: buttonWidth,
-              backgroundColor: "#fff",
-              transform: [
-                { translateY: shadowAnim },
-                { translateX: shadowAnim },
-              ],
-            }}
+            style={[
+              styles.shadow,
+              {
+                height: buttonHeight,
+                width: buttonWidth,
+                transform: [
+                  { translateY: shadowAnim },
+                  { translateX: shadowAnim },
+                ],
+              },
+            ]}
           ></Animated.View>
           <Pressable
             style={styles.button}
@@ -126,16 +132,17 @@ const Landing = ({ navigation }) => {
         </View>
         <View>
           <Animated.View
-            style={{
-              position: "absolute",
-              height: buttonHeight,
-              width: buttonWidth,
-              backgroundColor: "#fff",
-              transform: [
-                { translateY: shadowAnim },
-                { translateX: shadowAnim },
-              ],
-            }}
+            style={[
+              styles.shadow,
+              {
+                height: buttonHeight,
+                width: buttonWidth,
+                transform: [
+                  { translateY: shadowAnim },
+                  { translateX: shadowAnim },
+                ],
+              },
+            ]}
           ></Animated.View>
           <Pressable
             style={styles.button}
@@ -146,11 +153,6 @@ const Landing = ({ navigation }) => {
           </Pressable>
         </View>
       </Animated.View>
-      <LottieView
-        progress={confetti}
-        style={{ width: "100%", position: "absolute" }}
-        source={require("../assets/confetti.json")}
-      />
     </SafeAreaView>
   );
 };
@@ -164,10 +166,14 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     overflow: "hidden",
-    // borderWidth: 2,
-    // borderColor: "white",
     padding: 10,
     backgroundColor: "#000",
+    borderRadius: "10px",
+  },
+  shadow: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    borderRadius: "10px",
   },
   title: {
     fontWeight: "bold",
@@ -182,12 +188,11 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    // borderWidth: 2,
-    // borderColor: "white",
     width: 150,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#000",
+    borderRadius: "10px",
   },
 
   text: {

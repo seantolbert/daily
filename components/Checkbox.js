@@ -5,22 +5,22 @@ import { gStyles } from "../styles/global";
 const Checkbox = ({ daily, setDaily }) => {
   return (
     // <View style={styles.container}>
-      <Pressable style={styles.button} onPress={() => setDaily(!daily)}>
-          <Text style={gStyles.subtitle}>Daily</Text>
-        {daily ? (
-          <MaterialCommunityIcons
-            name="checkbox-multiple-marked"
-            size={35}
-            color="white"
-          />
-        ) : (
-          <MaterialCommunityIcons
-            name="checkbox-multiple-blank-outline"
-            size={35}
-            color="white"
-          />
-        )}
-      </Pressable>
+    <Pressable style={styles.button} onPress={() => setDaily(!daily)}>
+      <Text style={gStyles.subtitle}>Daily</Text>
+      {daily ? (
+        <MaterialCommunityIcons
+          name="checkbox-multiple-marked"
+          size={35}
+          color="white"
+        />
+      ) : (
+        <MaterialCommunityIcons
+          name="checkbox-multiple-blank-outline"
+          size={35}
+          color="white"
+        />
+      )}
+    </Pressable>
     // </View>
   );
 };
