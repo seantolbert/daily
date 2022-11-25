@@ -19,6 +19,7 @@ const AddAct = ({ navigation }) => {
   const [category, setCategory] = useState("none");
   const [placeholder, setPlaceholder] = useState("what did you do?");
   const [icon, setIcon] = useState("bowling");
+  const [note, setNote] = useState("");
 
   const { documents: goals } = useCollection("goals");
 
@@ -33,6 +34,7 @@ const AddAct = ({ navigation }) => {
     await addDoc(ref, {
       actText,
       date: dateDay,
+      note,
       fullDate,
       icon,
       time,
@@ -43,6 +45,16 @@ const AddAct = ({ navigation }) => {
     setActText("");
     navigation.navigate("main");
   };
+  
+
+
+
+  console.log(icon);
+
+
+
+
+  
   return (
     <SafeAreaView style={styles.container}>
       <CloseModal nav={navigation} dest="main" />
@@ -53,12 +65,20 @@ const AddAct = ({ navigation }) => {
           value={actText}
           change={setActText}
         />
+        <InputRow
+          color={color}
+          label="thoughts?"
+          value={note}
+          change={setNote}
+          multiline
+          custWidth="80%"
+        />
         <View
           style={{
             flexDirection: "row",
             flexWrap: "wrap",
             width: "95%",
-            justifyContent: "center",
+            // justifyContent: "center",
           }}
         >
           {goals &&
@@ -70,6 +90,7 @@ const AddAct = ({ navigation }) => {
                   console.log(goal.id);
                   setColor(goal.color);
                   setPlaceholder(goal.placeholder);
+                  setIcon(goal.icon);
                 }}
                 style={{
                   backgroundColor: `#${goal.color}`,
@@ -80,16 +101,6 @@ const AddAct = ({ navigation }) => {
                   alignItems: "center",
                 }}
               >
-                {/* <Text
-                  style={{
-                    fontWeight: "bold",
-                    marginRight: 10,
-                    color: "#000",
-                    fontSize: 15,
-                  }}
-                >
-                  {goal.title}
-                </Text> */}
                 <MaterialCommunityIcons
                   name={goal.icon || goal.title.toLowerCase()}
                   size={40}
@@ -114,8 +125,8 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "95%",
-    height: "70%",
+    height: "60%",
     justifyContent: "space-evenly",
-    alignItems: "center",
+    // alignItems: "center",
   },
 });

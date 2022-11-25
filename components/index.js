@@ -10,7 +10,6 @@ import GoalList from "./GoalList";
 import MonthlyActList from "./MonthlyActList";
 import CloseModal from "./CloseModal";
 import IconSelector from "./IconSelector";
-import AddActColorPicker from "./AddActColorPicker";
 import Submit from "./Submit";
 import Menu from "./Menu";
 import AddButton from "./AddButton";
@@ -22,12 +21,10 @@ import NumInputRow from "./NumInputRow";
 import EmojiPicker from "./EmojiPicker";
 import Keyboard from "./Keyboard";
 
-
 export {
   Keyboard,
   ColorPicker,
   AddButton,
-  AddActColorPicker,
   InputRow,
   MenuButton,
   Title,

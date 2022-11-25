@@ -15,7 +15,7 @@ const MonthlyActList = ({ selected, nav }) => {
           acts
             .filter((act) => act.date.valueOf() === selected)
             .sort((a, b) => Number(b.time) - Number(a.time))
-            .slice(0, 3)
+            // .slice(0, 3)
             .map((act, idx) => <Act key={idx} act={act} nav={nav} />)}
       </ScrollView>
     </View>

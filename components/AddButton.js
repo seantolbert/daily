@@ -1,34 +1,70 @@
-import { StyleSheet, Animated, View, Pressable } from "react-native";
+import { StyleSheet, View, Pressable, Animated } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 
-const AddButton = ({ show, setShow, nav }) => {
-  const { container, plusButton, shadow } = styles;
+const GoalAddButton = ({ nav }) => {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  const shadowAnim = useRef(new Animated.Value(2)).current;
+
+  const handlePressIn = () => {
+    Animated.timing(shadowAnim, {
+      useNativeDriver: true,
+      toValue: 8,
+      duration: 200,
+    }).start();
+  };
+  const handlePressOut = () => {
+    Animated.timing(shadowAnim, {
+      useNativeDriver: true,
+      toValue: 2,
+      duration: 200,
+    }).start();
+  };
 
   return (
-    <View style={container}>
-      <Pressable style={plusButton} onLongPress={() => nav.navigate("addGoal")}>
-        <Entypo name="plus" size={24} color="black" style={{ padding: 10 }} />
+    <View style={styles.container}>
+      <Animated.View
+        style={[
+          styles.shadow,
+          {
+            width,
+            height,
+            transform: [{ translateX: shadowAnim }, { translateY: shadowAnim }],
+          },
+        ]}
+      ></Animated.View>
+      <Pressable
+        style={styles.plusButton}
+        onLongPress={() => nav.navigate("addGoal", { goal: {} })}
+        onLayout={(e) => {
+          const { width, height } = e.nativeEvent.layout;
+          setHeight(height);
+          setWidth(width);
+        }}
+        onPressIn={() => handlePressIn()}
+        onPressOut={() => handlePressOut()}
+      >
+        <Entypo name="plus" size={40} color="#fff" />
       </Pressable>
     </View>
   );
 };
-export default AddButton;
+export default GoalAddButton;
 const styles = StyleSheet.create({
   container: {
     width: "95%",
-    alignItems: "flex-end",
-    marginVertical: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
-
   plusButton: {
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#372772",
+    backgroundColor: "#000",
+    borderRadius: "50%",
   },
-
   shadow: {
-    backgroundColor: "#828282",
     position: "absolute",
+    backgroundColor: "#fff",
+    borderRadius: "50%",
   },
 });

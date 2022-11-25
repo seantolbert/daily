@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useRef } from "react";
 
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { gStyles } from "../styles/global";
 import { getTime } from "date-fns/esm";
 import { daysToWeeks, getHours } from "date-fns";
@@ -25,13 +27,22 @@ const DayViewAct = ({ act, setWidth, setOffsetX, setHeight }) => {
             setOffsetX(x);
             setWidth(width);
           }}
-          style={[styles.marble, { backgroundColor: `#${act.color}` }]}
-        ></View>
+          style={[styles.marble, {backgroundColor: 'black'}]}
+        >
+          <MaterialCommunityIcons
+            name={act.icon}
+            color={`#${act.color}`}
+            size={25}
+          />
+        </View>
       </View>
       <View style={[styles.actCont, { borderColor: `#${act.color}` }]}>
         <Text style={{ color: "#fff" }}>{act.actText}</Text>
         <Text style={{ color: "#fff" }}>{act.fullDate}</Text>
-        <Text style={{ color: "#fff" }}>{new Date(act.time).toLocaleTimeString()}</Text>
+        <Text style={{ color: "#fff" }}>
+          {new Date(act.time).toLocaleTimeString()}
+        </Text>
+        <Text style={{ color: "#fff" }}>{act.note && act.note}</Text>
         <Text style={{ color: "#fff" }}>{act.category}</Text>
         <Text style={{ color: "#fff" }}>{act.color}</Text>
       </View>
@@ -53,11 +64,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   marble: {
+    alignItems: "center",
+    justifyContent: "center",
     // borderWidth: 3,
     borderRadius: "50%",
     // borderColor: "#fff",
-    width: 15,
-    height: 15,
+    // width: 15,
+    // height: 15,
   },
   actCont: {
     padding: 10,
