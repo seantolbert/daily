@@ -13,13 +13,14 @@ const GoalDash = () => {
   const { documents: goals } = useCollection("goals");
   const { documents: acts } = useCollection("activities");
 
-  const dailyCountTotal = () => {
+  const dailyCountTotal = (category) => {
     const filteredActs =
       acts && acts.filter((act) => isToday(new Date(act.fullDate)));
+    filteredActs.filter((act) => act.category === category);
     return filteredActs;
   };
 
-  // console.log(dailyCountTotal().length)
+  console.log(dailyCountTotal("music"));
 
   const totalActCount = (id) => {
     const filteredActs = acts && acts.filter((act) => act.category === id);
@@ -41,7 +42,7 @@ const GoalDash = () => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-  }, []);
+  }, [acts]);
 
   useEffect(() => {}, []);
 
@@ -76,21 +77,22 @@ const GoalDash = () => {
                   <View
                     key={idx}
                     style={{
-                      // backgroundColor: `#${goal.color}`,
+                      backgroundColor: `#${goal.color}`,
+                      opacity: 0.5,
                       alignItems: "center",
                       justifyContent: "space-between",
                       flexDirection: "row",
                       paddingVertical: 1,
                       paddingHorizontal: 5,
                       borderRadius: "10px",
-                      margin: 1,
+                      margin: 3,
                       borderWidth: 2,
                       borderColor: `#${goal.color}`,
                     }}
                   >
                     <MaterialCommunityIcons
                       name={goal.icon || goal.title.toLowerCase()}
-                      size={50}
+                      size={45}
                       color="#fff"
                     />
                     <View
