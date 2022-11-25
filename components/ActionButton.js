@@ -2,7 +2,7 @@ import { StyleSheet, View, Pressable, Animated } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useState, useRef } from "react";
 
-const GoalAddButton = ({ nav }) => {
+const ActionButton = ({ nav, icon, dest }) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
@@ -37,7 +37,11 @@ const GoalAddButton = ({ nav }) => {
       ></Animated.View>
       <Pressable
         style={styles.plusButton}
-        onLongPress={() => nav.navigate("addGoal", { goal: {} })}
+        onLongPress={() => {
+          if (dest) {
+            nav.navigate(dest, { goal: {} });
+          }
+        }}
         onLayout={(e) => {
           const { width, height } = e.nativeEvent.layout;
           setHeight(height);
@@ -46,12 +50,12 @@ const GoalAddButton = ({ nav }) => {
         onPressIn={() => handlePressIn()}
         onPressOut={() => handlePressOut()}
       >
-        <Entypo name="plus" size={40} color="#fff" />
+        <Entypo name={icon} size={40} color="#fff" />
       </Pressable>
     </View>
   );
 };
-export default GoalAddButton;
+export default ActionButton;
 const styles = StyleSheet.create({
   container: {
     width: "95%",

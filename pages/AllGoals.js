@@ -1,5 +1,5 @@
-import { StyleSheet,SafeAreaView } from "react-native";
-import { AddButton, BackButton, GoalList, Menu } from "../components";
+import { StyleSheet, SafeAreaView } from "react-native";
+import { ActionButton, BackButton, GoalList, Menu } from "../components";
 import { gStyles } from "../styles/global";
 
 const AllGoals = ({ navigation }) => {
@@ -21,7 +21,9 @@ const AllGoals = ({ navigation }) => {
 
       {/*  */}
       {/* Add, update, delete, toolbar */}
-      <AddButton nav={navigation} dest="allGoals" />
+      <ActionButton nav={navigation} dest="addGoal" icon="plus" />
+      {/* update button */}
+      {/* delete button */}
       {/*  */}
 
       <Menu nav={navigation} />

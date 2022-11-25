@@ -1,4 +1,4 @@
-import MenuButton from "./AddButton";
+import MenuButton from "./ActionButton";
 import Title from "./Title";
 import HomeButton from "./HomeButton";
 import BackButton from "./BackButton";
@@ -12,7 +12,7 @@ import CloseModal from "./CloseModal";
 import IconSelector from "./IconSelector";
 import Submit from "./Submit";
 import Menu from "./Menu";
-import AddButton from "./AddButton";
+import ActionButton from "./ActionButton";
 import Calendar from "./Calendar";
 import Timeline from "./Timeline";
 import GoalDash from "./GoalDash";
@@ -24,7 +24,7 @@ import Keyboard from "./Keyboard";
 export {
   Keyboard,
   ColorPicker,
-  AddButton,
+  ActionButton,
   InputRow,
   MenuButton,
   Title,
