@@ -21,17 +21,18 @@ export default function UserStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen
+        name="main"
+        component={Main}
+        initialParams={{ date: new Date().toDateString() }}
+      />
+        <Stack.Screen name="loading" component={Loading} />
         <Stack.Screen
           name="goalView"
           component={GoalView}
           initialParams={{ goal: {}, isUpdate: true }}
         />
         <Stack.Screen name="allGoals" component={AllGoals} />
-        <Stack.Screen
-          name="main"
-          component={Main}
-          initialParams={{ date: new Date().toDateString() }}
-        />
         <Stack.Screen
           name="addGoals"
           component={AddGoal}
@@ -61,7 +62,6 @@ export default function UserStack() {
           component={AddGoal}
           options={{ presentation: "Modal" }}
         />
-        <Stack.Screen name="loading" component={Loading} />
         <Stack.Screen name="allActivity" component={AllActivity} />
       </Stack.Navigator>
     </NavigationContainer>

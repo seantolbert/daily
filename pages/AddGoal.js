@@ -53,24 +53,6 @@ const AddGoal = ({ navigation, route }) => {
     }
   }, [show]);
 
-  // const handleUpdate = async () => {
-  //   const ref = collection(db, "goals", goal.id);
-  //   await updateDoc(ref, {
-  //     title,
-  //     description,
-  //     weekly,
-  //     placeholder,
-  //     daily,
-  //     color,
-  //   });
-  //   navigation.navigate("allGoals");
-  //   console.log(title);
-  //   // console.log(description);
-  //   console.log(weekly);
-  //   console.log(color);
-  //   console.log(daily);
-  // };
-
   const handleAdd = async () => {
     const ref = collection(db, "goals");
     await addDoc(ref, {
@@ -88,6 +70,7 @@ const AddGoal = ({ navigation, route }) => {
     console.log(title);
     console.log(note);
     console.log(weekly);
+    console.log(icon);
     console.log(color);
     console.log(daily);
   };

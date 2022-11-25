@@ -13,14 +13,14 @@ const GoalDash = () => {
   const { documents: goals } = useCollection("goals");
   const { documents: acts } = useCollection("activities");
 
-  const dailyCountTotal = (category) => {
+  const dailyCountTotal = async (category) => {
     const filteredActs =
       acts && acts.filter((act) => isToday(new Date(act.fullDate)));
-    filteredActs.filter((act) => act.category === category);
+   await filteredActs.filter((act) => act.category === category);
     return filteredActs;
   };
 
-  console.log(dailyCountTotal("music"));
+  console.log(dailyCountTotal());
 
   const totalActCount = (id) => {
     const filteredActs = acts && acts.filter((act) => act.category === id);
@@ -37,6 +37,8 @@ const GoalDash = () => {
         .filter((act) => act.category === id);
     return filteredActs.length;
   };
+
+// console.log((dailyCountTotal( goals && goals[4].id)))
 
   useEffect(() => {
     setTimeout(() => {
@@ -77,8 +79,8 @@ const GoalDash = () => {
                   <View
                     key={idx}
                     style={{
-                      backgroundColor: `#${goal.color}`,
-                      opacity: 0.5,
+                      backgroundColor: dailyCountTotal(goal.id).length >= 1 && `#${goal.color}`,
+                      // opacity: 0.5,
                       alignItems: "center",
                       justifyContent: "space-between",
                       flexDirection: "row",
@@ -86,6 +88,7 @@ const GoalDash = () => {
                       paddingHorizontal: 5,
                       borderRadius: "10px",
                       margin: 3,
+                      width: '30%',
                       borderWidth: 2,
                       borderColor: `#${goal.color}`,
                     }}
