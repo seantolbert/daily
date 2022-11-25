@@ -17,7 +17,7 @@ const Main = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <Title />
+      {/* <Title /> */}
       <View
         style={{
           width: "100%",

@@ -18,20 +18,9 @@ const AddAct = ({ navigation }) => {
   const [color, setColor] = useState("fff");
   const [category, setCategory] = useState("none");
   const [placeholder, setPlaceholder] = useState("what did you do?");
-  const [goalColors, setGoalColors] = useState([]);
-  const [goalCategories, setGoalCategories] = useState([]);
+  const [icon, setIcon] = useState("bowling");
 
   const { documents: goals } = useCollection("goals");
-
-  // useEffect(() => {
-  //   // const colors = goals && goals.map((goal) => goal.color);
-  //   // const categories = goals && goals.map((goal) => goal.title);
-  //   // setGoalColors(colors);
-  //   // setGoalCategories(categories);
-  // }, [goals]);
-
-  // console.log(goalColors);
-  // console.log(goalCategories);
 
   const user = Auth.currentUser;
 
@@ -45,6 +34,7 @@ const AddAct = ({ navigation }) => {
       actText,
       date: dateDay,
       fullDate,
+      icon,
       time,
       category,
       color,
@@ -68,7 +58,7 @@ const AddAct = ({ navigation }) => {
             flexDirection: "row",
             flexWrap: "wrap",
             width: "95%",
-            justifyContent: "space-evenly",
+            justifyContent: "center",
           }}
         >
           {goals &&
@@ -83,19 +73,27 @@ const AddAct = ({ navigation }) => {
                 }}
                 style={{
                   backgroundColor: `#${goal.color}`,
-                  padding: 10,
+                  padding: 5,
+                  margin: 5,
                   borderRadius: "10px",
                   flexDirection: "row",
                   alignItems: "center",
                 }}
               >
-                <Text style={{ fontWeight: "bold", marginRight: 10 }}>
+                {/* <Text
+                  style={{
+                    fontWeight: "bold",
+                    marginRight: 10,
+                    color: "#000",
+                    fontSize: 15,
+                  }}
+                >
                   {goal.title}
-                </Text>
+                </Text> */}
                 <MaterialCommunityIcons
-                  name={goal.title.toLowerCase()}
-                  size={24}
-                  color="black"
+                  name={goal.icon || goal.title.toLowerCase()}
+                  size={40}
+                  color="#000"
                 />
               </Pressable>
             ))}
@@ -116,7 +114,7 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "95%",
-    height: "40%",
+    height: "70%",
     justifyContent: "space-evenly",
     alignItems: "center",
   },

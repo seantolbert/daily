@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -18,24 +18,21 @@ import {
   Submit,
 } from "../components";
 import Checkbox from "../components/Checkbox";
+import IconButton from "../components/IconButton";
 import { Auth, db } from "../firebase/config";
 import { gStyles } from "../styles/global";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AddGoal = ({ navigation, route }) => {
+  // const { goal, isUpdate } = route.params;
 
-
-  const { goal, isUpdate } = route.params;
-
-  const [title, setTitle] = useState(isUpdate ? goal.title : "");
-  const [description, setDescription] = useState(
-    isUpdate ? goal.description : ""
-  );
-  const [weekly, setWeekly] = useState(isUpdate ? goal.weekly : 3);
-  const [placeholder, setPlaceholder] = useState(
-    isUpdate ? goal.placholder : ""
-  );
-  const [daily, setDaily] = useState(isUpdate ? goal.daily : "");
-  const [color, setColor] = useState(isUpdate ? goal.color : "");
+  const [title, setTitle] = useState("");
+  const [note, setNote] = useState("");
+  const [weekly, setWeekly] = useState(3);
+  const [placeholder, setPlaceholder] = useState("");
+  const [daily, setDaily] = useState("");
+  const [color, setColor] = useState("fff");
+  const [icon, setIcon] = useState("anvil");
 
   const keyboardAnimation = useRef(new Animated.Value(1000)).current;
 
@@ -56,20 +53,40 @@ const AddGoal = ({ navigation, route }) => {
     }
   }, [show]);
 
-  const handleSubmit = async () => {
+  // const handleUpdate = async () => {
+  //   const ref = collection(db, "goals", goal.id);
+  //   await updateDoc(ref, {
+  //     title,
+  //     description,
+  //     weekly,
+  //     placeholder,
+  //     daily,
+  //     color,
+  //   });
+  //   navigation.navigate("allGoals");
+  //   console.log(title);
+  //   // console.log(description);
+  //   console.log(weekly);
+  //   console.log(color);
+  //   console.log(daily);
+  // };
+
+  const handleAdd = async () => {
     const ref = collection(db, "goals");
     await addDoc(ref, {
       title,
-      description,
+      // description,
+      icon,
       weekly,
       placeholder,
       daily,
+      note,
       color,
       uid: Auth.currentUser.uid,
     });
     navigation.navigate("allGoals");
     console.log(title);
-    console.log(description);
+    console.log(note);
     console.log(weekly);
     console.log(color);
     console.log(daily);
@@ -111,12 +128,6 @@ const AddGoal = ({ navigation, route }) => {
     "4c1084",
   ];
 
-  // console.log(daily);
-
-  
-
-  console.log(isUpdate);
-
   return (
     <SafeAreaView
       style={[
@@ -128,18 +139,54 @@ const AddGoal = ({ navigation, route }) => {
       <View
         style={{
           justifyContent: "space-between",
-          height: "50%",
+          height: "60%",
           width: "95%",
           alignItems: "center",
         }}
       >
         <InputRow value={title} change={setTitle} label="Title" color={color} />
+        <InputRow value={note} change={setNote} label="notes" color={color} />
         <InputRow
           value={placeholder}
           change={setPlaceholder}
-          label="What are you asking for?"
+          label="placeholder"
           color={color}
         />
+        <View
+          style={{
+            flexDirection: "row",
+            width: "95%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <InputRow
+            value={icon}
+            change={setIcon}
+            color={color}
+            custWidth="40%"
+          />
+          <View
+            style={{ borderWidth: 2, borderRadius: "50%", borderColor: "#fff" }}
+          >
+            <View></View>
+            <View style={{ padding: 10 }}>
+              <MaterialCommunityIcons
+                name={icon.toLowerCase()}
+                size={30}
+                color="#fff"
+              />
+            </View>
+          </View>
+          <Text style={{ color: "#fff" }}>reference here</Text>
+        </View>
+        {/* <InputRow
+          custWidth='45%'
+          value={icon}
+          change={setIcon}
+          label=""
+          color={color}
+        /> */}
         <NumInputRow
           title="weekly commit"
           daily={daily}
@@ -156,7 +203,7 @@ const AddGoal = ({ navigation, route }) => {
           />
           <Checkbox daily={daily} setDaily={setDaily} />
         </View>
-        <Submit handler={handleSubmit} color={color} />
+        <Submit handler={handleAdd} color={color} />
       </View>
 
       {/* <Keyboard /> */}

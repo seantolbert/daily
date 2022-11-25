@@ -53,7 +53,7 @@ const InputRow = ({
         onBlur={() => handleBlur()}
         value={value}
         placeholder={label}
-        placeholderTextColor="#fff"
+        placeholderTextColor="#474747"
         style={[
           styles.input,
           { borderColor: `#${color}`, height: multiline ? 'auto' : 50 },

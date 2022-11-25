@@ -10,8 +10,10 @@ const GoalList = ({ nav }) => {
     <View style={styles.container}>
       <View
         style={{
-          justifyContent: "space-evenly",
+          // justifyContent: "space-evenly",
           alignItems: "flex-start",
+          flexDirection: "row",
+          flexWrap: "wrap",
         }}
       >
         {goals &&
@@ -22,11 +24,13 @@ const GoalList = ({ nav }) => {
               style={[styles.box, { backgroundColor: `#${goal.color}` }]}
             >
               <MaterialCommunityIcons
-                name={goal.title.toLowerCase()}
+                name={goal.icon || goal.title.toLowerCase()}
                 size={30}
                 color="#fff"
               />
-              <Text style={{ color: "#fff" }}>{goal.title}</Text>
+              {/* <Text style={{ color: "#000", fontWeight: "bold" }}>
+                {goal.title}
+              </Text> */}
             </Pressable>
           ))}
       </View>
@@ -40,5 +44,8 @@ const styles = StyleSheet.create({
   },
   box: {
     padding: 20,
+    borderRadius: "10px",
+    margin: 5,
+    alignItems: "center",
   },
 });

@@ -13,6 +13,12 @@ const Act = ({ act, nav, custWidth }) => {
     await deleteDoc(docRef);
   };
 
+  const timeHelper = (date) => {
+    const fullTime = new Date(date).toLocaleTimeString().split(":");
+  };
+
+  // console.log(new Date(act.time).toLocaleTimeString().split(":"));
+
   return (
     <View style={{ width: "95%", marginVertical: 10, alignItems: "center" }}>
       <View
@@ -51,50 +57,27 @@ const Act = ({ act, nav, custWidth }) => {
             alignItems: "center",
           }}
         >
-          <Text style={{ paddingRight: 10, color: "#fff", fontSize: 20 }}>
-            {act.actText}
-          </Text>
-          {act.date && (
-            <Text style={{ paddingRight: 10, color: "#fff" }}>
-              {act.date.valueOf()}
+          <View>
+            <Text style={{ paddingRight: 10, color: "#fff", fontSize: 20 }}>
+              {act.actText}
             </Text>
+            {act.date && (
+              <Text
+                style={{ paddingRight: 10, color: "#e3e3e3", fontSize: 12 }}
+              >
+                {new Date(act.time).toLocaleTimeString()}
+              </Text>
+            )}
+          </View>
+          {act.icon && (
+            <MaterialCommunityIcons
+              name={act.icon}
+              color={act.color}
+              size={30}
+            />
           )}
         </View>
         <View style={styles.buttons}>
-          <View>
-            {act.category === "none" && (
-              <MaterialCommunityIcons
-                name="checkbox-blank-circle-outline"
-                size={24}
-                color="#fff"
-              />
-            )}
-
-            {act.category === "workout" && (
-              <MaterialCommunityIcons
-                name="weight-lifter"
-                size={24}
-                color="#fff"
-              />
-            )}
-
-            {act.category === "music" && (
-              <MaterialCommunityIcons name="music" size={24} color="#fff" />
-            )}
-
-            {act.category === "social" && (
-              <MaterialCommunityIcons
-                name="human-greeting-proximity"
-                size={24}
-                color="#fff"
-              />
-            )}
-
-            {act.category === "apps" && (
-              <MaterialCommunityIcons name="briefcase" size={24} color="#fff" />
-            )}
-          </View>
-
           <Pressable
             style={{ marginLeft: 20 }}
             onPress={() => nav.navigate("dayView", { day: act.date.valueOf() })}
