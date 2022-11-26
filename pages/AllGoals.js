@@ -31,4 +31,3 @@ const AllGoals = ({ navigation }) => {
   );
 };
 export default AllGoals;
-const styles = StyleSheet.create({});

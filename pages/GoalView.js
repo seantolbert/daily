@@ -12,7 +12,7 @@ const GoalView = ({ navigation, route }) => {
     <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} title={goal.title} />
       <Pressable
-        onPress={() => navigation.navigate("addGoal", { goal, isUpdate: true })}
+        onPress={() => navigation.navigate("addGoal")}
       >
         <MaterialCommunityIcons name="plus" color="#fff" size={30} />
       </Pressable>

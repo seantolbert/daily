@@ -14,8 +14,6 @@ export const useRegister = () => {
   const [loginError, setLoginError] = useState("");
   const [resetPassError, setResetPassError] = useState("");
 
-  
-
   const signup = async (email, password, displayName, themeColor) => {
     try {
       const res = await createUserWithEmailAndPassword(Auth, email, password);
@@ -33,15 +31,12 @@ export const useRegister = () => {
   };
 
   const login = async (email, password) => {
-    // try {
-    await signInWithEmailAndPassword(Auth, email, password).catch((err) => {
+    try {
+      await signInWithEmailAndPassword(Auth, email, password);
+    } catch (err) {
       setLoginError(err.message);
       console.log(err.message);
-    });
-    // } catch (err) {
-    // setLoginError(err.message);
-    // console.log(err.message);
-    // }
+    }
   };
 
   const resetPassword = async (email) => {

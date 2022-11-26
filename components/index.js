@@ -18,9 +18,13 @@ import NumInputRow from "./NumInputRow";
 import EmojiPicker from "./EmojiPicker";
 import Keyboard from "./Keyboard";
 import AuthButtons from "./AuthButtons";
+import AddActGoalList from "./AddActGoalList";
+import Checkbox from "./Checkbox";
 
 export {
   Keyboard,
+  Checkbox,
+  AddActGoalList,
   ActionButton,
   InputRow,
   MenuButton,

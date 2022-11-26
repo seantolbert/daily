@@ -1,8 +1,9 @@
-import { StyleSheet, View, Pressable, Animated } from "react-native";
-import { Entypo } from "@expo/vector-icons";
+import { StyleSheet, View, Pressable,Text, Animated } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useRef } from "react";
+import { gStyles } from "../styles/global";
 
-const ActionButton = ({ nav, icon, dest }) => {
+const ActionButton = ({ nav, icon, dest, label }) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
@@ -39,7 +40,7 @@ const ActionButton = ({ nav, icon, dest }) => {
         style={styles.plusButton}
         onLongPress={() => {
           if (dest) {
-            nav.navigate(dest, { goal: {} });
+            nav.navigate(dest);
           }
         }}
         onLayout={(e) => {
@@ -50,7 +51,11 @@ const ActionButton = ({ nav, icon, dest }) => {
         onPressIn={() => handlePressIn()}
         onPressOut={() => handlePressOut()}
       >
-        <Entypo name={icon} size={40} color="#fff" />
+        {label ? (
+          <Text style={gStyles.subtitle}>{label}</Text>
+        ) : (
+          <MaterialCommunityIcons name={icon} size={40} color="#fff" />
+        )}
       </Pressable>
     </View>
   );
@@ -58,12 +63,13 @@ const ActionButton = ({ nav, icon, dest }) => {
 export default ActionButton;
 const styles = StyleSheet.create({
   container: {
-    width: "95%",
+    // width: "95%",
     alignItems: "center",
     justifyContent: "center",
   },
   plusButton: {
     backgroundColor: "#000",
+    padding: 5,
     borderRadius: "50%",
   },
   shadow: {

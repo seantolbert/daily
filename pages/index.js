@@ -8,10 +8,11 @@ import Loading from "./Loading";
 import AllGoals from "./AllGoals";
 import DayView from "./DayView";
 import AddAct from "./AddAct";
-import AddGoal from "./AddGoal";
+import AltAddGoal from "./AltAddGoal";
 import Profile from "./Profile";
 import Settings from "./Settings";
 import GoalView from "./GoalView";
+import Test from "./Test";
 
 export {
   Main,
@@ -24,8 +25,9 @@ export {
   AllGoals,
   DayView,
   AddAct,
-  AddGoal,
+  AltAddGoal,
   Profile,
   GoalView,
   Settings,
+  Test,
 };

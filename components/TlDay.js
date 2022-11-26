@@ -7,8 +7,6 @@ const TlDay = ({ selected, setSelected, day }) => {
   const dow = new Date(day).toDateString().split(" ")[0];
 
 
-  console.log(date);
-  console.log(selected);
 
   return (
     <Pressable

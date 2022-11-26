@@ -6,7 +6,7 @@ const Submit = ({ handler, color }) => {
   return (
     <View style={styles.container}>
       <Pressable
-        onPress={handler}
+        onPress={() => handler()}
         style={[styles.button, { borderColor: `#${color}` }]}
       >
         <Text style={gStyles.subtitle}>Submit</Text>
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
   container: {
     width: "95%",
     alignItems: "flex-end",
-    // marginTop: 30,
   },
   button: {
     borderWidth: 5,

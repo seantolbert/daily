@@ -9,10 +9,10 @@ import {
   AllGoals,
   DayView,
   AddAct,
-  AddGoal,
   Profile,
-  Settings,
   GoalView,
+  AltAddGoal,
+  Test,
 } from "../pages";
 
 const Stack = createNativeStackNavigator();
@@ -21,24 +21,26 @@ export default function UserStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="main"
-        component={Main}
-        initialParams={{ date: new Date().toDateString() }}
-      />
+        <Stack.Screen name="test" component={Test} />
+        <Stack.Screen
+          name="addGoal"
+          component={AltAddGoal}
+          options={{ presentation: "modal" }}
+        />
+        <Stack.Screen name="allGoals" component={AllGoals} />
+
+        <Stack.Screen
+          name="main"
+          component={Main}
+          initialParams={{ date: new Date().toDateString() }}
+        />
         <Stack.Screen name="loading" component={Loading} />
         <Stack.Screen
           name="goalView"
           component={GoalView}
           initialParams={{ goal: {}, isUpdate: true }}
         />
-        <Stack.Screen name="allGoals" component={AllGoals} />
-        <Stack.Screen
-          name="addGoals"
-          component={AddGoal}
-          options={{ presentation: "modal" }}
-          initialParams={{ goal: {} }}
-        />
+
         <Stack.Screen
           name="addAct"
           component={AddAct}
@@ -55,13 +57,7 @@ export default function UserStack() {
           component={MonthView}
           initialParams={{ date: new Date().toDateString() }}
         />
-        <Stack.Screen name="settings" component={Settings} />
 
-        <Stack.Screen
-          name="addGoal"
-          component={AddGoal}
-          options={{ presentation: "Modal" }}
-        />
         <Stack.Screen name="allActivity" component={AllActivity} />
       </Stack.Navigator>
     </NavigationContainer>
