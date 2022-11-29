@@ -24,7 +24,6 @@ import IconInputRow from "./IconInputRow";
 import UserWelcome from "./UserWelcome";
 
 export {
-  Keyboard,
   IconInputRow,
   Checkbox,
   AddActGoalList,

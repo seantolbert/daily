@@ -1,30 +1,67 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { gStyles } from '../styles/global'
+import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 
-const Keyboard = () => {
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-    const themeColors = [
-        "ffffff",
-        "ffeded",
-        "ff8787",
-        "ff5454",
-        "ff2121",
-        "ed0000",
-        "ffffff",
-        "fff8ed",
-        "ffd187",
-        "ffbd54",
-        "ffaa21",
-        "ed9200",
-      ];
+const Keyboard = ({ setIcon, isColor, setColor }) => {
+  const icons = [
+    "arrow-up-circle",
+    "audio-input-xlr",
+    "audio-video",
+    "backburger",
+    "backspace",
+    "badminton",
+    "baguette",
+    "barcode",
+    "barley",
+    "battery-40",
+    "binoculars",
+    "react",
+    "bike",
+    "instagram",
+    "youtube",
+    "anvil",
+    "twitter",
+    "slack",
+    "discord",
+    "git",
+    "zodiac-aries",
+    "zodiac-aquarius",
+    "zodiac-cancer",
+    "zodiac-capricorn",
+    "zodiac-gemini",
+    "zodiac-leo",
+    "zodiac-libra",
+    "zodiac-pisces",
+    "zodiac-virgo",
+    "zodiac-taurus",
+    "zodiac-scorpio",
+    "zodiac-sagittarius",
+    'cards',
+    'cards-spade',
+    'cards-heart',
+    'cards-diamond',
+    'cards-club',
+  ];
+
   return (
-    <View>
-      <Text style={gStyles.subtitle}>Keyboard</Text>
-      {themeColors.map(color => (
-        <View style={{width: 70, height: 40, backgroundColor: 'white'}}></View>
-      ))}
+    <View style={{ width: "100%", height: "30%", backgroundColor: "#474747" }}>
+      <ScrollView>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
+          {icons.map((item, idx) => (
+            <Pressable key={idx} onPress={() => setIcon(item)}>
+              <MaterialCommunityIcons name={item} color="#fff" size={40} />
+            </Pressable>
+          ))}
+        </View>
+      </ScrollView>
     </View>
-  )
-}
-export default Keyboard
-const styles = StyleSheet.create({})
+  );
+};
+export default Keyboard;
+const styles = StyleSheet.create({});

@@ -14,22 +14,7 @@ import { gStyles } from "../styles/global";
 import ColorSwitch from "../components/ColorSwitch";
 import IconSwitch from "../components/IconSwitch";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-const icons = [
-  "arrow-up-circle",
-  "audio-input-xlr",
-  "audio-video",
-  "backburger",
-  "backspace",
-  "badminton",
-  "baguette",
-  "barcode",
-  "barley",
-  "battery-40",
-  "binoculars",
-  "react",
-  "bike",
-];
+import Keyboard from "../components/Keyboard";
 
 const Test = ({ navigation }) => {
   const [title, setTitle] = useState("");
@@ -113,25 +98,7 @@ const Test = ({ navigation }) => {
           />
         </View>
       </View>
-      <View
-        style={{ width: "100%", height: "30%", backgroundColor: "#474747" }}
-      >
-        <ScrollView>
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            {icons.map((item) => (
-              <Pressable onPress={() => setIcon(item)}>
-                <MaterialCommunityIcons name={item} color="#fff" size={40} />
-              </Pressable>
-            ))}
-          </View>
-        </ScrollView>
-      </View>
+      <Keyboard setIcon={setIcon} setColor={setColor} isColor={isColor} />
     </SafeAreaView>
   );
 };
