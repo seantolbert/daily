@@ -28,14 +28,11 @@ const styles = StyleSheet.create({
     height: "30%",
     alignItems: "center",
     justifyContent: "center",
-    // flex: 1
   },
+  
   scrollContainer: {
     width: widthView,
-    // width: '100%',
     height: "100%",
-    // borderWidth: 2,
-    // borderColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
   },

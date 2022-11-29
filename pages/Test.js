@@ -2,39 +2,50 @@ import { addDoc, collection } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import {
   Animated,
+  Pressable,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   View,
-  Text,
-  Pressable,
 } from "react-native";
-import {
-  CloseModal,
-  ColorPicker,
-  InputRow,
-  NumInputRow,
-  Submit,
-  Checkbox,
-  ActionButton,
-  IconInputRow,
-} from "../components";
+import { CloseModal, InputRow, NumInputRow } from "../components";
 import { Auth, db } from "../firebase/config";
 import { gStyles } from "../styles/global";
+import ColorSwitch from "../components/ColorSwitch";
+import IconSwitch from "../components/IconSwitch";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+const icons = [
+  "arrow-up-circle",
+  "audio-input-xlr",
+  "audio-video",
+  "backburger",
+  "backspace",
+  "badminton",
+  "baguette",
+  "barcode",
+  "barley",
+  "battery-40",
+  "binoculars",
+  "react",
+  "bike",
+];
 
 const Test = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
   const [weekly, setWeekly] = useState(3);
   const [placeholder, setPlaceholder] = useState("");
-  const [daily, setDaily] = useState("");
+  const [hasDaily, setHasDaily] = useState("");
+  const [hasWeekly, setHasWeekly] = useState("");
+  const [daily, setDaily] = useState(1);
   const [color, setColor] = useState("fff");
-  const [icon, setIcon] = useState("anvil");
-  const [tempIcon, setTempIcon] = useState("anvil");
-
-  const keyboardAnimation = useRef(new Animated.Value(1000)).current;
+  const [icon, setIcon] = useState("emoticon-tongue-outline");
+  const [isColor, setIsColor] = useState(true);
 
   const [show, setShow] = useState(false);
+
+  const keyboardAnimation = useRef(new Animated.Value(1000)).current;
 
   useEffect(() => {
     Animated.timing(keyboardAnimation, {
@@ -67,13 +78,10 @@ const Test = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView
-      style={[gStyles.pageContainer, { justifyContent: "flex-start" }]}
-    >
+    <SafeAreaView style={[gStyles.pageContainer]}>
       <CloseModal title="new goal" dest="allGoals" nav={navigation} />
-
       <View style={styles.form}>
-        <InputRow value={title} change={setTitle} label="Title" color={color} />
+        <InputRow value={title} change={setTitle} label="title" color={color} />
         <InputRow value={note} change={setNote} label="notes" color={color} />
         <InputRow
           value={placeholder}
@@ -81,37 +89,48 @@ const Test = ({ navigation }) => {
           label="placeholder"
           color={color}
         />
-        {/* <View
-          style={{
-            flexDirection: "row",
-            width: "95%",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <InputRow
-            value={icon}
-            change={setIcon}
-            color={color}
-            custWidth="40%"
-          />
-
-          <Text style={gStyles.subtitle}>Search</Text>
-          <View style={{ borderRadius: "50%", borderColor: "#fff" }}>
-            <View style={styles.shadow}></View>
-            <MaterialCommunityIcons
-              name={icon.toLowerCase()}
-              size={70}
-              color="#fff"
-            />
-          </View>
-        </View> */}
-        <IconInputRow
-          tempIcon={tempIcon}
-          setTempIcon={setTempIcon}
-          setIcon={setIcon}
-          color={color}
+        <NumInputRow
+          title="daily commit"
+          value={daily}
+          change={setDaily}
+          enabled={hasDaily}
+          setEnabled={setHasDaily}
         />
+        <NumInputRow
+          title="weekly commit"
+          value={weekly}
+          change={setWeekly}
+          enabled={hasWeekly}
+          setEnabled={setHasWeekly}
+        />
+        <View style={styles.colorIconCont}>
+          <ColorSwitch color={color} setShow={setShow} isColor={isColor} />
+          <IconSwitch
+            color={color}
+            setShow={setShow}
+            icon={icon}
+            isColor={isColor}
+          />
+        </View>
+      </View>
+      <View
+        style={{ width: "100%", height: "30%", backgroundColor: "#474747" }}
+      >
+        <ScrollView>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            {icons.map((item) => (
+              <Pressable onPress={() => setIcon(item)}>
+                <MaterialCommunityIcons name={item} color="#fff" size={40} />
+              </Pressable>
+            ))}
+          </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -120,8 +139,18 @@ export default Test;
 const styles = StyleSheet.create({
   form: {
     justifyContent: "space-between",
-    height: "60%",
+    height: "55%",
     width: "95%",
     alignItems: "center",
+  },
+  commitCont: {
+    alignItems: "center",
+    width: "100%",
+  },
+  colorIconCont: {
+    width: "95%",
+    height: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });

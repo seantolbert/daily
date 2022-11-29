@@ -63,12 +63,6 @@ const AltAddGoal = ({ navigation }) => {
       uid: Auth.currentUser.uid,
     });
     navigation.navigate("allGoals");
-    // console.log(title);
-    // console.log(note);
-    // console.log(weekly);
-    // console.log(icon);
-    // console.log(color);
-    // console.log(daily);
   };
 
   const themeColors = [

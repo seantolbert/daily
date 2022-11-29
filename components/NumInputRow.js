@@ -1,23 +1,27 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { gStyles } from "../styles/global";
+import Checkbox from "./Checkbox";
 
-const NumInputRow = ({ daily, title, value, change }) => {
+const NumInputRow = ({ title, value, change, enabled, setEnabled }) => {
   return (
-    <View
-      style={{
-        width: "95%",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexDirection: "row",
-        marginVertical: 10,
-      }}
-    >
-      <View style={{ width: "45%" }}>
-        <Text style={gStyles.subtitle}>{title}</Text>
+    <View style={styles.container}>
+      <Checkbox bool={enabled} change={setEnabled} />
+      <View>
+        <Text
+          style={[gStyles.subtitle, { color: enabled ? "#fff" : "#828282" }]}
+        >
+          {title}
+        </Text>
       </View>
       <View>
-        <Text style={{ fontWeight: "bold", fontSize: "30", color: daily ? "#828282" : "#fff" }}>
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: "30",
+            color: enabled ? "#fff" : "#828282",
+          }}
+        >
           {value}
         </Text>
       </View>
@@ -26,18 +30,37 @@ const NumInputRow = ({ daily, title, value, change }) => {
           flexDirection: "row",
         }}
       >
-        <Pressable onPress={() => change((count) => count - 1)}>
-          <AntDesign name="leftsquareo" size={40} color={daily ? "#828282" : "#fff"} />
+        <Pressable
+          onPress={() => change((count) => count - 1)}
+          disabled={!enabled}
+        >
+          <AntDesign
+            name="leftsquareo"
+            size={40}
+            color={enabled ? "#fff" : "#828282"}
+          />
         </Pressable>
         <Pressable
           onPress={() => change((count) => count + 1)}
           style={{ marginLeft: 15 }}
+          disabled={!enabled}
         >
-          <AntDesign name="rightsquareo" size={40} color={daily ? "#828282" : "#fff"}/>
+          <AntDesign
+            name="rightsquareo"
+            size={40}
+            color={enabled ? "#fff" : "#828282"}
+          />
         </Pressable>
       </View>
     </View>
   );
 };
 export default NumInputRow;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    width: "95%",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+});
