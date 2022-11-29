@@ -28,6 +28,7 @@ const AltAddGoal = ({ navigation }) => {
   const [daily, setDaily] = useState("");
   const [color, setColor] = useState("fff");
   const [icon, setIcon] = useState("anvil");
+  const [tempIcon, setTempIcon] = useState("anvil");
 
   const keyboardAnimation = useRef(new Animated.Value(1000)).current;
 
@@ -55,6 +56,7 @@ const AltAddGoal = ({ navigation }) => {
       icon,
       weekly,
       placeholder,
+      tempIcon,
       daily,
       note,
       color,
@@ -130,7 +132,6 @@ const AltAddGoal = ({ navigation }) => {
           color={color}
         />
 
-        
         <View
           style={{
             flexDirection: "row",

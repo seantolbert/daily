@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
-
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useRef } from "react";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
 import { gStyles } from "../styles/global";
-import { getTime } from "date-fns/esm";
-import { daysToWeeks, getHours } from "date-fns";
+
 const DayViewAct = ({ act, setWidth, setOffsetX, setHeight }) => {
   const marbleRef = useRef();
+
+  const date = new Date(act.time).toLocaleTimeString();
+  const ampm = date.split(" ").pop().toLowerCase();
+  const time = date.split(" ").shift();
+  const standard = time.split(":").slice(0, -1).join(":");
+  const result = standard + " " + ampm;
 
   return (
     <View
@@ -27,7 +28,7 @@ const DayViewAct = ({ act, setWidth, setOffsetX, setHeight }) => {
             setOffsetX(x);
             setWidth(width);
           }}
-          style={[styles.marble, {backgroundColor: 'black'}]}
+          style={[styles.marble, { backgroundColor: "black" }]}
         >
           <MaterialCommunityIcons
             name={act.icon}
@@ -35,16 +36,13 @@ const DayViewAct = ({ act, setWidth, setOffsetX, setHeight }) => {
             size={25}
           />
         </View>
+        <Text style={{ color: "#8c8c8c", marginLeft: 10, fontSize: 12 }}>
+          {result}
+        </Text>
       </View>
       <View style={[styles.actCont, { borderColor: `#${act.color}` }]}>
-        <Text style={{ color: "#fff" }}>{act.actText}</Text>
-        <Text style={{ color: "#fff" }}>{act.fullDate}</Text>
-        <Text style={{ color: "#fff" }}>
-          {new Date(act.time).toLocaleTimeString()}
-        </Text>
-        <Text style={{ color: "#fff" }}>{act.note && act.note}</Text>
-        <Text style={{ color: "#fff" }}>{act.category}</Text>
-        <Text style={{ color: "#fff" }}>{act.color}</Text>
+        <Text style={gStyles.subtitle}>{act.actText}</Text>
+        {act.note && <Text style={{ color: "#fff" }}>{act.note}</Text>}
       </View>
     </View>
   );
@@ -62,15 +60,12 @@ const styles = StyleSheet.create({
     width: "25%",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
   },
   marble: {
     alignItems: "center",
     justifyContent: "center",
-    // borderWidth: 3,
     borderRadius: "50%",
-    // borderColor: "#fff",
-    // width: 15,
-    // height: 15,
   },
   actCont: {
     padding: 10,

@@ -1,43 +1,32 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 
-import { Menu, GoalDash, Timeline, Title, MainLatestActs } from "../components";
-// firebase
-import { Auth } from "../firebase/config";
-import { signOut } from "firebase/auth";
+import {
+  Menu,
+  GoalDash,
+  Timeline,
+  MainLatestActs,
+  UserWelcome,
+} from "../components";
 
 import { gStyles } from "../styles/global";
 
 const Main = ({ navigation, route }) => {
-  const today = new Date().toDateString()
-
-  const [selected, setSelected] = useState(today);
+  const todayDate = new Date().getDate();
+  const [selected, setSelected] = useState(todayDate);
 
   const { date } = route.params;
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      {/* <Title /> */}
-      <View
-        style={{
-          width: "100%",
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-        }}
-      >
-        <Text style={gStyles.subtitle}>
-          Welcome {Auth.currentUser.displayName}
-        </Text>
-        <Button title="logout" onPress={() => signOut(Auth)} />
-      </View>
+      <UserWelcome />
 
       <GoalDash />
 
       <Timeline
         nav={navigation}
         date={date}
-        selected={new Date(selected).getDate()}
+        selected={selected}
         setSelected={setSelected}
       />
 

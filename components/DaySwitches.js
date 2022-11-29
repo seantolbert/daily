@@ -1,6 +1,17 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
-const DaySwitches = ({ goals }) => {
+import { isToday } from "date-fns";
+
+const DaySwitches = ({ goals, acts }) => {
+  const getDaily = (id) => {
+    const filteredActs =
+      acts &&
+      acts
+        .filter((act) => act.category === id)
+        .filter((act) => isToday(new Date(act.fullDate)));
+    return filteredActs.length;
+  };
+
   return (
     <View style={styles.container}>
       {goals &&
@@ -10,7 +21,8 @@ const DaySwitches = ({ goals }) => {
             style={[
               styles.daySwitch,
               {
-                backgroundColor: `#${goal.color}`,
+                backgroundColor:
+                  getDaily(goal.id) > 0 ? `#${goal.color}` : "#000",
                 borderColor: `#${goal.color}`,
               },
             ]}

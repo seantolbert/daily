@@ -6,10 +6,12 @@ import DaySwitches from "./DaySwitches";
 import GoalScroller from "./GoalScroller";
 
 const GoalDash = () => {
-  const [loading, setLoading] = useState(true);
-
   const { documents: goals } = useCollection("goals");
   const { documents: acts } = useCollection("activities");
+
+  const [loading, setLoading] = useState(true);
+
+  
 
   useEffect(() => {
     setTimeout(() => {

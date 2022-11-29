@@ -48,7 +48,6 @@ const DayView = ({ navigation, route }) => {
           </View>
           <View
             style={{
-              // height: "100%",
               justifyContent: "flex-start",
             }}
           >

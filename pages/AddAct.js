@@ -2,6 +2,7 @@ import { StyleSheet, View, SafeAreaView } from "react-native";
 import { Auth, db } from "../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
+import { getUnixTime } from "date-fns";
 import { AddActGoalList, CloseModal, InputRow, Submit } from "../components";
 
 const AddAct = ({ navigation }) => {

@@ -1,12 +1,8 @@
 import { StyleSheet, Text, Pressable } from "react-native";
 
-
-
 const TlDay = ({ selected, setSelected, day }) => {
   const date = new Date(day).getDate();
   const dow = new Date(day).toDateString().split(" ")[0];
-
-
 
   return (
     <Pressable
