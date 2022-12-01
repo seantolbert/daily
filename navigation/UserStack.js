@@ -11,8 +11,7 @@ import {
   AddAct,
   Profile,
   GoalView,
-  AltAddGoal,
-  Test,
+  AddGoal,
 } from "../pages";
 
 const Stack = createNativeStackNavigator();
@@ -23,7 +22,7 @@ export default function UserStack() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="addGoal"
-          component={Test}
+          component={AddGoal}
           screenOptions={{ presentation: "modal" }}
         />
         <Stack.Screen

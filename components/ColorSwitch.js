@@ -1,12 +1,16 @@
+import { setISODay } from "date-fns";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { gStyles } from "../styles/global";
 
-const ColorSwitch = ({ color, setShow }) => {
+const ColorSwitch = ({ color, setShow, setIsColor, show }) => {
   return (
     <View style={styles.container}>
       <Text style={gStyles.subtitle}>color</Text>
       <Pressable
-        onPress={() => setShow(true)}
+        onPress={() => {
+          setIsColor(true)
+          setShow(!show);
+        }}
         style={[styles.colorTile, { backgroundColor: `#${color}` }]}
       ></Pressable>
     </View>

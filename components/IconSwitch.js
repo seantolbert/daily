@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { gStyles } from "../styles/global";
 
-const IconSwitch = ({ icon, setShow, color }) => {
+const IconSwitch = ({ icon, setShow, color, show, setIsColor }) => {
   return (
     <View
       style={{
@@ -15,10 +15,14 @@ const IconSwitch = ({ icon, setShow, color }) => {
       }}
     >
       <Text style={gStyles.subtitle}>icon</Text>
-      <View
+      <Pressable
+        onPress={() => {
+          setIsColor(false);
+          setShow(!show);
+        }}
         style={{
-          width: 50,
-          height: 50,
+          width: 60,
+          height: 60,
           borderWidth: 2,
           borderRadius: "50%",
           borderColor: "#fff",
@@ -27,7 +31,7 @@ const IconSwitch = ({ icon, setShow, color }) => {
         }}
       >
         <MaterialCommunityIcons name={icon} color={`#${color}`} size={38} />
-      </View>
+      </Pressable>
     </View>
   );
 };

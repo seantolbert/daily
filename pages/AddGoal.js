@@ -1,15 +1,35 @@
-import { StyleSheet, Text, View, Animated } from "react-native";
+import { addDoc, collection } from "firebase/firestore";
+import { useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
+import { CloseModal, InputRow, NumInputRow } from "../components";
+import { Auth, db } from "../firebase/config";
 import { gStyles } from "../styles/global";
-import { useState, useEffect, useRef } from "react";
+import ColorSwitch from "../components/ColorSwitch";
+import IconSwitch from "../components/IconSwitch";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Keyboard from "../components/Keyboard";
 
-const AddGoal = () => {
+const AddGoal = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
   const [weekly, setWeekly] = useState(3);
   const [placeholder, setPlaceholder] = useState("");
-  const [daily, setDaily] = useState("");
+  const [hasDaily, setHasDaily] = useState("");
+  const [hasWeekly, setHasWeekly] = useState("");
+  const [daily, setDaily] = useState(1);
   const [color, setColor] = useState("fff");
-  const [icon, setIcon] = useState("anvil");
+  const [icon, setIcon] = useState("emoticon-tongue-outline");
+  const [isColor, setIsColor] = useState(true);
+
+  // console.log(isColor);
+  // console.log(show);
 
   const [show, setShow] = useState(false);
 
@@ -43,14 +63,85 @@ const AddGoal = () => {
       uid: Auth.currentUser.uid,
     });
     navigation.navigate("allGoals");
-
   };
 
   return (
-    <View style={gStyles.pageContainer}>
-      <Text style={{ color: "#fff" }}>AddGoal</Text>
-    </View>
+    <SafeAreaView style={[gStyles.pageContainer]}>
+      <CloseModal title="create a new goal" dest="allGoals" nav={navigation} />
+      <View style={styles.form}>
+        <InputRow value={title} change={setTitle} label="title" color={color} />
+        <InputRow value={note} change={setNote} label="notes" color={color} />
+        <InputRow
+          value={placeholder}
+          change={setPlaceholder}
+          label="placeholder"
+          color={color}
+        />
+        <NumInputRow
+          title="daily commit"
+          value={daily}
+          change={setDaily}
+          enabled={hasDaily}
+          setEnabled={setHasDaily}
+        />
+        <NumInputRow
+          title="weekly commit"
+          value={weekly}
+          change={setWeekly}
+          enabled={hasWeekly}
+          setEnabled={setHasWeekly}
+        />
+        <View style={styles.colorIconCont}>
+          <ColorSwitch
+            setIsColor={setIsColor}
+            color={color}
+            setShow={setShow}
+            isColor={isColor}
+            show={show}
+          />
+          <IconSwitch
+            color={color}
+            setShow={setShow}
+            setIsColor={setIsColor}
+            show={show}
+            icon={icon}
+            isColor={isColor}
+          />
+        </View>
+      </View>
+      <Animated.View
+        style={{
+          width: "100%",
+          height: "30%",
+          transform: [{ translateY: keyboardAnimation }],
+        }}
+      >
+        <Keyboard
+          setIcon={setIcon}
+          keyboardAnimation={keyboardAnimation}
+          setColor={setColor}
+          isColor={isColor}
+        />
+      </Animated.View>
+    </SafeAreaView>
   );
 };
 export default AddGoal;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  form: {
+    justifyContent: "space-between",
+    height: "55%",
+    width: "95%",
+    alignItems: "center",
+  },
+  commitCont: {
+    alignItems: "center",
+    width: "100%",
+  },
+  colorIconCont: {
+    width: "95%",
+    height: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});

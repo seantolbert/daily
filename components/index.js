@@ -16,15 +16,12 @@ import GoalDash from "./GoalDash";
 import MainLatestActs from "./MainLatestActs";
 import NumInputRow from "./NumInputRow";
 import EmojiPicker from "./EmojiPicker";
-import Keyboard from "./Keyboard";
 import AuthButtons from "./AuthButtons";
 import AddActGoalList from "./AddActGoalList";
 import Checkbox from "./Checkbox";
-import IconInputRow from "./IconInputRow";
 import UserWelcome from "./UserWelcome";
 
 export {
-  IconInputRow,
   Checkbox,
   AddActGoalList,
   ActionButton,
