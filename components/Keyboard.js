@@ -11,6 +11,7 @@ import Values from "values.js";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Keyboard = ({ setIcon, isColor, setColor }) => {
+  console.log("isColor: " + isColor);
   const icons = [
     "arrow-up-circle",
     "audio-input-xlr",
@@ -61,14 +62,30 @@ const Keyboard = ({ setIcon, isColor, setColor }) => {
   ];
 
   const baseColors = [
+    "#fff",
     "#6b7280",
-    "#78716c",
     "#ef4444",
     "#f97316",
     "#f59e0b",
     "#eab308",
+    "#84cc16",
+    "#22c55e",
+    "#10b981",
+    "#14b8a6",
+    "#06b6d4",
+    "#0ea5e9",
+    "#3b82f6",
+    "#6366f1",
+    "#8b5cf6",
+    "#a855f7",
+    "#d946ef",
+    "#ec4899",
+    "#f43f5e",
   ];
 
+  const { log } = console;
+
+  log;
   // console.log(themeColors.length);
 
   return (
@@ -78,43 +95,31 @@ const Keyboard = ({ setIcon, isColor, setColor }) => {
       }}
     >
       <View>
-        {isColor ? (
-          <View style={{ flexDirection: "row" }}>
-            {baseColors.map((baseColor, idx) => {
-              const themeColor = new Values(baseColor);
-              // console.log(themeColor.all(25).length);
-              return (
-                <View key={idx}>
-                  {themeColor.all(25).map((c, idx) => (
-                    <View
-                      key={idx}
-                      style={{
-                        width: 40,
-                        height: 40,
-                        backgroundColor: `#${c.hexString()}`,
-                      }}
-                    ></View>
-                  ))}
-                </View>
-              );
-            })}
-          </View>
-        ) : (
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            {!isColor &&
-              icons.map((item, idx) => (
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
+          {!isColor
+            ? icons.map((item, idx) => (
                 <Pressable key={idx} onPress={() => setIcon(item)}>
                   <MaterialCommunityIcons name={item} color="#fff" size={40} />
                 </Pressable>
+              ))
+            : baseColors.map((item, idx) => (
+                <View
+                  key={idx}
+                  style={{
+                    width: 19,
+                    height: 19,
+                    borderRadius: "10px",
+                    backgroundColor: item,
+                  }}
+                ></View>
               ))}
-          </View>
-        )}
+        </View>
       </View>
     </View>
   );

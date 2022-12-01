@@ -3,6 +3,10 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import { gStyles } from "../styles/global";
 
 const ColorSwitch = ({ color, setShow, setIsColor, show }) => {
+
+
+  console.log('show: ' + show)
+
   return (
     <View style={styles.container}>
       <Text style={gStyles.subtitle}>color</Text>
