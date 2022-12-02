@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import { Auth } from "../firebase/config";
+import { signOut } from "firebase/auth";
 import { gStyles } from "../styles/global";
 
 const UserWelcome = () => {

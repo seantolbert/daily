@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, SafeAreaView, Pressable } from "react-native";
+import { Text, SafeAreaView, Pressable } from "react-native";
 import { BackButton, Menu } from "../components";
-import { useCollection } from "../hooks/useCollection";
 import { gStyles } from "../styles/global";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -11,9 +10,7 @@ const GoalView = ({ navigation, route }) => {
   return (
     <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} title={goal.title} />
-      <Pressable
-        onPress={() => navigation.navigate("addGoal")}
-      >
+      <Pressable onPress={() => navigation.navigate("addGoal")}>
         <MaterialCommunityIcons name="plus" color="#fff" size={30} />
       </Pressable>
       <Text style={gStyles.subtitle}>{goal.placeholder}</Text>
@@ -22,4 +19,3 @@ const GoalView = ({ navigation, route }) => {
   );
 };
 export default GoalView;
-const styles = StyleSheet.create({});

@@ -11,7 +11,7 @@ import Values from "values.js";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Keyboard = ({ setIcon, isColor, setColor }) => {
-  console.log("isColor: " + isColor);
+  // console.log("isColor: " + isColor);
   const icons = [
     "arrow-up-circle",
     "audio-input-xlr",
@@ -83,10 +83,10 @@ const Keyboard = ({ setIcon, isColor, setColor }) => {
     "#f43f5e",
   ];
 
-  const { log } = console;
-
-  log;
-  // console.log(themeColors.length);
+  // baseColors.map((c, idx) => {
+  //   const themeColor = new Values(c);
+  //   console.log(themeColor);
+  // });
 
   return (
     <View
@@ -108,17 +108,24 @@ const Keyboard = ({ setIcon, isColor, setColor }) => {
                   <MaterialCommunityIcons name={item} color="#fff" size={40} />
                 </Pressable>
               ))
-            : baseColors.map((item, idx) => (
-                <View
-                  key={idx}
-                  style={{
-                    width: 19,
-                    height: 19,
-                    borderRadius: "10px",
-                    backgroundColor: item,
-                  }}
-                ></View>
-              ))}
+            : baseColors.map((item, idx) => {
+                const themeColor = new Values(item);
+                console.log(themeColor.all(4));
+                themeColor.all(4).map((c, idx) => {
+                  // console.log('hexString: ' + c.hexString())
+                  return (
+                    <View
+                      key={idx}
+                      style={{
+                        width: 19,
+                        height: 19,
+                        borderRadius: "10px",
+                        backgroundColor: c.hexString(),
+                      }}
+                    ></View>
+                  );
+                });
+              })}
         </View>
       </View>
     </View>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native";
 import { BackButton, MonthlyActList, Menu, Calendar } from "../components";
-
 import { gStyles } from "../styles/global";
 
 const MonthView = ({ navigation, route }) => {
@@ -13,7 +12,7 @@ const MonthView = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <BackButton nav={navigation} title="month view" date={date} />
+      <BackButton nav={navigation} title={new Date(date).toLocaleString("default", { month: "long" })} date={date} />
 
       <MonthlyActList selected={selected} nav={navigation} />
 

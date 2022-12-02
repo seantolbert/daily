@@ -12,13 +12,11 @@ const Loading = ({ navigation }) => {
     }).start(() => navigation.navigate("main"));
   }, []);
 
-
   return (
     <View style={styles.container}>
       <LottieView
         progress={spinner}
         loop={true}
-        // autoplay
         style={{ width: "100%", position: "absolute" }}
         source={require("../assets/rainbow-loader.json")}
       />

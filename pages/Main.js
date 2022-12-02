@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
 
 import {
   Menu,
@@ -37,4 +37,3 @@ const Main = ({ navigation, route }) => {
   );
 };
 export default Main;
-const styles = StyleSheet.create({});

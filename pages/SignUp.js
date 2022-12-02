@@ -59,6 +59,7 @@ const SignUp = ({ navigation }) => {
             isMember={false}
             dest="signIn"
             label="sign up"
+            handler={handleSubmit}
             email={email}
             password={password}
             confirm={confirm}

@@ -24,7 +24,6 @@ export {
   AllGoals,
   DayView,
   AddAct,
-  // AltAddGoal,
   Profile,
   GoalView,
   Settings,
