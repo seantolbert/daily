@@ -61,7 +61,9 @@ const Act = ({ act, nav, custWidth }) => {
             <View>
               <Text style={styles.text}>{act.actText}</Text>
               {act.fullDate && (
-                <Text style={styles.smallText}>{new Date(act.fullDate).toDateString()}</Text>
+                <Text style={styles.smallText}>
+                  {new Date(act.fullDate).toDateString()}
+                </Text>
               )}
             </View>
           </View>
@@ -77,7 +79,7 @@ const Act = ({ act, nav, custWidth }) => {
               style={{ marginLeft: 20 }}
               onPress={() =>
                 nav.navigate("dayView", {
-                  day: new Date(act.date).toDateString(),
+                  day: new Date(act.fullDate).toDateString(),
                 })
               }
             >

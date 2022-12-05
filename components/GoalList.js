@@ -4,7 +4,7 @@ import { gStyles } from "../styles/global";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Goal from "./Goal";
 
-const GoalList = ({ nav }) => {
+const GoalList = ({ nav, setGoal }) => {
   const { documents: goals } = useCollection("goals");
   return (
     <View style={styles.container}>
@@ -19,7 +19,7 @@ const GoalList = ({ nav }) => {
         {goals &&
           goals.map((goal, idx) => (
             <Pressable
-              onPress={() => nav.navigate("goalView", { goal })}
+              onPress={() => setGoal(goal)}
               key={idx}
               style={[styles.box, { backgroundColor: `#${goal.color}` }]}
             >

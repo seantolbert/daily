@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable,Text, Animated } from "react-native";
+import { StyleSheet, View, Pressable, Text, Animated } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState, useRef } from "react";
 import { gStyles } from "../styles/global";
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   plusButton: {
     backgroundColor: "#000",
-    padding: 5,
+    padding: 30,
     borderRadius: "50%",
   },
   shadow: {

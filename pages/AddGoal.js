@@ -24,8 +24,8 @@ const AddGoal = ({ navigation }) => {
   const [hasDaily, setHasDaily] = useState("");
   const [hasWeekly, setHasWeekly] = useState("");
   const [daily, setDaily] = useState(1);
-  const [color, setColor] = useState("fff");
-  const [icon, setIcon] = useState("emoticon-tongue-outline");
+  const [color, setColor] = useState("1fcf6e");
+  const [icon, setIcon] = useState("codepen");
   const [isColor, setIsColor] = useState(true);
 
   // console.log(isColor);

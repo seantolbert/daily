@@ -9,7 +9,7 @@ import Act from "../components/Act";
 const DayView = ({ navigation, route }) => {
   const { date } = route.params;
 
-console.dir()
+  console.log(new Date(date).toDateString());
 
   const [offsetX, setOffsetX] = useState(0);
   const [width, setWidth] = useState(0);
@@ -21,7 +21,7 @@ console.dir()
   return (
     <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} title={date} />
-      <Text style={{color: ''}}></Text>
+      <Text style={{ color: "" }}></Text>
       <ScrollView>
         <View style={styles.container}>
           <View
@@ -57,17 +57,20 @@ console.dir()
             {acts &&
               acts
                 .filter((act) => act.fullDate === date)
-                .map((act, idx) => (
-                  <DayViewAct
-                    act={act}
-                    key={idx}
-                    setWidth={setWidth}
-                    setOffsetX={setOffsetX}
-                    setHeight={setHeight}
-                    // setContHeight={setContHeight}
-                    nav={navigation}
-                  />
-                ))}
+                .map((act, idx) => {
+                  console.log("fullDate: " + act.fullDate);
+                  return (
+                    <DayViewAct
+                      act={act}
+                      key={idx}
+                      setWidth={setWidth}
+                      setOffsetX={setOffsetX}
+                      setHeight={setHeight}
+                      // setContHeight={setContHeight}
+                      nav={navigation}
+                    />
+                  );
+                })}
           </View>
         </View>
       </ScrollView>

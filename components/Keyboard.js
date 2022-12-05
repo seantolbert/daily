@@ -110,7 +110,7 @@ const Keyboard = ({ setIcon, isColor, setColor }) => {
               ))
             : baseColors.map((item, idx) => {
                 const themeColor = new Values(item);
-                console.log(themeColor.all(4));
+                // console.log(themeColor.all(4));
                 themeColor.all(4).map((c, idx) => {
                   // console.log('hexString: ' + c.hexString())
                   return (
