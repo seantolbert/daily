@@ -28,7 +28,6 @@ const AltAddGoal = ({ navigation }) => {
   const [daily, setDaily] = useState("");
   const [color, setColor] = useState("fff");
   const [icon, setIcon] = useState("anvil");
-  const [tempIcon, setTempIcon] = useState("anvil");
 
   const keyboardAnimation = useRef(new Animated.Value(1000)).current;
 

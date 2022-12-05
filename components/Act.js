@@ -60,7 +60,9 @@ const Act = ({ act, nav, custWidth }) => {
           <View style={styles.content}>
             <View>
               <Text style={styles.text}>{act.actText}</Text>
-              {act.date && <Text style={styles.smallText}>{act.date}</Text>}
+              {act.fullDate && (
+                <Text style={styles.smallText}>{new Date(act.fullDate).toDateString()}</Text>
+              )}
             </View>
           </View>
           <View style={styles.buttons}>
