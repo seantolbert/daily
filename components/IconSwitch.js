@@ -3,7 +3,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { gStyles } from "../styles/global";
 
-const IconSwitch = ({ icon, setShow, color, show, setIsColor }) => {
+const IconSwitch = ({ icon, setShow, color, show }) => {
   return (
     <View
       style={{
@@ -17,7 +17,7 @@ const IconSwitch = ({ icon, setShow, color, show, setIsColor }) => {
       <Text style={gStyles.subtitle}>icon</Text>
       <Pressable
         onPress={() => {
-          setIsColor(false);
+          // setIsColor(false);
           setShow(!show);
         }}
         style={{
@@ -30,7 +30,7 @@ const IconSwitch = ({ icon, setShow, color, show, setIsColor }) => {
           justifyContent: "center",
         }}
       >
-        <MaterialCommunityIcons name={icon} color={`#${color}`} size={38} />
+        <MaterialCommunityIcons name={icon} color={color} size={38} />
       </Pressable>
     </View>
   );

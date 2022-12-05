@@ -39,7 +39,7 @@ const InputRow = ({
     >
       <Animated.View
         style={{
-          backgroundColor: `#${color}`,
+          backgroundColor: color,
           width,
           height,
           position: "absolute",

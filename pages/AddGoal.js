@@ -8,7 +8,7 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { CloseModal, InputRow, NumInputRow } from "../components";
+import { CloseModal, InputRow, NumInputRow, Submit } from "../components";
 import { Auth, db } from "../firebase/config";
 import { gStyles } from "../styles/global";
 import ColorSwitch from "../components/ColorSwitch";
@@ -24,9 +24,9 @@ const AddGoal = ({ navigation }) => {
   const [hasDaily, setHasDaily] = useState("");
   const [hasWeekly, setHasWeekly] = useState("");
   const [daily, setDaily] = useState(1);
-  const [color, setColor] = useState("1fcf6e");
-  const [icon, setIcon] = useState("codepen");
-  const [isColor, setIsColor] = useState(true);
+  const [color, setColor] = useState("#fff");
+  const [icon, setIcon] = useState("");
+  const [showColor, setShowColor] = useState(false);
 
   // console.log(isColor);
   // console.log(show);
@@ -92,23 +92,17 @@ const AddGoal = ({ navigation }) => {
           setEnabled={setHasWeekly}
         />
         <View style={styles.colorIconCont}>
-          <ColorSwitch
-            setIsColor={setIsColor}
-            color={color}
-            setShow={setShow}
-            isColor={isColor}
-            show={show}
-          />
-          <IconSwitch
-            color={color}
-            setShow={setShow}
-            setIsColor={setIsColor}
-            show={show}
-            icon={icon}
-            isColor={isColor}
-          />
+          <ColorSwitch setShowColor={setShowColor} showColor={showColor} color={color} />
+          <IconSwitch color={color} setShow={setShow} show={show} icon={icon} />
         </View>
+        <Submit
+          color={color}
+          showColor={showColor}
+          setColor={setColor}
+          handler={handleAdd}
+        />
       </View>
+
       <Animated.View
         style={{
           width: "100%",
@@ -120,7 +114,7 @@ const AddGoal = ({ navigation }) => {
           setIcon={setIcon}
           keyboardAnimation={keyboardAnimation}
           setColor={setColor}
-          isColor={isColor}
+          // isColor={isColor}
         />
       </Animated.View>
     </SafeAreaView>
@@ -130,7 +124,7 @@ export default AddGoal;
 const styles = StyleSheet.create({
   form: {
     justifyContent: "space-between",
-    height: "55%",
+    height: "65%",
     width: "95%",
     alignItems: "center",
   },
