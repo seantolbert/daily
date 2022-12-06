@@ -21,7 +21,7 @@ const GoalList = ({ nav, setGoal }) => {
             <Pressable
               onPress={() => setGoal(goal)}
               key={idx}
-              style={[styles.box, { backgroundColor: `#${goal.color}` }]}
+              style={[styles.box, { backgroundColor: goal.color }]}
             >
               <MaterialCommunityIcons
                 name={goal.icon || goal.title.toLowerCase()}

@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     alignItems: "flex-end",
+    // width: '100%'
   },
   goalBox: {
     alignItems: "center",

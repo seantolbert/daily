@@ -1,34 +1,55 @@
-import { StyleSheet, Text, Pressable } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, Pressable, View } from "react-native";
 
 const TlDay = ({ selected, setSelected, day }) => {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
   const date = new Date(day).getDate();
   const dow = new Date(day).toDateString().split(" ")[0];
 
   return (
-    <Pressable
-      onPress={() => setSelected(date)}
-      style={[
-        styles.container,
-        { backgroundColor: selected === date ? "#fff" : "#000" },
-      ]}
-    >
-      <Text
-        style={[styles.dow, { color: selected === date ? "#000" : "#fff" }]}
+    <View style={{ marginHorizontal: 10 }}>
+      <View
+        style={{
+          width,
+          height,
+          transform: [{ translateX: 3 }, { translateY: 3 }],
+          position: "absolute",
+          backgroundColor: selected === date ? "gold" : "#fff",
+          borderRadius: "5px",
+        }}
+      ></View>
+      <Pressable
+        onPress={() => setSelected(date)}
+        onLayout={(e) => {
+          const { width, height } = e.nativeEvent.layout;
+          setHeight(height);
+          setWidth(width);
+        }}
+        style={[
+          styles.container,
+          { backgroundColor: selected === date ? "#fff" : "#000" },
+        ]}
       >
-        {dow}
-      </Text>
-      <Text
-        style={[styles.date, { color: selected === date ? "#000" : "#fff" }]}
-      >
-        {date}
-      </Text>
-    </Pressable>
+        <Text
+          style={[styles.dow, { color: selected === date ? "#000" : "#fff" }]}
+        >
+          {dow}
+        </Text>
+        <Text
+          style={[styles.date, { color: selected === date ? "#000" : "#fff" }]}
+        >
+          {date}
+        </Text>
+      </Pressable>
+    </View>
   );
 };
 export default TlDay;
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     justifyContent: "center",
     alignItems: "center",
     padding: 5,

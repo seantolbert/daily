@@ -16,6 +16,7 @@ const Keyboard = ({ setIcon, isColor, setColor }) => {
     "audio-input-xlr",
     "audio-video",
     // "backburger",
+    'weight-lifter',
     "backspace",
     "badminton",
     "baguette",

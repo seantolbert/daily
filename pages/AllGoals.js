@@ -57,7 +57,6 @@ const AllGoals = ({ navigation }) => {
           zIndex: 5
         }}
         onPress={() =>{
-          console.log('craaaazy')
           navigation.navigate("addGoal")
         }}
       >
