@@ -16,7 +16,7 @@ const TlDay = ({ selected, setSelected, day }) => {
           height,
           transform: [{ translateX: 3 }, { translateY: 3 }],
           position: "absolute",
-          backgroundColor: selected === date ? "gold" : "#fff",
+          backgroundColor: selected === date ? "red" : "#fff",
           borderRadius: "5px",
         }}
       ></View>

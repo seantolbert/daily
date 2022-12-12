@@ -44,7 +44,7 @@ const Act = ({ act, nav, custWidth }) => {
             {
               width: shadowWidth,
               height: shadowHeight,
-              backgroundColor: `#${act.color}`,
+              backgroundColor: act.color,
               transform: [{ translateX: actRef }, { translateY: actRef }],
             },
           ]}
@@ -71,7 +71,7 @@ const Act = ({ act, nav, custWidth }) => {
             {act.icon && (
               <MaterialCommunityIcons
                 name={act.icon}
-                color={`#${act.color}`}
+                color={act.color}
                 size={30}
               />
             )}
@@ -104,7 +104,7 @@ const Act = ({ act, nav, custWidth }) => {
 export default Act;
 const styles = StyleSheet.create({
   container: {
-    width: "95%",
+    width: "100%",
     marginVertical: 10,
     alignItems: "center",
   },

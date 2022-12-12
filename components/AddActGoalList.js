@@ -21,7 +21,7 @@ const AddActGoalList = ({ setCategory, setIcon, setPlaceholder, setColor }) => {
             style={[
               styles.goalButton,
               {
-                backgroundColor: `#${goal.color}`,
+                backgroundColor: goal.color,
               },
             ]}
           >

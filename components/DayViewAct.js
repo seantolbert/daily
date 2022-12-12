@@ -6,7 +6,7 @@ import { gStyles } from "../styles/global";
 const DayViewAct = ({ act, setWidth, setOffsetX, setHeight }) => {
   const marbleRef = useRef();
 
-  const date = new Date(act.time).toLocaleTimeString();
+  const date = new Date(act.fullDate).toLocaleTimeString();
   const ampm = date.split(" ").pop().toLowerCase();
   const time = date.split(" ").shift();
   const standard = time.split(":").slice(0, -1).join(":");
@@ -32,7 +32,7 @@ const DayViewAct = ({ act, setWidth, setOffsetX, setHeight }) => {
         >
           <MaterialCommunityIcons
             name={act.icon}
-            color={`#${act.color}`}
+            color={act.color}
             size={25}
           />
         </View>
@@ -40,7 +40,7 @@ const DayViewAct = ({ act, setWidth, setOffsetX, setHeight }) => {
           {result}
         </Text>
       </View>
-      <View style={[styles.actCont, { borderColor: `#${act.color}` }]}>
+      <View style={[styles.actCont, { borderColor: act.color }]}>
         <Text style={gStyles.subtitle}>{act.actText}</Text>
         {act.note && <Text style={{ color: "#fff" }}>{act.note}</Text>}
       </View>

@@ -21,7 +21,6 @@ const DayView = ({ navigation, route }) => {
   return (
     <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} title={date} />
-      <Text style={{ color: "" }}></Text>
       <ScrollView>
         <View style={styles.container}>
           <View
