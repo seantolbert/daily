@@ -7,9 +7,9 @@ import DayViewAct from "../components/DayViewAct";
 import Act from "../components/Act";
 
 const DayView = ({ navigation, route }) => {
-  const { date } = route.params;
+  const { day } = route.params;
 
-  console.log(new Date(date).toDateString());
+  const currentDay = new Date(day).getDate();
 
   const [offsetX, setOffsetX] = useState(0);
   const [width, setWidth] = useState(0);
@@ -20,7 +20,7 @@ const DayView = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
-      <BackButton nav={navigation} title={date} />
+      <BackButton nav={navigation} title={day} />
       <ScrollView>
         <View style={styles.container}>
           <View
@@ -55,9 +55,9 @@ const DayView = ({ navigation, route }) => {
           >
             {acts &&
               acts
-                .filter((act) => act.fullDate === date)
+                .filter((act) => act.date === currentDay)
                 .map((act, idx) => {
-                  console.log("fullDate: " + act.fullDate);
+                  console.log("fullDate: " + day);
                   return (
                     <DayViewAct
                       act={act}

@@ -1,8 +1,8 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { isToday } from "date-fns";
 
-const DaySwitches = ({ goals, acts }) => {
+const DaySwitches = ({ goals, acts, nav }) => {
   const getDaily = (id) => {
     const filteredActs =
       acts &&
@@ -16,14 +16,18 @@ const DaySwitches = ({ goals, acts }) => {
     <View style={styles.container}>
       {goals &&
         goals.map((goal, idx) => (
-          <View
+          <Pressable
+            onPress={() =>
+              nav.navigate("allGoals", {
+                goal,
+              })
+            }
             key={idx}
             style={[
               styles.daySwitch,
               {
-                backgroundColor:
-                  getDaily(goal.id) > 0 ? `#${goal.color}` : "#000",
-                borderColor: `#${goal.color}`,
+                backgroundColor: getDaily(goal.id) > 0 ? goal.color : "#000",
+                borderColor: goal.color,
               },
             ]}
           >
@@ -32,8 +36,13 @@ const DaySwitches = ({ goals, acts }) => {
               size={45}
               color="#fff"
             />
-            <View style={styles.dot}></View>
-          </View>
+            <View
+              style={[
+                styles.dot,
+                { backgroundColor: getDaily(goal.id) > 0 ? "#fff" : "" },
+              ]}
+            ></View>
+          </Pressable>
         ))}
     </View>
   );
@@ -50,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    paddingVertical: 1,
+    paddingVertical: 4,
     paddingHorizontal: 5,
     borderRadius: "10px",
     margin: 3,
@@ -58,7 +67,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   dot: {
-    backgroundColor: "#fff",
     borderWidth: 1,
     borderColor: "#fff",
     width: 10,

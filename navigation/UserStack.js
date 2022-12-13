@@ -25,7 +25,11 @@ export default function UserStack() {
           component={Main}
           initialParams={{ date: new Date().toDateString() }}
         />
-        <Stack.Screen name="allGoals" component={AllGoals} />
+        <Stack.Screen
+          name="allGoals"
+          component={AllGoals}
+          initialParams={{ goal: null }}
+        />
         <Stack.Screen
           name="addGoal"
           component={AddGoal}
@@ -36,7 +40,7 @@ export default function UserStack() {
           component={DayView}
           initialParams={{ date: new Date().toDateString() }}
         />
-<Stack.Screen name="loading" component={Loading} />
+        <Stack.Screen name="loading" component={Loading} />
 
         <Stack.Screen
           name="goalView"

@@ -2,15 +2,15 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useCollection } from "../hooks/useCollection";
 import { gStyles } from "../styles/global";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { CommonActions } from "@react-navigation/native";
 import Goal from "./Goal";
 
-const GoalList = ({ nav, setGoal }) => {
+const GoalList = ({ nav }) => {
   const { documents: goals } = useCollection("goals");
   return (
     <View style={styles.container}>
       <View
         style={{
-          // justifyContent: "space-evenly",
           alignItems: "flex-start",
           flexDirection: "row",
           flexWrap: "wrap",
@@ -19,7 +19,7 @@ const GoalList = ({ nav, setGoal }) => {
         {goals &&
           goals.map((goal, idx) => (
             <Pressable
-              onPress={() => setGoal(goal)}
+              onPress={() => nav.dispatch(CommonActions.setParams({ goal }))}
               key={idx}
               style={[styles.box, { backgroundColor: goal.color }]}
             >
@@ -28,9 +28,6 @@ const GoalList = ({ nav, setGoal }) => {
                 size={30}
                 color="#fff"
               />
-              {/* <Text style={{ color: "#000", fontWeight: "bold" }}>
-                {goal.title}
-              </Text> */}
             </Pressable>
           ))}
       </View>

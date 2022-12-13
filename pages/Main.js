@@ -19,9 +19,10 @@ const Main = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={gStyles.pageContainer}>
+      
       <UserWelcome />
 
-      <GoalDash />
+      <GoalDash nav={navigation}/>
 
       <Timeline
         nav={navigation}
@@ -33,6 +34,7 @@ const Main = ({ navigation, route }) => {
       <MainLatestActs nav={navigation} selected={selected} />
 
       <Menu nav={navigation} />
+
     </SafeAreaView>
   );
 };

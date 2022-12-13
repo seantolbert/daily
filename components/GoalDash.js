@@ -5,13 +5,11 @@ import { useEffect, useState } from "react";
 import DaySwitches from "./DaySwitches";
 import GoalScroller from "./GoalScroller";
 
-const GoalDash = () => {
+const GoalDash = ({nav}) => {
   const { documents: goals } = useCollection("goals");
   const { documents: acts } = useCollection("activities");
 
   const [loading, setLoading] = useState(true);
-
-  
 
   useEffect(() => {
     setTimeout(() => {
@@ -25,7 +23,7 @@ const GoalDash = () => {
         <Text style={gStyles.subtitle}>Loading ...</Text>
       ) : (
         <View style={styles.dashCont}>
-          <DaySwitches goals={goals} acts={acts} />
+          <DaySwitches goals={goals} acts={acts} nav={nav}/>
           <GoalScroller goals={goals} acts={acts} />
         </View>
       )}

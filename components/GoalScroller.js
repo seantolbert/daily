@@ -15,15 +15,12 @@ const GoalScroller = ({ goals, acts }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView>
       {goals &&
         goals.map((goal, idx) => (
-          <View
-            key={idx}
-            style={[styles.goalBox, { borderColor: `#${goal.color}` }]}
-          >
+          <View key={idx} style={[styles.goalBox, { borderColor: goal.color }]}>
             <View style={{ alignItems: "center" }}>
-              <Text style={[styles.colorPercent, { color: `#${goal.color}` }]}>
+              <Text style={[styles.colorPercent, { color: goal.color }]}>
                 {Math.round((weeklyActCount(goal.id) / goal.weekly) * 100) +
                   "%"}
               </Text>
@@ -40,11 +37,6 @@ const GoalScroller = ({ goals, acts }) => {
 };
 export default GoalScroller;
 const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    alignItems: "flex-end",
-    // width: '100%'
-  },
   goalBox: {
     alignItems: "center",
     justifyContent: "space-between",
