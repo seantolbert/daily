@@ -37,6 +37,12 @@ const Profile = ({ navigation }) => {
     <SafeAreaView style={gStyles.pageContainer}>
       <BackButton nav={navigation} title="profile" />
 
+      <View style={{ width: "95%", alignItems: "center" }}>
+        <Text style={gStyles.subtitle}>
+          Carosel Demo in progress showing profile menu options
+        </Text>
+      </View>
+
       <Animated.View
         style={[styles.circle, { transform: [{ rotate: spin }] }]}
         onLayout={(e) => {

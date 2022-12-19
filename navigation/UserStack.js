@@ -20,6 +20,7 @@ export default function UserStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="loading" component={Loading} />
         <Stack.Screen
           name="main"
           component={Main}
@@ -40,14 +41,11 @@ export default function UserStack() {
           component={DayView}
           initialParams={{ date: new Date().toDateString() }}
         />
-        <Stack.Screen name="loading" component={Loading} />
-
         <Stack.Screen
           name="goalView"
           component={GoalView}
           initialParams={{ goal: {}, isUpdate: true }}
         />
-
         <Stack.Screen
           name="addAct"
           component={AddAct}
@@ -59,7 +57,6 @@ export default function UserStack() {
           component={MonthView}
           initialParams={{ date: new Date().toDateString() }}
         />
-
         <Stack.Screen name="allActivity" component={AllActivity} />
       </Stack.Navigator>
     </NavigationContainer>

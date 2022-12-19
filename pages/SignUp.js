@@ -27,31 +27,31 @@ const SignUp = ({ navigation }) => {
       <KeyboardAvoidingView style={styles.form}>
         <InputRow
           value={displayName}
-          color='fff'
+          color='#fff'
           change={setDisplayName}
           label="username"
         />
         <InputRow
           value={email}
-          color='fff'
+          color='#fff'
           change={setEmail}
           label="email"
         />
         <InputRow
           value={password}
-          color='fff'
+          color='#fff'
           change={setPassword}
           label="password"
           secret
         />
         <InputRow
           value={confirm}
-          color='fff'
+          color='#fff'
           change={setConfirm}
           label="confirm"
           secret
         />
-          <View style={{ width: "75%", alignItems: "flex-start" }}>
+          <View style={{ width: "95%", alignItems: "flex-end" }}>
             <Text style={{ color: "#fff" }}>Already have an account?</Text>
           </View>
           <AuthButtons

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import DaySwitches from "./DaySwitches";
 import GoalScroller from "./GoalScroller";
 
-const GoalDash = ({nav}) => {
+const GoalDash = ({ nav }) => {
   const { documents: goals } = useCollection("goals");
   const { documents: acts } = useCollection("activities");
 
@@ -22,9 +22,9 @@ const GoalDash = ({nav}) => {
       {loading ? (
         <Text style={gStyles.subtitle}>Loading ...</Text>
       ) : (
-        <View style={styles.dashCont}>
-          <DaySwitches goals={goals} acts={acts} nav={nav}/>
-          <GoalScroller goals={goals} acts={acts} />
+        <View style={[styles.dashCont, {justifyContent: goals.length > 0 ? 'space-between' : 'center'}]}>
+          <DaySwitches goals={goals} acts={acts} nav={nav} />
+          {goals.length > 0 && <GoalScroller goals={goals} acts={acts} />}
         </View>
       )}
     </View>
@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     height: "100%",
     flexDirection: "row",
     borderColor: "#fff",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
 });

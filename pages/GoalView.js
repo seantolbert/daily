@@ -8,9 +8,6 @@ import { useEffect } from "react";
 
 const GoalView = ({ goal }) => {
   const { documents: acts } = useCollection("activities");
-  // filtering for selected goal's id
-
-  // const goalActs = acts && acts.filter((act) => act.category === goal.id);
 
   if (goal === null) {
     return <Text style={{ color: "#fff" }}>Select Goal</Text>;

@@ -19,8 +19,8 @@ const AllGoals = ({ navigation, route }) => {
         style={{
           width: "95%",
           height: "50%",
-          borderWidth: 1,
-          borderColor: "#fff",
+          // borderWidth: 1,
+          // borderColor: "#fff",
           alignItems: "center",
           justifyContent: "center",
         }}

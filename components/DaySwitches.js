@@ -1,6 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { isToday } from "date-fns";
+import { gStyles } from "../styles/global";
 
 const DaySwitches = ({ goals, acts, nav }) => {
   const getDaily = (id) => {
@@ -13,8 +14,8 @@ const DaySwitches = ({ goals, acts, nav }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {goals &&
+    <View style={[styles.container, {width: goals.length > 0 ? '75%' : '95%'}]}>
+      {goals && goals.length > 0 ? (
         goals.map((goal, idx) => (
           <Pressable
             onPress={() =>
@@ -43,7 +44,22 @@ const DaySwitches = ({ goals, acts, nav }) => {
               ]}
             ></View>
           </Pressable>
-        ))}
+        ))
+      ) : (
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+            width: '100%',
+            alignItems: 'center',
+          }}
+        >
+          <Text style={[gStyles.subtitle, {textAlign: 'center'}]}>
+            Add some goals by clicking on the trophy in the menu
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -53,7 +69,9 @@ const styles = StyleSheet.create({
     height: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
-    width: "75%",
+    // width: "75%",
+    // borderColor: '#fff', 
+    // borderWidth: 1,
   },
   daySwitch: {
     alignItems: "center",

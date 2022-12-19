@@ -21,7 +21,7 @@ const SignIn = ({ navigation }) => {
     login(email, password);
   };
 
-  console.log("login error: " + logInError);
+  // console.log("login error: " + logInError);
 
   return (
     <SafeAreaView
@@ -29,12 +29,12 @@ const SignIn = ({ navigation }) => {
     >
       <BackButton nav={navigation} title="log in" dest="landing" />
       <KeyboardAvoidingView style={styles.form}>
-        <InputRow value={email} label="email" change={setEmail} color="fff" />
+        <InputRow value={email} label="email" change={setEmail} color="#fff" />
         <InputRow
           value={password}
           label="password"
           change={setPassword}
-          color="fff"
+          color="#fff"
           secret
         />
         <View style={{ width: "100%", alignItems: "flex-end" }}>

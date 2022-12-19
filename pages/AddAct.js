@@ -6,7 +6,7 @@ import { addDoc, collection } from "firebase/firestore";
 
 const AddAct = ({ navigation }) => {
   const [actText, setActText] = useState("");
-  const [color, setColor] = useState("fff");
+  const [color, setColor] = useState("#fff");
   const [category, setCategory] = useState("none");
   const [placeholder, setPlaceholder] = useState("what did you do?");
   const [icon, setIcon] = useState("bowling");

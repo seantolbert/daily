@@ -28,9 +28,6 @@ const AddGoal = ({ navigation }) => {
   const [icon, setIcon] = useState("");
   const [showColor, setShowColor] = useState(false);
 
-  // console.log(isColor);
-  // console.log(show);
-
   const [show, setShow] = useState(false);
 
   const keyboardAnimation = useRef(new Animated.Value(1000)).current;

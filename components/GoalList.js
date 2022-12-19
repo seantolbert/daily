@@ -16,7 +16,7 @@ const GoalList = ({ nav }) => {
           flexWrap: "wrap",
         }}
       >
-        {goals &&
+        {goals && goals.length > 0 ? (
           goals.map((goal, idx) => (
             <Pressable
               onPress={() => nav.dispatch(CommonActions.setParams({ goal }))}
@@ -29,7 +29,19 @@ const GoalList = ({ nav }) => {
                 color="#fff"
               />
             </Pressable>
-          ))}
+          ))
+        ) : (
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={[gStyles.subtitle, {textAlign: 'center'}]}>Add your first goal by pressing the 'New Goal' button below</Text>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -38,6 +50,7 @@ export default GoalList;
 const styles = StyleSheet.create({
   container: {
     width: "95%",
+    // height: "28%",
   },
   box: {
     padding: 20,

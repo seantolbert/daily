@@ -10,14 +10,17 @@ const MainLatestActs = ({ nav, selected }) => {
   return (
     <View style={styles.container}>
       <View style={styles.listContainer}>
-        {acts ? (
+        {acts && acts.length > 0 ? (
           acts
             .filter((act) => act.date === selected)
             .sort((a, b) => Number(b.time) - Number(a.time))
             .slice(0, 3)
             .map((act, idx) => <Act nav={nav} act={act} key={idx} />)
         ) : (
-          <Text style={gStyles.subtitle}>No acts recorded for today</Text>
+          <View style={{alignItems: 'center'}}>
+            <Text style={[gStyles.subtitle, {marginBottom: 10}]}>No acts recorded for today</Text>
+            <Text style={gStyles.subtitle}>Press the + below to add a new act</Text>
+          </View>
         )}
       </View>
     </View>

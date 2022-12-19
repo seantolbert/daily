@@ -57,7 +57,6 @@ const DayView = ({ navigation, route }) => {
               acts
                 .filter((act) => act.date === currentDay)
                 .map((act, idx) => {
-                  console.log("fullDate: " + day);
                   return (
                     <DayViewAct
                       act={act}
