@@ -3,7 +3,7 @@
 ### Landing Page
 <img src="https://i.imgur.com/FG4qhTu.png">
 
-### Sign In
+### Sign Up
 <img src="https://i.imgur.com/sMZvbyz.png">
 
 ### Main Page
