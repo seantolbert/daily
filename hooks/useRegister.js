@@ -35,13 +35,13 @@ export const useRegister = () => {
       await signInWithEmailAndPassword(Auth, email, password);
     } catch (err) {
       setLoginError(err.message);
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
 
   const resetPassword = async (email) => {
     await sendPasswordResetEmail(Auth, email).catch((err) => {
-      console.log(err.message);
+      // console.log(err.message);
       setResetPassError(err.message);
     });
   };
