@@ -31,7 +31,7 @@ React Native | Expo | Firebase
 
 ## Future Enhancements
 
-- unique goal color themes to prievent overlap
+- unique goal color themes to prevent overlap
 - updating goal functionality
 - onLayout Animations
 - user based theme colors
